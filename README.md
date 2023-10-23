@@ -2,8 +2,19 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
-
+1. Clone the repository 
+```bash
+git clone https://github.com/fajarrw/rental-bahari-fe.git
+```
+2. Open rental-bahari-fe folder
+```bash
+cd rental-bahari-fe
+```
+3. Install dependencies
+```bash
+npm i
+``` 
+4. Run the development server:
 ```bash
 npm run dev
 # or
