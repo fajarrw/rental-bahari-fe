@@ -8,7 +8,7 @@ export default function BookingSummary() {
 				<Link href="/search-car" className="font-poppins font-medium">&lt;</Link>
 				<h1 className="font-poppins font-medium">Booking Summary</h1>
 			</div>
-			<div className="flex flex-col w-[25rem] p-6 items-stretch gap-3 shadow-xl pt-4 pb-10">
+			<div className="flex flex-col max-w-[25rem] w-full items-stretch gap-3 md:shadow-xl pt-4 pb-10 px-6">
 				<div className="flex flex-col items-center box-info py-3 text-base">Congrats! You just saved Rp. 150000</div>
 				<div className="flex flex-row justify-between items-center">
 					<Image
