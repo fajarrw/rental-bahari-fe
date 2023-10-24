@@ -51,7 +51,3 @@ hr {
 	border: 1px var(--RBgreen) dashed; 
 	border-radius: 4px;
 }
-
-.shadow-card {
-	box-shadow: 0 0 24px black;
-}
