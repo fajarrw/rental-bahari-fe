@@ -1,0 +1,28 @@
+.dd-filter:hover .dd-content-filter {
+  display: flex;
+  flex-direction: column;
+}
+
+.dd-sort:hover .dd-content-sort {
+  display: flex;
+  flex-direction: column;
+}
+
+.dd-content-filter {
+  display: none;
+}
+
+.dd-content-sort {
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .dd-content-filter {
+    display: flex;
+    flex-direction: column;
+  }
+  .dd-content-sort {
+    display: flex;
+    flex-direction: column;
+  }
+}
