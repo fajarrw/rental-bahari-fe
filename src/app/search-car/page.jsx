@@ -23,8 +23,8 @@ export default function SearchCar() {
             <div className="flex flex-col gap-3">
               <h3 className="font-medium text-base">Price per Day</h3>
               <div className="flex flex-row justify-between">
-                <p>Rp. 50000</p>
-                <p>Rp. 5000000</p>
+                <p className="text-sm">Rp. 50000</p>
+                <p className="text-sm">Rp. 5000000</p>
               </div>
             </div>
             <hr />
@@ -151,7 +151,7 @@ export default function SearchCar() {
       </div>
       <div className="flex flex-col w-full items-center">
         <div className="flex flex-row w-full lg:w-max gap-4 p-5 justify-between items-center">
-          <div className="hidden md:flex flex-row w-32 items-center">
+          <div className="hidden md:flex flex-row w-36 items-center">
             <p className="md:block font-medium">4 Cars Found</p>
           </div>
           <div className="flex flex-row w-full justify-center">
@@ -193,7 +193,7 @@ export default function SearchCar() {
                     height={18}
                     alt="seats"
                   />
-                  <p>4 seats</p>
+                  <p className="text-sm">4 seats</p>
                 </div>
                 <div className="flex flex-row gap-2">
                   <Image
@@ -202,7 +202,7 @@ export default function SearchCar() {
                     height={18}
                     alt="transmission"
                   />
-                  <p>Manual</p>
+                  <p className="text-sm">Manual</p>
                 </div>
               </div>
             </div>
@@ -231,7 +231,7 @@ export default function SearchCar() {
                     height={18}
                     alt="seats"
                   />
-                  <p>4 seats</p>
+                  <p className="text-sm">4 seats</p>
                 </div>
                 <div className="flex flex-row gap-2">
                   <Image
@@ -240,7 +240,7 @@ export default function SearchCar() {
                     height={18}
                     alt="transmission"
                   />
-                  <p>Manual</p>
+                  <p className="text-sm">Manual</p>
                 </div>
               </div>
             </div>
@@ -269,7 +269,7 @@ export default function SearchCar() {
                     height={18}
                     alt="seats"
                   />
-                  <p>4 seats</p>
+                  <p className="text-sm">4 seats</p>
                 </div>
                 <div className="flex flex-row gap-2">
                   <Image
@@ -278,7 +278,7 @@ export default function SearchCar() {
                     height={18}
                     alt="transmission"
                   />
-                  <p>Manual</p>
+                  <p className="text-sm">Manual</p>
                 </div>
               </div>
             </div>
@@ -297,7 +297,7 @@ export default function SearchCar() {
               height={88}
               alt="car"
             />
-            <div className="flex flex-col w-52 gap-2 px-2 ml-8">
+            <div className="flex flex-col w-52 ml-8 gap-2 px-2">
               <h4 className="text-xl font-medium">Toyota Agya</h4>
               <div className="flex flex-col gap-1">
                 <div className="flex flex-row gap-2">
@@ -307,7 +307,7 @@ export default function SearchCar() {
                     height={18}
                     alt="seats"
                   />
-                  <p>4 seats</p>
+                  <p className="text-sm">4 seats</p>
                 </div>
                 <div className="flex flex-row gap-2">
                   <Image
@@ -316,7 +316,7 @@ export default function SearchCar() {
                     height={18}
                     alt="transmission"
                   />
-                  <p>Manual</p>
+                  <p className="text-sm">Manual</p>
                 </div>
               </div>
             </div>
