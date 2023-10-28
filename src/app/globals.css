@@ -8,7 +8,8 @@
   --RBblack: #222222;
   --RBgreen: #045757;
   --RBdarkgreen: #044343;
-  --RBlightgray: #e4e4e4;
+  --RBwhite: #e4e4e4;
+  --RBlightgray: #d9d9d9;
   --RBgray: #cdcdcd;
 }
 
@@ -16,12 +17,23 @@ h1,
 h2,
 h3,
 h4,
-p {
+p,
+label,
+select {
   color: var(--RBblack);
 }
 
-body {
+input[type=checkbox] {
+  width: 14px;
+}
+
+select {
   background-color: var(--RBlightgray);
+  border-radius: 4px;
+}
+
+body {
+  background-color: var(--RBwhite);
 }
 
 hr {

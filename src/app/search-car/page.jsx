@@ -30,16 +30,103 @@ export default function SearchCar() {
             <hr />
             <div className="flex flex-col gap-3">
               <h3 className="font-medium text-base">Types</h3>
-              <p className="text-xs text-rb-darkgreen">+ View More</p>
+              <div className="flex flex-col gap-2 text-sm">
+                <div className="flex flex-row gap-2">
+                  <input
+                    type="checkbox"
+                    id="vehicle1"
+                    name="vehicle1"
+                    value="Crossover"
+                  />
+                  <label for="vehicle1">Crossover</label>
+                  <br />
+                </div>
+                <div className="flex flex-row gap-2">
+                  <input
+                    type="checkbox"
+                    id="vehicle2"
+                    name="vehicle2"
+                    value="Hatchback"
+                  />
+                  <label for="vehicle2">Hatchback</label>
+                  <br />
+                </div>
+                <div className="flex flex-row gap-2">
+                  <input
+                    type="checkbox"
+                    id="vehicle3"
+                    name="vehicle3"
+                    value="SUV"
+                  />
+                  <label for="vehicle3">SUV</label>
+                  <br />
+                </div>
+                <a className="text-xs text-rb-darkgreen">+ View More</a>
+              </div>
             </div>
             <hr />
             <div className="flex flex-col gap-3">
               <h3 className="font-medium text-base">Models</h3>
-              <p className="text-xs text-rb-darkgreen">+ View More</p>
+              <div className="flex flex-col gap-2 text-sm">
+                <div className="flex flex-row gap-2">
+                  <input
+                    type="checkbox"
+                    id="vehicle1"
+                    name="vehicle1"
+                    value="Agya"
+                  />
+                  <label for="vehicle1">Agya</label>
+                  <br />
+                </div>
+                <div className="flex flex-row gap-2">
+                  <input
+                    type="checkbox"
+                    id="vehicle2"
+                    name="vehicle2"
+                    value="HR-V"
+                  />
+                  <label for="vehicle2">HR-V</label>
+                  <br />
+                </div>
+                <div className="flex flex-row gap-2">
+                  <input
+                    type="checkbox"
+                    id="vehicle3"
+                    name="vehicle3"
+                    value="Civic"
+                  />
+                  <label for="vehicle3">Civic</label>
+                  <br />
+                </div>
+                <a className="text-xs text-rb-darkgreen">+ View More</a>
+              </div>
             </div>
             <hr />
             <div className="flex flex-col gap-3">
               <h3 className="font-medium text-base">Transmission</h3>
+              <div className="flex flex-col gap-2 text-sm">
+                <div className="flex flex-row gap-2">
+                  <input
+                    type="checkbox"
+                    id="vehicle1"
+                    name="vehicle1"
+                    value="Automatic"
+                  />
+                  <label for="vehicle1">Automatic</label>
+                  <br />
+                </div>
+                <div className="flex flex-row gap-2">
+                  <input
+                    type="checkbox"
+                    id="vehicle2"
+                    name="vehicle2"
+                    value="Manual"
+                  />
+                  <label for="vehicle2">Manual</label>
+                  <br />
+                </div>
+                <a className="text-xs text-rb-darkgreen">+ View More</a>
+              </div>
             </div>
             <hr />
           </div>
@@ -50,8 +137,14 @@ export default function SearchCar() {
             Sort
           </button>
           <div className="dd-content-sort w-64 px-4 pb-4 gap-3">
-            <div className="flex flex-row py-2 md:py-0">
-              <h3 className="font-medium text-base">Sort By</h3>
+            <div className="flex flex-row py-2 md:py-0 gap-2">
+              <label for="sort" className="font-medium text-base">
+                Sort by
+              </label>
+              <select id="sort" className="text-sm ">
+                <option value="Price1">Price: Low to High</option>
+                <option value="Price-1">Price: High to Low</option>
+              </select>
             </div>
           </div>
         </div>
