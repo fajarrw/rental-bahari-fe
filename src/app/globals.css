@@ -103,3 +103,18 @@ hr {
 .text-rb-darkgreen {
   color: var(--RBdarkgreen);
 }
+
+.img-white-logo {
+	width: 230px;
+	height: 130px;
+}
+
+.img-white-logo1 {
+	width: 255px;
+	height: 155px;
+}
+
+.py-reg{
+	padding-top: 0.85rem;
+	padding-bottom: 0.85rem;
+}

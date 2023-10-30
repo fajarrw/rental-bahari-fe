@@ -11,7 +11,9 @@ module.exports = {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'admin-login': 'url(/assets/admin-login-bg-image.png)'
+        'admin-login': 'url(/assets/admin-login-bg-image.png)',
+        'user-login': 'url(/assets/user-login-bg2.png)',
+        'reg-bg': 'url(/assets/reg-bg.png)'
       },
       colors: {
         'dark-green-1': '#045757',
