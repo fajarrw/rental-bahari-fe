@@ -119,7 +119,7 @@ export default function Register(){
                         <div className="mb-3">
                             <button
                                 type="submit"
-                                className="bg-dark-green-1 p-20 py-2 rounded-3xl text-white font-semibold mt-6" // Mengubah lebar di sini
+                                className="bg-dark-green-1 p-20 py-2 rounded-3xl text-white font-semibold mt-6"
                             >
                                 Sign up
                             </button>
