@@ -1,3 +1,4 @@
+import Link from "next/link";
 import AsideSearchCar from "../components/searchCar";
 export default function CarList() {
   return (
@@ -8,8 +9,14 @@ export default function CarList() {
       </header>
       <section className="px-8 py-6 flex flex-row gap-8">
         <AsideSearchCar />
-        <content>
-          <h1>Some cards</h1>
+        <content className="w-full">
+          <div className="flex justify-end">
+            <Link href={"/admin/dashboard/cars/add"}>
+              <button className="btn-primary hover:bg-[#044343] transition-colors duration-200">
+                Add Car
+              </button>
+            </Link>
+          </div>
         </content>
       </section>
     </main>
