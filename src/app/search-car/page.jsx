@@ -1,7 +1,15 @@
+"use client";
+
 import Image from "next/image";
+import { useState, useEffect } from "react";
 import "./styles.css";
 
+function handleClick() {
+  console.log("i got clicked");
+}
+
 export default function SearchCar() {
+  const [viewMoreTypes, setViewMoreTypes] = useState(false);
   return (
     <main className="flex flex-col md:flex-row">
       <div className="flex flex-row md:flex-col w-full md:w-max py-3 md:p-0 justify-center md:justify-start gap-10 md:gap-0 shadow-lg md:shadow-none">
@@ -34,34 +42,51 @@ export default function SearchCar() {
                 <div className="flex flex-row gap-2">
                   <input
                     type="checkbox"
-                    id="vehicle1"
-                    name="vehicle1"
+                    id="crossover"
+                    name="crossover"
                     value="Crossover"
                   />
-                  <label for="vehicle1">Crossover</label>
+                  <label for="crossover">Crossover</label>
                   <br />
                 </div>
                 <div className="flex flex-row gap-2">
                   <input
                     type="checkbox"
-                    id="vehicle2"
-                    name="vehicle2"
+                    id="hatchback"
+                    name="hatchback"
                     value="Hatchback"
                   />
-                  <label for="vehicle2">Hatchback</label>
+                  <label for="hatchback">Hatchback</label>
                   <br />
                 </div>
                 <div className="flex flex-row gap-2">
                   <input
                     type="checkbox"
-                    id="vehicle3"
-                    name="vehicle3"
-                    value="SUV"
+                    id="sedan"
+                    name="sedan"
+                    value="Sedan"
                   />
-                  <label for="vehicle3">SUV</label>
+                  <label for="suv">Sedan</label>
                   <br />
                 </div>
-                <a className="text-xs text-rb-darkgreen">+ View More</a>
+                <div className="flex flex-row gap-2">
+                  <input type="checkbox" id="suv" name="suv" value="SUV" />
+                  <label for="suv">SUV</label>
+                  <br />
+                </div>
+                <div className="flex flex-row gap-2">
+                  <input
+                    type="checkbox"
+                    id="wagon"
+                    name="wagon"
+                    value="Wagon"
+                  />
+                  <label for="wagon">Wagon</label>
+                  <br />
+                </div>
+                <a className="text-xs text-rb-darkgreen" onClick={handleClick}>
+                  + View More
+                </a>
               </div>
             </div>
             <hr />
@@ -69,33 +94,23 @@ export default function SearchCar() {
               <h3 className="font-medium text-base">Models</h3>
               <div className="flex flex-col gap-2 text-sm">
                 <div className="flex flex-row gap-2">
-                  <input
-                    type="checkbox"
-                    id="vehicle1"
-                    name="vehicle1"
-                    value="Agya"
-                  />
-                  <label for="vehicle1">Agya</label>
+                  <input type="checkbox" id="agya" name="agya" value="Agya" />
+                  <label for="agya">Agya</label>
+                  <br />
+                </div>
+                <div className="flex flex-row gap-2">
+                  <input type="checkbox" id="hr-v" name="hr-v" value="HR-V" />
+                  <label for="hr-v">HR-V</label>
                   <br />
                 </div>
                 <div className="flex flex-row gap-2">
                   <input
                     type="checkbox"
-                    id="vehicle2"
-                    name="vehicle2"
-                    value="HR-V"
-                  />
-                  <label for="vehicle2">HR-V</label>
-                  <br />
-                </div>
-                <div className="flex flex-row gap-2">
-                  <input
-                    type="checkbox"
-                    id="vehicle3"
-                    name="vehicle3"
+                    id="civic"
+                    name="civic"
                     value="Civic"
                   />
-                  <label for="vehicle3">Civic</label>
+                  <label for="civic">Civic</label>
                   <br />
                 </div>
                 <a className="text-xs text-rb-darkgreen">+ View More</a>
@@ -108,21 +123,21 @@ export default function SearchCar() {
                 <div className="flex flex-row gap-2">
                   <input
                     type="checkbox"
-                    id="vehicle1"
-                    name="vehicle1"
+                    id="automatic"
+                    name="automatic"
                     value="Automatic"
                   />
-                  <label for="vehicle1">Automatic</label>
+                  <label for="automatic">Automatic</label>
                   <br />
                 </div>
                 <div className="flex flex-row gap-2">
                   <input
                     type="checkbox"
-                    id="vehicle2"
-                    name="vehicle2"
+                    id="manual"
+                    name="manual"
                     value="Manual"
                   />
-                  <label for="vehicle2">Manual</label>
+                  <label for="manual">Manual</label>
                   <br />
                 </div>
                 <a className="text-xs text-rb-darkgreen">+ View More</a>

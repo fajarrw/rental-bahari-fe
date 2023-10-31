@@ -38,6 +38,10 @@ select {
   font-family: "Inter", sans-serif;
 }
 
+a:hover {
+  cursor: pointer;
+}
+
 input[type="checkbox"] {
   width: 14px;
 }
