@@ -118,3 +118,25 @@ hr {
 	padding-top: 0.85rem;
 	padding-bottom: 0.85rem;
 }
+
+/* date range style*/
+.rdrDayToday:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span::after,
+.rdrDayToday:not(.rdrDayPassive) .rdrStartEdge ~ .rdrDayNumber span::after,
+.rdrDayToday:not(.rdrDayPassive) .rdrEndEdge ~ .rdrDayNumber span::after,
+.rdrDayToday:not(.rdrDayPassive) .rdrSelected ~ .rdrDayNumber span::after {
+	background-color: #fff !important;
+}
+
+.rdrdayToday .rdrDayNumber span:after {
+	background: #ed1d24 !important;
+}
+
+.rdrMonthAndYearPickers {
+	font-size: 16px;
+}
+
+.rdrDayNumber,
+.rdrWeekDay {
+	color: #1e1f23 !important;
+	font-weight: 500 !important;
+}
