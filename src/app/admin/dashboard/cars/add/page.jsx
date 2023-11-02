@@ -3,6 +3,7 @@
 import Link from "next/link";
 import {FiChevronLeft} from "react-icons/fi";
 import {useState} from "react";
+import GetToken from "./GetToken";
 export default function AddCar() {
   const [carInfo, setCarInfo] = useState({
     imageData: "",
@@ -26,14 +27,32 @@ export default function AddCar() {
     }
   };
 
+  const postCarData = async (carData) => {
+    try {
+      const {value} = await GetToken();
+      const res = await fetch("http://localhost:3001/api/car/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${value}`,
+        },
+        body: JSON.stringify(carData),
+      });
+      const data = await res.json();
+      console.log(data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const handleChange = ({target}) => {
     const {name, value} = target;
     setCarInfo({...carInfo, [name]: value});
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(carInfo);
+    postCarData(carInfo);
   };
 
   return (
@@ -56,14 +75,14 @@ export default function AddCar() {
           <div className="flex justify-between">
             <p>Upload Image</p>
             <input
-              className="text-sm w-2/3 lg:w-1/2 cursor-pointer"
+              className="text-sm w-1/2 cursor-pointer"
               type="file"
               accept="image/*"
               onChange={handleFileChange}
               required
             />
           </div>
-          <div className="flex gap-2 items-center justify-between">
+          <div className="flex items-center justify-between">
             <label className="font-poppins">Name</label>
             <input
               className="border focus:border-dark-green-1 font-poppins text-sm rounded-md px-4 py-2 focus:outline-none w-1/2"
@@ -74,7 +93,7 @@ export default function AddCar() {
               required
             />
           </div>
-          <div className="flex gap-2 items-center justify-between">
+          <div className="flex items-center justify-between">
             <label className="font-poppins">Model</label>
             <input
               className="border focus:border-dark-green-1 font-poppins text-sm rounded-md px-4 py-2 focus:outline-none w-1/2"
@@ -85,7 +104,7 @@ export default function AddCar() {
               required
             />
           </div>
-          <div className="flex gap-2 items-center justify-between">
+          <div className="flex items-center justify-between">
             <label className="font-poppins">Type</label>
             <input
               className="border focus:border-dark-green-1 font-poppins text-sm rounded-md px-4 py-2 focus:outline-none w-1/2"
@@ -96,7 +115,7 @@ export default function AddCar() {
               required
             />
           </div>
-          <div className="flex gap-2 items-center justify-between">
+          <div className="flex items-center justify-between">
             <label className="font-poppins">Transmission</label>
             <select
               className="border focus:border-dark-green-1 font-poppins text-sm rounded-md px-4 py-2 focus:outline-none w-1/2"
@@ -113,7 +132,7 @@ export default function AddCar() {
               <option value="matic">Matic</option>
             </select>
           </div>
-          <div className="flex gap-2 items-center justify-between">
+          <div className="flex items-center justify-between">
             <label className="font-poppins">Price(IDR)</label>
             <input
               className="border focus:border-dark-green-1 font-poppins text-sm rounded-md px-4 py-2 focus:outline-none w-1/2"
