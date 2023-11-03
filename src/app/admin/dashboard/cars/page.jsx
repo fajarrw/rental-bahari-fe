@@ -1,6 +1,7 @@
 import Link from "next/link";
 import AsideSearchCar from "../components/searchCar";
-export default function CarList() {
+import CarList from "./CarList";
+export default function Cars() {
   return (
     <main className="bg-[#EDEDED]">
       <header className="border-b border-main-black/20">
@@ -16,6 +17,9 @@ export default function CarList() {
                 Add Car
               </button>
             </Link>
+          </div>
+          <div>
+            <CarList />
           </div>
         </content>
       </section>
