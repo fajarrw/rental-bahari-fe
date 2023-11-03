@@ -1,18 +1,22 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Profile(){
     return (
         <main>
             <div className="flex py-20 justify-center">
                 <div className="flex flex-col bg-slate-100 max-w-[45rem] w-full p-8 rounded-md shadow-lg	">
-                    <div className="flex pb-10">
+                    <div className="flex pb-10 items-baseline">
                         <h1 className="text-3xl font-bold pr-3">ACCOUNT PROFILE</h1>
-                        <Image
-                            src="/assets/edit_icon.svg"
-                            width={16}
-                            height={16}
-                            alt="filter"
-                        />
+                        <a href="/profile/edit">
+                            <Image
+                                src="/assets/edit_icon.svg"
+                                width={16}
+                                height={16}
+                                alt="filter"
+                            />
+                        </a>
+                        
                     </div>
                     <div>
                         <div className="pb-10">
