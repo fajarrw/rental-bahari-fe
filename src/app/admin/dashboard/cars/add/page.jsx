@@ -4,6 +4,8 @@ import Link from "next/link";
 import {FiChevronLeft} from "react-icons/fi";
 import {useState} from "react";
 import {useGetToken} from "@/hooks/useCookies";
+import {useImage} from "@/hooks/useImage";
+
 export default function AddCar() {
   const [carInfo, setCarInfo] = useState({
     imageData: "",
@@ -16,15 +18,10 @@ export default function AddCar() {
   });
   const {name, type, model, transmission, price, seatNumber} = carInfo;
   const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const base64Image = e.target.result;
-        setCarInfo({...carInfo, imageData: base64Image});
-      };
-      reader.readAsDataURL(file);
-    }
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useImage(e, (base64Image) =>
+      setCarInfo({...carInfo, imageData: base64Image})
+    );
   };
 
   const postCarData = async (carData) => {
