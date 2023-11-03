@@ -1,23 +1,33 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Profile(){
     return (
         <main>
             <div className="flex py-20 justify-center">
                 <div className="flex flex-col bg-slate-100 max-w-[45rem] w-full p-8 rounded-md shadow-lg	">
-                    <div className="pb-10">
-                        <h1 className="text-3xl font-bold">ACCOUNT PROFILE</h1>
+                    <div className="flex pb-10 items-baseline">
+                        <h1 className="text-3xl font-bold pr-3">ACCOUNT PROFILE</h1>
+                        <a href="/profile/edit">
+                            <Image
+                                src="/assets/edit_icon.svg"
+                                width={16}
+                                height={16}
+                                alt="filter"
+                            />
+                        </a>
+                        
                     </div>
-                    <ul className="list-none">
-                        <li className="pb-10">
+                    <div>
+                        <div className="pb-10">
                             <h1 className="pb-3 text-lg font-semibold">USERNAME</h1>
                             <h2 className="text-sm">michaeljackson</h2>
-                        </li>
-                        <li className="pb-10">
+                        </div>
+                        <div className="pb-10">
                             <h1 className="pb-3 text-lg font-semibold">PHONE NUMBER</h1>
                             <h2 className="text-sm">085945286214</h2>
-                        </li>
-                        <li className="pb-10 space-y-2">
+                        </div>
+                        <div className="pb-10 space-y-2">
                             <h1 className="pb-3 text-lg font-semibold">ADDRESS</h1>
                             <ul className="list-disc">
                                 <li className="flex justify-start">
@@ -41,12 +51,12 @@ export default function Profile(){
                                     <span>: DI Yogyakarta</span>
                                 </li>
                             </ul>
-                        </li>
-                        <li className="pb-10">
+                        </div>
+                        <div className="pb-10">
                             <h1 className="pb-3 text-lg font-semibold">NIK</h1>
                             <h2 className="text-sm">1234567812345678</h2>
-                        </li>
-                        <li className="pb-10">
+                        </div>
+                        <div className="pb-1">
                             <h1 className="pb-3 text-lg font-semibold">FOTO KTP</h1>
                             <div className="flex">
                                 <h2 className="text-sm pr-2">foto_ktp.jpg</h2>
@@ -57,8 +67,8 @@ export default function Profile(){
                                     alt="filter"
                                 />
                             </div>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
 
                 </div>
             </div>
