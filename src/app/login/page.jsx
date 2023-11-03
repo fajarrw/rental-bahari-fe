@@ -43,7 +43,7 @@ export default function Login() {
                             </h2>
                         </div>
                         <p className='text-gray-400 mb-10'>login into your account</p>
-                        <form onSubmit={handleSubmit} className="flex flex-col h-full px-32">
+                        <form onSubmit={handleSubmit} className="flex flex-col px-32">
                             <div className="flex flex-col gap-5" >
                                 <div className="flex flex-col gap-2">
                                     <label className="font-semibold text-left">Email</label>
