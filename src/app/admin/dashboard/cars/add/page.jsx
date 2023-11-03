@@ -3,7 +3,7 @@
 import Link from "next/link";
 import {FiChevronLeft} from "react-icons/fi";
 import {useState} from "react";
-import GetToken from "./GetToken";
+import {useGetToken} from "@/hooks/useCookies";
 export default function AddCar() {
   const [carInfo, setCarInfo] = useState({
     imageData: "",
@@ -29,7 +29,8 @@ export default function AddCar() {
 
   const postCarData = async (carData) => {
     try {
-      const {value} = await GetToken();
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const {value} = await useGetToken();
       const res = await fetch("http://localhost:3001/api/car/create", {
         method: "POST",
         headers: {

@@ -2,7 +2,25 @@
 
 import {FiEye, FiEyeOff} from "react-icons/fi";
 import {useState} from "react";
-import Login from "./Login";
+import {useLogin} from "@/hooks/useCookies";
+
+async function Login(body) {
+  try {
+    const res = await fetch("http://localhost:3001/api/auth/admin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+    if (res.status === 403) return false;
+    const data = await res.json();
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useLogin(data);
+  } catch (err) {
+    console.error(err);
+  }
+}
 
 export default function LoginForm() {
   const [userInfo, setUserInfo] = useState({
