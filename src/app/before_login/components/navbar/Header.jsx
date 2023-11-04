@@ -55,7 +55,7 @@ export default function Header() {
         }  fixed w-full max-w-[1920px] mx-auto z-20 transition-all duation-300`}
         >
 
-            <div className="xl:container mx-auto flex flex-col xl:flex-row xl:items-center xl:justify-between">
+            <div className="xl:container  mx-auto flex flex-col xl:flex-row xl:items-center xl:justify-between">
                 <div className="flex justify-between items-center px-4">
 
                     <Link
