@@ -6,8 +6,6 @@ import { useContext, useEffect, useState } from "react"
 
 import { Link } from "react-scroll"
 
-import Cari from "./Cari"
-
 import { useMediaQuery } from 'react-responsive'
 
 import { AiFillCar } from "react-icons/ai";
@@ -17,8 +15,6 @@ import { BiMenuAltRight, BiX } from "react-icons/bi"
 import { SearchContext } from '../../context/cari'
 
 import Person from "./Person"
-
-import SearchModelx from "../hero/SearchModelx"
 
 
 export default function Header() {
@@ -58,7 +54,7 @@ export default function Header() {
   return (
   <header 
   className={`${
-    header ? 'bg-[#045757] shadow-md py-2' : 'bg-[#045757] shadow-none py-4'
+    header ? 'bg-[#045757] shadow-md py-5' : 'bg-[#045757] shadow-none py-5'
   }  fixed w-full max-w-[1920px] mx-auto z-20 transition-all duation-300`}
   >
 
@@ -89,7 +85,7 @@ export default function Header() {
         <nav className={`${
             nav ? 'max-h-max py-8 px-4 xl:py-0 xl:px-0' : 'max-h-0 xl:max-h-max'
             } flex flex-col items-center w-full bg-[#045757] gap-y-8 overflow-hidden xl:overflow-visible font-bold 
-            xl:font-medium xl:flex-row xl:w-max xl:gap-x-8 xl:h-max xl:bg-transparent
+            xl:font-medium xl:flex-row xl:w-max xl:gap-x-12 xl:h-max xl:bg-transparent
             xl:pb-0 transition-all duration-150 text-center xl:text-left 
             text-sm xl:text-[15px] xl:normal-case`}>
 
@@ -164,7 +160,7 @@ export default function Header() {
                 <Person />
             </Link>
 
-            <SearchModelx />
+            
 
         </nav>
 

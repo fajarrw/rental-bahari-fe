@@ -1,11 +1,14 @@
-
 'use client'
 
-import React, {useState} from 'react'
+import React, { useState, useEffect, useContext} from 'react'
+
+import { 
+  RiArrowDownSLine, 
+  RiArrowUpSLine, 
+  RiCalendar2Fill} from 'react-icons/ri'
 
 import { Menu } from '@headlessui/react'
 
-import { FaCalendarAlt } from 'react-icons/fa'
 import { FaArrowRightLong } from 'react-icons/fa6'
 
 import {DateRange} from 'react-date-range'
@@ -24,36 +27,41 @@ export default function DateFunctionx() {
         }
     ])
 
+    const [isOpen, setIsOpen ] = useState(false)
+
   return (
-    <Menu as='div' className='w-full h-full flex xl:flex-row'>
-      <div className='relative flex-1'>
+    <Menu as='div' className='w-full xl:max-w-[296px] cursor-pointer relative'>
         
-        <Menu.Button className='dropdown-btn w-full h-full flex flex-col
-        justify-center items-center xl:items-start xl:pl-8'>
- 
-              <div className='flex flex-col xl:flex-row items-center xl:gap-x-2 gap-y-2 xl:gap-y-0'>
-                <FaCalendarAlt className='text-red-600'/>
-                <div className='text-[15px] uppercase font-bold'> Select Date </div>  
-              </div>
+        <Menu.Button 
+        onClick={() => setIsOpen(!isOpen)} 
+        className="flex h-[64px] items-center px-[18px] gap-x-2 border rounded-lg w-full text-left">
+        <RiCalendar2Fill className='text-2xl mr-[18px] text-[#045757] ' />
+        <div>
+          <div className='flex items-center gap-x-3'>
+          <div className='text-[15px] font-medium leading-tight'> {format(date[0].startDate, 'dd/MM/yy')}</div>
+          <FaArrowRightLong className='text-[#045757]  text-[12px]'/>
 
-              <div className='flex items-center gap-x-3 xl:ml-6'>
-                <div className='text-[13px] font-medium text-gray-500'> {format(date[0].startDate, 'dd/MM/yy')} </div>
-
-                <FaArrowRightLong className='text-red-600 text-[12px]'/>
-
-                <div className='text-[13px] font-medium text-gray-500'>
-                    {date[0].endDate ? (
+          {date[0].endDate ? (
                     <div>{format(date[0].endDate, 'dd/MM/yy')}</div>
                     ) : (
                     <div>{format(date[0].startDate, 'dd/MM/yy')}</div>
                     )}
-                </div>
-              </div>
+           </div>     
+          <div className='text-[13px]'>Select Your Date</div> 
+        </div>
+        
+        {
+            isOpen ? (
+              <RiArrowUpSLine className='text-2xl ml-auto text-[#045757] ' />
+              
+            ) : (
+              <RiArrowDownSLine className='text-2xl ml-auto text-[#045757] ' />
+            )
+          }
 
         </Menu.Button>
 
-        <Menu.Items className='dropdown-menu shadow-lg absolute -top-48 rounded-8 xl:top-[90px]
-        left-1/2 xl:left-0 z-50 transform -translate-x-1/2 xl:-translate-x-0 rounded-[10px] overflow-hidden'>
+        <Menu.Items className='text-[15px] space-y-6 shadow-md bg-white absolute w-full z-10 list-none rounded-b-lg'>
             <DateRange
             onChange={(item) => setDate([item.selection])} 
             editableDateInputs={true} 
@@ -64,9 +72,7 @@ export default function DateFunctionx() {
             />
         </Menu.Items>
         
-      </div>
     </Menu>
   )
 }
-
 
