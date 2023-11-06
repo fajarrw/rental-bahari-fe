@@ -16,7 +16,7 @@ async function Login(body) {
     if (res.status === 403) return false;
     const data = await res.json();
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    useLogin(data);
+    useLogin({...data, username: body.username});
   } catch (err) {
     console.error(err);
   }
