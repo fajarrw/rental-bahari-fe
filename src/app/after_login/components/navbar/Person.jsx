@@ -1,8 +1,13 @@
+'use client'
+
+import React, { useState, useEffect, useContext} from 'react'
 import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 
-import { BiChevronDownCircle } from 'react-icons/bi'
-import { BsFillPersonFill } from 'react-icons/bs'
+import { BiChevronDownCircle, BiChevronRightCircle, BiChevronUpCircle } from 'react-icons/bi'
+import { BsPersonCircle } from 'react-icons/bs'
+
+import Sign from './Sign'
 import { Link } from "@nextui-org/react"
 
 function classNames(...classes) {
@@ -10,12 +15,25 @@ function classNames(...classes) {
 }
 
 export default function Person() {
+
+  const [isOpen, setIsOpen ] = useState(false)
+
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
-        <Menu.Button className="inline-flex w-full justify-center gap-x-2 rounded-md bg-transparent px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-          <BsFillPersonFill className='text-2xl' />
-          <BiChevronDownCircle className="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
+        <Menu.Button 
+        onClick={() => setIsOpen(!isOpen)}
+        className="inline-flex w-full justify-center items-center gap-x-3 rounded-md bg-transparent px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+          <BsPersonCircle className='text-2xl' />
+
+          {
+            isOpen ? (
+              <BiChevronUpCircle className=" h-5 w-5 text-gray-400" aria-hidden="true" />
+            ) : (
+              <BiChevronDownCircle className=" h-5 w-5 text-gray-400" aria-hidden="true" />
+            )
+          }
+
         </Menu.Button>
       </div>
 
@@ -37,42 +55,35 @@ export default function Person() {
                   href="/profile"
                   className={classNames(
                     active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2 text-sm'
+                    'flex items-center justify-between px-4 py-2 text-sm'
                   )}
                 >
                   Edit Profile
+
+                  <BiChevronRightCircle className='text-[#045757]  text-[15px]'/>
                 </Link>
               )}
             </Menu.Item>
             <Menu.Item>
               {({ active }) => (
                 <Link
-                  href="#"
+                  href="/mybooking"
                   className={classNames(
                     active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2 text-sm'
+                    'flex items-center justify-between px-4 py-2 text-sm'
                   )}
                 >
                   My Booking
+
+                  <BiChevronRightCircle className='text-[#045757]  text-[15px]'/>
                 </Link>
               )}
             </Menu.Item>
-            <form method="POST" action="#">
-              <Menu.Item>
-                {({ active }) => (
-                  <Link
-                    href='/'
-                    type="submit"
-                    className={classNames(
-                      active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                      'block w-full px-4 py-2 text-left text-sm text-red-500'
-                    )}
-                  >
-                    Sign out
-                  </Link>
-                )}
-              </Menu.Item>
-            </form>
+            
+            <Menu.Item>
+              <Sign />     
+            </Menu.Item>
+            
           </div>
         </Menu.Items>
       </Transition>

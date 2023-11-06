@@ -3,7 +3,6 @@
 
 import { useContext, useEffect, useState } from "react"
 
-
 import { Link } from "react-scroll"
 
 import { useMediaQuery } from 'react-responsive'
@@ -15,6 +14,7 @@ import { BiMenuAltRight, BiX } from "react-icons/bi"
 import { SearchContext } from '../../context/cari'
 
 import Person from "./Person"
+import Sign from "./Sign";
 
 
 export default function Header() {
@@ -82,7 +82,9 @@ export default function Header() {
 
         </div>
 
-        <nav className={`${
+        <nav 
+        onClick={() => setNav(!nav)}
+        className={`${
             nav ? 'max-h-max py-8 px-4 xl:py-0 xl:px-0' : 'max-h-0 xl:max-h-max'
             } flex flex-col items-center w-full bg-[#045757] gap-y-8 overflow-hidden xl:overflow-visible font-bold 
             xl:font-medium xl:flex-row xl:w-max xl:gap-x-12 xl:h-max xl:bg-transparent
@@ -90,17 +92,19 @@ export default function Header() {
             text-sm xl:text-[15px] xl:normal-case`}>
 
 
-            <Link 
+            <Link
+            onClick={() => setNav(!nav)} 
             className="cursor-pointer text-[#E4E4E4]" 
             to='homex' 
             activeClass='active' 
-            smooth={desktopMode} 
+            smooth={desktopMode}
             spy={true}
             > 
                 Home 
             </Link>
 
-            <Link 
+            <Link
+            onClick={() => setNav(!nav)} 
             className="cursor-pointer text-[#E4E4E4]" 
             to='aboutx' 
             activeClass='active' 
@@ -110,44 +114,48 @@ export default function Header() {
                 About 
             </Link>
 
-            <Link 
+            <a
+            onClick={() => setNav(!nav)} 
             className="cursor-pointer mx-auto text-[#E4E4E4]" 
-            to='cars' 
+            href="/search-car" 
             activeClass='active' 
             smooth={desktopMode} 
             spy={true}
             > 
                 Cars 
-            </Link>
+            </a>
 
-            <Link 
+            <a
+            onClick={() => setNav(!nav)} 
             className="xl:hidden cursor-pointer mx-auto text-[#E4E4E4]" 
-            to='faq' 
+            href="/profile" 
             activeClass='active' 
             smooth={desktopMode} 
             spy={true}
             > 
                 Edit Profile 
-            </Link>
+            </a>
 
-            <Link 
+            <a
+            onClick={() => setNav(!nav)} 
             className="xl:hidden cursor-pointer mx-auto text-[#E4E4E4]" 
-            to='faq' 
+            href="/mybooking" 
             activeClass='active' 
             smooth={desktopMode} 
             spy={true}
             > 
                 My Booking 
-            </Link>
+            </a>
 
-            <Link 
+            <Link
+            onClick={() => setNav(!nav)} 
             className="xl:hidden cursor-pointer mx-auto text-red-500" 
-            to='faq' 
+            to='' 
             activeClass='active' 
             smooth={desktopMode} 
             spy={true}
             > 
-                Sign Out 
+                <Sign />
             </Link>
 
             <Link 
@@ -160,11 +168,8 @@ export default function Header() {
                 <Person />
             </Link>
 
-            
-
         </nav>
 
-         
     </div>
   </header>
   )
