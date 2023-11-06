@@ -22,6 +22,11 @@ module.exports = {
         'main-black': '#222222'
       }
     },
+    container: {
+      padding: {
+        DEFAULT: '15px',
+      },
+    },
   },
   plugins: [],
 }
