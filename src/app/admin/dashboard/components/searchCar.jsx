@@ -9,7 +9,7 @@ export default function AsideSearchCar() {
   };
 
   return (
-    <content className="bg-white p-4 rounded-lg drop-shadow-md">
+    <content className="bg-white p-4 rounded-lg drop-shadow-md h-fit">
       <form className="flex flex-col gap-6">
         <div className="flex flex-col gap-2">
           <label>Search cars:</label>

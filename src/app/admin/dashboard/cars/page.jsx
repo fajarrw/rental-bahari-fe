@@ -18,7 +18,7 @@ export default function Cars() {
               </button>
             </Link>
           </div>
-          <div>
+          <div className="mt-4">
             <CarList />
           </div>
         </content>
