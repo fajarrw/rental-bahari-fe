@@ -1,6 +1,7 @@
 "use client";
 
 import {useState, useEffect} from "react";
+import CarCard from "../components/carCard";
 
 const CarList = () => {
   const [carData, setCarData] = useState([]);
@@ -19,12 +20,12 @@ const CarList = () => {
     getCarData();
   }, []);
   return (
-    <div>
+    <div className="max-h-[40rem] overflow-auto">
       <h1>
         {carData.map((item, i) => {
           return (
             <div key={i}>
-              <p>{item.name}</p>
+              <CarCard item={item} />
             </div>
           );
         })}
