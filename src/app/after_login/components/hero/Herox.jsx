@@ -13,7 +13,7 @@ import { fadeIn } from "./variants"
 export default function Herox() {
   const { searchActive } = useContext(SearchContext)
   return (
-  <section className="h-screen bg-[#b2b7c2]/10" id='home'>
+  <section className="h-screen bg-[#b2b7c2]/10" id='homex'>
     <div className="container mx-auto h-full pt-16">
        
        <div className="flex flex-col w-full xl:flex-row justify-center items-center xl:justify-center h-full">
