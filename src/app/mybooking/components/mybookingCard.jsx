@@ -5,7 +5,7 @@ export default function bookingCard(){
     return (
         <div className="flex bg-slate-100 space-x-6 max-w-[45rem] w-full p-8 rounded-md shadow-lg m-5 justify-center">
             <div className='h-28'>
-                <Image
+                <Image  
                     src="/assets/2023-EQE350-SEDAN-AVP-DR.png"
                     alt="filter"
                     width="500" height="500"
