@@ -34,7 +34,7 @@ export default function DateFunctionx() {
         
         <Menu.Button 
         onClick={() => setIsOpen(!isOpen)} 
-        className="flex h-[64px] items-center px-[18px] gap-x-2 border rounded-lg w-full text-left">
+        className="flex h-[64px] items-center px-[18px] gap-x-2 border-2 border-[#045757] rounded-lg w-full text-left">
         <RiCalendar2Fill className='text-2xl mr-[18px] text-[#045757] ' />
         <div>
           <div className='flex items-center gap-x-3'>
@@ -67,7 +67,7 @@ export default function DateFunctionx() {
             editableDateInputs={true} 
             moveRangeOnFirstSelection={false}
             ranges={date}
-            rangeColors={['#ed1d24']}
+            rangeColors={['#045757']}
             minDate={addDays(new Date(), 0)}
             />
         </Menu.Items>

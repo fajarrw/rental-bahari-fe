@@ -21,7 +21,7 @@ export default function Sign() {
         isOpen={isOpen} 
         onOpenChange={onOpenChange}
         classNames={{
-          backdrop: "bg-gradient-to-t from-white z-50 to-white-100/10 backdrop-opacity-20 filter blur-2xl"
+          backdrop: "bg-black bg-opacity-25 backdrop-blur-sm insert-0 flex justify-center items-center"
         }}
         >
             <ModalContent className="relative z-100 ">
