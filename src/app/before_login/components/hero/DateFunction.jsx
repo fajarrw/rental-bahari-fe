@@ -34,34 +34,30 @@ export default function DateFunction() {
         
         <Menu.Button 
         onClick={() => setIsOpen(!isOpen)} 
-        className="flex h-[64px] items-center px-[18px] gap-x-2 border rounded-lg w-full text-left">
+        className="flex h-[64px] items-center px-[18px] gap-x-2 border-2 border-[#045757] rounded-lg w-full text-left">
+        <RiCalendar2Fill className='text-2xl mr-[18px] text-[#045757] ' />
+        <div>
+          <div className='flex items-center gap-x-3'>
+          <div className='text-[15px] font-medium leading-tight'> {format(date[0].startDate, 'dd/MM/yy')}</div>
+          <FaArrowRightLong className='text-[#045757]  text-[12px]'/>
 
-          <RiCalendar2Fill className='text-2xl mr-[18px] text-[#045757] ' />
-
-          <div>
-            <div className='flex items-center gap-x-3'>
-
-              <div className='text-[15px] font-medium leading-tight'> {format(date[0].startDate, 'dd/MM/yy')}</div>
-              <FaArrowRightLong className='text-[#045757]  text-[12px]'/>
-
-              {date[0].endDate ? (
-                        <div>{format(date[0].endDate, 'dd/MM/yy')}</div>
-                        ) : (
-                        <div>{format(date[0].startDate, 'dd/MM/yy')}</div>
-                        )}
-            </div>
-
-            <div className='text-[13px]'>Select Your Date</div> 
-          </div>
+          {date[0].endDate ? (
+                    <div>{format(date[0].endDate, 'dd/MM/yy')}</div>
+                    ) : (
+                    <div>{format(date[0].startDate, 'dd/MM/yy')}</div>
+                    )}
+           </div>     
+          <div className='text-[13px]'>Select Your Date</div> 
+        </div>
         
-          {
-              isOpen ? (
-                <RiArrowUpSLine className='text-2xl ml-auto text-[#045757] ' />
-                
-              ) : (
-                <RiArrowDownSLine className='text-2xl ml-auto text-[#045757] ' />
-              )
-            }
+        {
+            isOpen ? (
+              <RiArrowUpSLine className='text-2xl ml-auto text-[#045757] ' />
+              
+            ) : (
+              <RiArrowDownSLine className='text-2xl ml-auto text-[#045757] ' />
+            )
+          }
 
         </Menu.Button>
 
@@ -71,7 +67,7 @@ export default function DateFunction() {
             editableDateInputs={true} 
             moveRangeOnFirstSelection={false}
             ranges={date}
-            rangeColors={['#ed1d24']}
+            rangeColors={['#045757']}
             minDate={addDays(new Date(), 0)}
             />
         </Menu.Items>

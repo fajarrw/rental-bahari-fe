@@ -35,7 +35,7 @@ export default function Herox() {
                 whileInView={'show'} 
                 viewport={{once: false, amount:0.6}} 
                 className="text-sm text-gray-500 md:text-xl xl:leading-8 max-w-[550px] mx-auto xl:mx-0 mb-6 xl:mb-10"> 
-                    Lorem Ipsum Generator Generate Lorem Ipsum placeholder text. Select the number of characters, words, sentences or paragraphs, and hit generate! 
+                    Tersedia Berbagai Pilihan Kendaraan Berkualitas untuk Petualangan Anda  
                 </motion.p>
 
                 <motion.div 
