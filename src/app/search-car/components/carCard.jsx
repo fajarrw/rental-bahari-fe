@@ -39,7 +39,9 @@ const CarCard = ({ item }) => {
               height={18}
               alt="transmission"
             />
-            <p className="text-sm">{item.transmission}</p>
+            <p className="text-sm">
+              {item.transmission[0].toUpperCase() + item.transmission.slice(1)}
+            </p>
           </div>
         </div>
       </div>
@@ -50,7 +52,9 @@ const CarCard = ({ item }) => {
         </div>
         <button
           className="btn-primary"
-          onClick={() => router.push("/booking-summary" + "?" + "carId=" + item._id)}
+          onClick={() =>
+            router.push("/booking-summary" + "?" + "carId=" + item._id)
+          }
         >
           Order
         </button>
