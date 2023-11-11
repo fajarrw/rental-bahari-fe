@@ -78,6 +78,15 @@ hr {
   padding: 0.75rem;
 }
 
+.btn-secondary {
+  border: 2px var(--RBdarkgreen) solid;
+  border-radius: 0.25rem;
+  color: var(--RBdarkgreen);
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  padding: 0.75rem 2.5rem;
+}
+
 .btn-secondary-sm {
   border: 2px var(--RBdarkgreen) solid;
   border-radius: 0.25rem;
