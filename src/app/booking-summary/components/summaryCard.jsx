@@ -111,10 +111,10 @@ const SummaryCard = () => {
             <p>You aren't logged in. Please log in or sign up</p>
           </div>
           <div className="flex flex-row justify-center gap-4 py-2">
-            <button className="btn-secondary font-poppins font-normal">
+            <button className="btn-secondary font-normal">
               Sign Up
             </button>
-            <button className="btn-primary font-poppins font-normal">Log In</button>
+            <button className="btn-primary font-normal">Log In</button>
           </div>
         </div>
       ) : (

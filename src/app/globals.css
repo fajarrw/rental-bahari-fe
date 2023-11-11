@@ -79,7 +79,7 @@ hr {
 }
 
 .btn-secondary {
-  border: 2px var(--RBdarkgreen) solid;
+  border: 1px var(--RBdarkgreen) solid;
   border-radius: 0.25rem;
   color: var(--RBdarkgreen);
   font-family: "Inter", sans-serif;
