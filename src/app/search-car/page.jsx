@@ -40,9 +40,9 @@ export default function SearchCar() {
             <SearchBar />
           </div>
           <hr className="w-0 md:w-full" />
-            <div className="flex flex-col py-6 gap-6 md:gap-0 w-full items-center max-w-[36rem]">
-              <CarList />
-            </div>
+          <div className="flex flex-col py-6 gap-6 md:gap-0 w-full items-center max-w-[36rem]">
+            <CarList />
+          </div>
         </div>
       </main>
     </SearchContextFunction>
