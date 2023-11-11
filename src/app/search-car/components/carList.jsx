@@ -1,10 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import CarCard from "./components/carCard";
+import CarCard from "./carCard";
+import CarCardSkeleton from "./carCardSkeleton";
 
 const CarList = () => {
-  const [carData, setCarData] = useState([]);
+  const [carData, setCarData] = useState();
 
   const getCarData = async () => {
     try {
@@ -21,11 +22,20 @@ const CarList = () => {
   useEffect(() => {
     getCarData();
   }, []);
+
+  const skeleton = [1, 2, 3];
+
   return (
     <div className="flex flex-col gap-6 md:gap-0">
-      {carData.map((item, i) => {
-        return <CarCard key={i} item={item} />;
-      })}
+      {carData ? (
+        carData.map((item, i) => {
+          return <CarCard key={i} item={item} />;
+        })
+      ) : (
+        skeleton.map((item, i) => {
+          return <CarCardSkeleton key={i} item={item} />;
+        })
+      )}
     </div>
   );
 };
