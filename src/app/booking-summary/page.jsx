@@ -1,7 +1,7 @@
 import Link from "next/link";
 import SummaryCard from "./components/summaryCard";
-import { SearchContextFunction } from '../before_login/context/search';
-import Header from '../before_login/components/navbar/header';
+import { SearchContextFunction } from "../before_login/context/search";
+import Header from "../before_login/components/navbar/header";
 
 export default function BookingSummary() {
   return (
@@ -14,7 +14,9 @@ export default function BookingSummary() {
           </Link>
           <h1 className="font-poppins font-medium">Booking Summary</h1>
         </div>
-        <SummaryCard />
+        <div className="flex flex-row">
+          <SummaryCard />
+        </div>
       </main>
     </SearchContextFunction>
   );

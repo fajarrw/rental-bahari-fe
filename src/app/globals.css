@@ -78,6 +78,15 @@ hr {
   padding: 0.75rem;
 }
 
+.btn-secondary {
+  border: 1px var(--RBdarkgreen) solid;
+  border-radius: 0.25rem;
+  color: var(--RBdarkgreen);
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  padding: 0.75rem 2.5rem;
+}
+
 .btn-secondary-sm {
   border: 2px var(--RBdarkgreen) solid;
   border-radius: 0.25rem;
@@ -106,6 +115,27 @@ hr {
 
 .text-rb-darkgreen {
   color: var(--RBdarkgreen);
+}
+
+.skeleton-loader {
+  display: block;
+  background: linear-gradient(	  
+      to right,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.5) 50%,
+      rgba(255, 255, 255, 0) 80%
+    ),
+    lightgray;
+  background-repeat: repeat-y;
+  background-size: 50px 500px;
+  background-position: 0 0;
+  animation: shine 1s infinite;	  
+}
+
+@keyframes shine {	
+  to {
+    background-position: 100% 0, /* move highlight to right */ 0 0;
+  }
 }
 
 .img-white-logo {

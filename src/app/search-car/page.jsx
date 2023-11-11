@@ -1,7 +1,7 @@
 "use client";
 
 import "./styles.css";
-import CarList from "./CarList";
+import CarList from "./components/carList";
 import FilterAndSort from "./components/filterAndSort";
 import SearchBar from "./components/searchBar";
 import { SearchContextFunction } from '../before_login/context/search';
