@@ -7,15 +7,18 @@ import { FilterAndSortContext } from "../context/filterAndSortContext";
 
 const CarList = () => {
   const [carData, setCarData] = useState();
+  const [isLoading, setIsLoading] = useState(true);
   const filterAndSortContext = useContext(FilterAndSortContext);
 
   const getCarData = async () => {
     try {
+      setIsLoading(true);
       const res = await fetch(
         process.env.NEXT_PUBLIC_RB_REST_API_URL + "/api/car/search?" + createParams(filterAndSortContext)
       );
       const { car } = await res.json();
       setCarData(car);
+      setIsLoading(false);
     } catch (err) {
       console.error(err);
     }
@@ -37,7 +40,7 @@ const CarList = () => {
 
   return (
     <div className="flex flex-col gap-6 md:gap-0">
-      {carData
+      {!isLoading
         ? carData.map((item, i) => {
             return <CarCard key={i} item={item} />;
           })
