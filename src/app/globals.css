@@ -138,6 +138,22 @@ hr {
   }
 }
 
+.bg-rb-green {
+  background: var(--RBgreen);
+}
+
+.bg-rb-white {
+  background: var(--RBwhite);
+}
+
+.border-rb-green {
+  border-color: var(--RBgreen);
+}
+
+.border-rb-black {
+  border-color: var(--RBblack);
+}
+
 .img-white-logo {
 	width: 230px;
 	height: 130px;
