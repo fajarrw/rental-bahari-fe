@@ -12,24 +12,22 @@ import { DateRange } from "react-date-range";
 import { format, addDays } from "date-fns";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
+import { DateContext } from "../context/dateContext";
 
 export default function DateFunctionx() {
-  const [date, setDate] = useState([
-    {
-      startDate: new Date(),
-      endDate: new Date(),
-      key: "selection",
-    },
-  ]);
+  const dateContext = useContext(DateContext);
   const [isOpen, setIsOpen] = useState(false);
 
-  console.log(format(date[0].startDate, "dd-MM-yy"));
-  console.log(format(date[0].endDate, "dd-MM-yy"));
+  console.log(format(dateContext.date[0].startDate, "dd-MM-yy"));
+  console.log(format(dateContext.date[0].endDate, "dd-MM-yy"));
 
   return (
     <Menu as="div" className="w-full xl:max-w-[296px] cursor-pointer relative">
       <Menu.Button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => {
+          setIsOpen(!isOpen);
+          console.log(isOpen);
+        }}
         className="flex h-[64px] items-center px-[18px] gap-x-2 border-2 border-[#cdcdcd] rounded-lg w-full text-left"
       >
         <RiCalendar2Fill className="text-2xl mr-[18px] text-[#045757] " />
@@ -37,13 +35,13 @@ export default function DateFunctionx() {
           <div className="flex items-center gap-x-3">
             <div className="text-[15px] font-medium leading-tight">
               {" "}
-              {format(date[0].startDate, "dd/MM/yy")}
+              {format(dateContext.date[0].startDate, "dd/MM/yy")}
             </div>
             <FaArrowRightLong className="text-[#045757] text-[12px]" />
-            {date[0].endDate ? (
-              <div>{format(date[0].endDate, "dd/MM/yy")}</div>
+            {dateContext.date[0].endDate ? (
+              <div>{format(dateContext.date[0].endDate, "dd/MM/yy")}</div>
             ) : (
-              <div>{format(date[0].startDate, "dd/MM/yy")}</div>
+              <div>{format(dateContext.date[0].startDate, "dd/MM/yy")}</div>
             )}
           </div>
           <div className="text-[13px]">Select Your Date</div>
@@ -56,10 +54,10 @@ export default function DateFunctionx() {
       </Menu.Button>
       <Menu.Items className="text-[15px] space-y-6 shadow-md bg-white absolute w-full z-10 list-none rounded-b-lg">
         <DateRange
-          onChange={(item) => setDate([item.selection])}
+          onChange={(item) => dateContext.setDate([item.selection])}
           editableDateInputs={true}
           moveRangeOnFirstSelection={false}
-          ranges={date}
+          ranges={dateContext.date}
           rangeColors={["#045757"]}
           minDate={addDays(new Date(), 0)}
         />

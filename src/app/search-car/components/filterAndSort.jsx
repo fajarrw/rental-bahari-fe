@@ -1,10 +1,17 @@
+"use client"
+
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import { Slider } from "@nextui-org/react";
+import useCurrency from "../../../hooks/useCurrency";
 
 function handleClick() {
   console.log("i got clicked");
 }
 
 const FilterAndSort = () => {
+  const [value, setValue] = useState([100000, 1000000]);
+
   return (
     <div className="flex flex-row md:flex-col w-full md:w-max py-3 md:p-0 justify-center md:justify-start gap-10 md:gap-0 shadow-lg md:shadow-none">
       <div className="dd-filter">
@@ -19,10 +26,39 @@ const FilterAndSort = () => {
           </div>
           <div className="flex flex-col gap-3">
             <h3 className="font-medium text-base">Price per Day</h3>
-            <div className="flex flex-row justify-between">
+            <div className="flex flex-col gap-2 w-full h-full max-w-md items-start justify-center">
+              <Slider
+                aria-label="price slider"
+                size="sm"
+                step={10000}
+                maxValue={1000000}
+                minValue={100000}
+                value={value}
+                onChange={setValue}
+                classNames={{
+                  base: "max-w-md gap-3",
+                  track: "border-s-secondary-100",
+                  filler: "bg-rb-green",
+                }}
+                renderThumb={({ index, ...props }) => (
+                  <div
+                    {...props}
+                    className="group p-2 top-1/2 bg-rb-white border border-rb-black dark:border-default-400/50 shadow-medium rounded-full cursor-grab data-[dragging=true]:cursor-grabbing"
+                  ></div>
+                )}
+              />
+              <div className="flex flex-col gap-1/2 text-rb-black text-small">
+                <p className="text-rb-black text-xs font-medium">
+                  Selected budget:{" "}
+                </p>
+                {Array.isArray(value) &&
+                  value.map((b) => `${useCurrency(b)}`).join(" – ")}
+              </div>
+            </div>
+            {/* <div className="flex flex-row justify-between">
               <p className="text-sm">Rp. 50000</p>
               <p className="text-sm">Rp. 5000000</p>
-            </div>
+            </div> */}
           </div>
           <hr />
           <div className="flex flex-col gap-3">

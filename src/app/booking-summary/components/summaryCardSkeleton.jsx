@@ -13,12 +13,12 @@ const SummaryCardSkeleton = () => {
       </div>
       <div className="flex flex-row justify-between">
         <div className="flex flex-col gap-2">
-          <span class="skeleton-loader h-2 w-16"></span>
-          <span class="skeleton-loader h-4 w-16"></span>
+          <span class="skeleton-loader h-2 w-8"></span>
+          <span class="skeleton-loader h-4 w-32"></span>
         </div>
-        <div className="flex flex-col gap-2">
-          <span class="skeleton-loader h-2 w-16"></span>
-          <span class="skeleton-loader h-4 w-16"></span>
+        <div className="flex flex-col gap-2 items-end">
+          <span class="skeleton-loader h-2 w-8"></span>
+          <span class="skeleton-loader h-4 w-32"></span>
         </div>
       </div>
       <hr />
@@ -32,7 +32,7 @@ const SummaryCardSkeleton = () => {
       </div>
       <hr />
       <div className="flex flex-row justify-between items-center py-1">
-        <span class="skeleton-loader h-6 w-16"></span>
+        <span class="skeleton-loader h-6 w-32"></span>
         <span class="skeleton-loader h-6 w-32"></span>
       </div>
       <div className="flex flex-col items-center py-1">
