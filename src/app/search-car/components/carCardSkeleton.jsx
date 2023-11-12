@@ -1,9 +1,5 @@
 "use client";
 
-import Image from "next/image";
-import useCurrency from "@/hooks/useCurrency";
-import { useRouter } from "next/navigation";
-
 const CarCardSkeleton = ({ item }) => {
   return (
     <div className="flex flex-col rounded border-2 md:border-0 border-gray-300 border-opacity-20 md:border-opacity-0 md:flex-row w-64 md:w-full gap-6 md:gap-0 py-4 px-5 justify-between items-center md:items-start shadow-xl md:shadow-none">

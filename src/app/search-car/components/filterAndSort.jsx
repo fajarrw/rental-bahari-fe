@@ -2,7 +2,13 @@
 
 import React, { useState, useEffect, useContext } from "react";
 import Image from "next/image";
-import { Slider, Select, SelectItem } from "@nextui-org/react";
+import {
+  Slider,
+  Select,
+  SelectItem,
+  CheckboxGroup,
+  Checkbox,
+} from "@nextui-org/react";
 import useCurrency from "../../../hooks/useCurrency";
 import { FilterAndSortContext } from "../context/filterAndSortContext";
 
@@ -110,7 +116,7 @@ const FilterAndSort = () => {
           <div className="flex flex-col gap-3">
             <h3 className="font-medium text-base">Transmission</h3>
             <div className="flex flex-col gap-2 text-sm">
-              <div className="flex flex-row gap-2">
+              {/* <div className="flex flex-row gap-2">
                 <input
                   type="checkbox"
                   id="automatic"
@@ -129,7 +135,23 @@ const FilterAndSort = () => {
                 />
                 <label for="manual">Manual</label>
                 <br />
-              </div>
+              </div> */}
+              <CheckboxGroup
+                // label="Select cities"
+                defaultValue={[]}
+                value={filterAndSortContext.transmission}
+                onValueChange={filterAndSortContext.setTransmission}
+              >
+                <Checkbox size="sm" color="success" value="automatic">
+                  Automatic
+                </Checkbox>
+                <Checkbox size="sm" color="success" value="manual">
+                  Manual
+                </Checkbox>
+              </CheckboxGroup>
+              {/* <p className="text-default-500 text-small">
+                Selected: {filterAndSortContext.transmission}
+              </p> */}
             </div>
           </div>
           <hr />
@@ -153,6 +175,7 @@ const FilterAndSort = () => {
               // labelPlacement="outside-left"
               // label="Sort by"
               aria-label="sort selection"
+              selectionMode="single"
               selectedKeys={filterAndSortContext.sort}
               onSelectionChange={filterAndSortContext.setSort}
               className="max-w-xs"
