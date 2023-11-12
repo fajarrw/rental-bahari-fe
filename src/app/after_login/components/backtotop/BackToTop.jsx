@@ -6,7 +6,7 @@ import { FaChevronUp } from 'react-icons/fa6'
 
 import { Link } from 'react-scroll'
 
-export default function BackToTop() {
+export default function BackToTopx() {
 const [isActive, setIsActive] = useState(false)
 useEffect(() => {
     const handleScroll = () => {
