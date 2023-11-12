@@ -1,9 +1,10 @@
-"use client"
+"use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Image from "next/image";
-import { Slider } from "@nextui-org/react";
+import { Slider, Select, SelectItem } from "@nextui-org/react";
 import useCurrency from "../../../hooks/useCurrency";
+import { FilterAndSortContext } from "../context/filterAndSortContext";
 
 function handleClick() {
   console.log("i got clicked");
@@ -11,6 +12,7 @@ function handleClick() {
 
 const FilterAndSort = () => {
   const [value, setValue] = useState([100000, 1000000]);
+  const filterAndSortContext = useContext(FilterAndSortContext);
 
   return (
     <div className="flex flex-row md:flex-col w-full md:w-max py-3 md:p-0 justify-center md:justify-start gap-10 md:gap-0 shadow-lg md:shadow-none">
@@ -139,14 +141,30 @@ const FilterAndSort = () => {
           Sort
         </button>
         <div className="dd-content-sort w-64 px-4 pb-4 gap-3">
-          <div className="flex flex-row py-2 md:py-0 gap-2">
-            <label for="sort" className="font-medium text-base">
+          <div className="flex flex-col py-2 md:py-0 gap-2 items-start">
+            <label for="sort" className="font-medium text-base w-20">
               Sort by
             </label>
-            <select id="sort" className="text-sm ">
+            {/* <select id="sort" className="text-sm">
               <option value="Price1">Price: Low to High</option>
               <option value="Price-1">Price: High to Low</option>
-            </select>
+            </select> */}
+            <Select
+              // labelPlacement="outside-left"
+              // label="Sort by"
+              aria-label="sort selection"
+              selectedKeys={filterAndSortContext.sort}
+              onSelectionChange={filterAndSortContext.setSort}
+              className="max-w-xs"
+              radius="sm"
+            >
+              <SelectItem key="1" value="1">
+                Price: Low to High
+              </SelectItem>
+              <SelectItem key="-1" value="-1">
+                Price: High to Low
+              </SelectItem>
+            </Select>
           </div>
         </div>
       </div>
