@@ -10,17 +10,11 @@ import { useState } from "react";
 import { DateContextFunction } from "./context/dateContext";
 
 export default function SearchCar() {
-  const [isOpen, setIsOpen] = useState("COK");
-  const [isName, setIsName] = useState("FAAAA");
-  const handleIsOpen = (state) => {
-    setIsOpen(state);
-  };
-
   return (
     <DateContextFunction>
       <SearchContextFunction>
         <Header />
-        <main className="flex flex-col md:flex-row pt-20">
+        <main className="flex flex-col md:flex-row pt-20 min-h-screen">
           <FilterAndSort />
           <div className="flex flex-col w-full items-center">
             <div className="flex flex-row w-max lg:w-max gap-4 justify-between items-center">
