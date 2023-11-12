@@ -41,7 +41,7 @@ const SummaryCard = () => {
     try {
       const res = await fetch(
         process.env.NEXT_PUBLIC_RB_REST_API_URL +
-          "/api/car/" +
+          "/api/car/id/" +
           searchParams.get("carId")
       );
       const { car } = await res.json();
