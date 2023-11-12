@@ -33,18 +33,6 @@ const CarList = () => {
     getCarData();
   }, [filterAndSortContext.sort]);
 
-  // useEffect(() => {
-  // const sortedData = carData.sort((a, b) => {
-  //   if (sortOrder === '1') {
-  //     return a.price.localeCompare(b.price);
-  //   } else {
-  //     return b.price.localeCompare(a.price);
-  //   }
-  // });
-
-  // setCarData(sortedData);
-  // }, [filterAndSortContext.sort])
-
   const skeleton = [1, 2, 3];
 
   return (
