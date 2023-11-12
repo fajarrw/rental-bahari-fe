@@ -6,7 +6,7 @@ import { FaChevronUp } from 'react-icons/fa6'
 
 import { Link } from 'react-scroll'
 
-export default function BackToTop() {
+export default function BackToTop1() {
 const [isActive, setIsActive] = useState(false)
 useEffect(() => {
     const handleScroll = () => {
@@ -26,7 +26,7 @@ useEffect(() => {
 
   return (
     <Link 
-    to='homex'
+    to='home'
     smooth={true}
     className={`${!isActive && 'hidden'} 
     fixed bg-dark-green-1 hover:bg-accent-hover w-12 h-12 right-16 bottom-11 z-10 

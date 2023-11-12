@@ -8,58 +8,77 @@ import Card2 from "./Card2";
 
 const Aboutx = () => {
   return (
-    <section className=" h-fit xl:h-screen flex items-center
-    bg-dark-green-2" id="aboutx">
-      <div className=" container mx-auto h-full py-20 xl:py-16 flex w-full flex-col justify-center items-center">
+    <section className=" h-fit xl:h-screen flex items-center bg-dark-green-2" id="aboutx">
+      <div className=" container mx-auto h-full py-20 xl:py-16 flex w-full flex-col justify-center items-center overflow-hidden">
       
         <h1 className="text-white uppercase text-3xl md:text-4xl text-primary xl:leading-[72px] font-extrabold mb-12">
           Why US?
         </h1>
       
-    <div 
-  
-    className="flex flex-col xl:flex-row items-center justify-center gap-12">
-      <div class="max-w-sm rounded-xl  bg-white overflow-hidden shadow-lg">
-  <Image 
-  className="w-full h-64" 
-  src={'/assets/reg-bg.png'}
-  width={500}
-  height={500} 
-  alt=""  />
-  <div class="px-6 py-4">
-    <div class="font-bold text-xl mb-2">Terpercaya</div>
-    <p class="text-gray-700 text-base">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
-    </p>
-  </div>
-  <div class="px-6 pt-4 pb-2 flex justify-end items-center ">
-  <div type="button" className=" bg-dark-green-1 inline-flex w-full justify-center rounded-md px-3 py-2 text-sm text-white font-semibold text-gray-900 shadow-sm hover:bg-dark-green-2 sm:w-auto">
-      <Card1 />
-  </div>
-  </div>
-</div>
+        <div className="flex flex-col xl:flex-row items-center justify-center gap-12 xl:gap-20">
 
-<div class="max-w-sm rounded-xl bg-white  overflow-hidden shadow-lg">
-  <Image 
-  className="w-full h-64" 
-  src={'/assets/user-login-bg2.png'}
-  width={500}
-  height={500} 
-  alt=""  />
-  <div class="px-6 py-4">
-    <div class="font-bold text-xl mb-2">Pilihan Mobil Banyak</div>
-    <p class="text-gray-700 text-base">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
-    </p>
-  </div>
-  <div class="px-6 pt-4 pb-2 flex justify-end items-center ">
-  <div type="button" className=" bg-dark-green-1 inline-flex w-full justify-center rounded-md px-3 py-2 text-sm text-white font-semibold text-gray-900 shadow-sm hover:bg-dark-green-2 sm:w-auto">
-      <Card2 />
-  </div>
-  </div>
-</div>
-</div>
-</div>
+          <div className="max-w-sm rounded-xl bg-white overflow-hidden shadow-lg hover:scale-105 duration-500">
+
+            <div className="h-56 overflow-hidden text-white shadow-lg rounded-t-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40">
+              <Image
+              className="h-full w-full "
+              src={'/assets/reg-bg.png'}
+              alt="img-blur-shadow"
+              width={500}
+              height={500}
+              />
+            </div>
+
+            <div className="p-6">
+
+              <h5 className="block mb-4 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
+                Trusted For Years
+              </h5>
+
+              <p className="block font-sans text-base antialiased font-light leading-relaxed text-inherit">
+                Kepercayaan adalah pijakan utama kami di dunia layanan rental mobil. Kami memahami bahwa mempercayakan kendaraan Anda kepada kami 
+                merupakan tanggung jawab besar, dan itulah mengapa kami mengutamakan integritas dan keandalan dalam setiap aspek layanan kami. 
+              </p>
+
+            </div>
+
+            <Card1 />
+
+          </div>
+
+          <div className="max-w-sm rounded-xl bg-white overflow-hidden shadow-lg hover:scale-105 duration-500">
+
+            <div className="h-56 overflow-hidden text-white shadow-lg rounded-t-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40">
+              <Image
+              className="h-full w-full"
+              src={'/assets/user-login-bg2.png'}
+              alt="img-blur-shadow"
+              width={500}
+              height={500}
+              />
+            </div>
+
+            <div className="p-6">
+
+              <h5 className="block mb-4 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
+                Easy Booking, Outstanding Vehicles
+              </h5>
+
+              <p className="block font-sans text-base antialiased font-light leading-relaxed text-inherit">
+                Menghadirkan pengalaman pemesanan yang mudah dan kendaraan yang luar biasa adalah komitmen utama kami 
+                dalam memberikan layanan rental mobil. Proses pemesanan yang sederhana dan efisien adalah pintu gerbang 
+                menuju petualangan tanpa kerumitan. 
+              </p>
+
+            </div>
+
+            <Card2 />
+
+          </div>
+
+        </div>
+
+      </div>
     </section>
   )
 }
