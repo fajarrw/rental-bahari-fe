@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import useCurrency from "@/hooks/useCurrency";
 import SummaryCardSkeleton from "./summaryCardSkeleton";
+import { format } from "date-fns";
 
 const SummaryCard = () => {
   const [carData, setCarData] = useState();
@@ -86,11 +87,29 @@ const SummaryCard = () => {
           <div className="flex flex-row justify-between">
             <div className="flex flex-col">
               <p className="text-xs font-semibold">Start</p>
-              <p>Fri, 20 Oct</p>
+              <p>
+                {format(
+                  new Date(
+                    searchParams.get("start").slice(6, 10),
+                    searchParams.get("start").slice(3, 5),
+                    searchParams.get("start").slice(0, 2)
+                  ),
+                  "E, dd MMM yyyy"
+                )}
+              </p>
             </div>
             <div className="flex flex-col">
               <p className="text-xs font-semibold">End</p>
-              <p>Sat, 21 Oct</p>
+              <p>
+                {format(
+                  new Date(
+                    searchParams.get("end").slice(6, 10),
+                    searchParams.get("end").slice(3, 5),
+                    searchParams.get("end").slice(0, 2)
+                  ),
+                  "E, dd MMM yyyy"
+                )}
+              </p>
             </div>
           </div>
           <hr />
@@ -111,9 +130,7 @@ const SummaryCard = () => {
             <p>You aren't logged in. Please log in or sign up</p>
           </div>
           <div className="flex flex-row justify-center gap-4 py-2">
-            <button className="btn-secondary font-normal">
-              Sign Up
-            </button>
+            <button className="btn-secondary font-normal">Sign Up</button>
             <button className="btn-primary font-normal">Log In</button>
           </div>
         </div>

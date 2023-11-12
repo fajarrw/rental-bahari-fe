@@ -10,7 +10,7 @@ const SearchBar = () => {
       {/* <div className="hidden md:flex flex-row w-36 items-center">
         <p className="md:block font-medium">4 Cars Found</p>
       </div> */}
-			<DateFunctionx />
+      <DateFunctionx />
       <button className="btn-primary-sm">
         <Image
           src="/assets/magnifier.svg"
