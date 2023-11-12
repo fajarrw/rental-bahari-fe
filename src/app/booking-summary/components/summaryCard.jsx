@@ -5,13 +5,37 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import useCurrency from "@/hooks/useCurrency";
 import SummaryCardSkeleton from "./summaryCardSkeleton";
-import { format } from "date-fns";
+import { format, differenceInCalendarDays } from "date-fns";
 
 const SummaryCard = () => {
   const [carData, setCarData] = useState();
+  const [price, setPrice] = useState(0);
   const [discount, setDiscount] = useState(0);
   const [payable, setPayable] = useState(0);
   const searchParams = useSearchParams();
+  var interval = 0;
+  const intervalCalendar = differenceInCalendarDays(
+    new Date(
+      searchParams.get("end").slice(6, 10),
+      searchParams.get("end").slice(3, 5),
+      searchParams.get("end").slice(0, 2)
+    ),
+    new Date(
+      searchParams.get("start").slice(6, 10),
+      searchParams.get("start").slice(3, 5),
+      searchParams.get("start").slice(0, 2)
+    )
+  );
+  var dayOrDays = "days";
+
+  if (intervalCalendar == 0) {
+    interval = 0.5;
+  } else if(intervalCalendar == 1)  {
+    interval = intervalCalendar;
+    dayOrDays = "day";
+  } else {
+    interval = intervalCalendar;
+  }
 
   const getCarData = async () => {
     try {
@@ -32,8 +56,8 @@ const SummaryCard = () => {
       const carPrice = carData?.price; // Safely access the price property
 
       if (carPrice !== undefined) {
-        console.log("Car Price:", carPrice);
-        setDiscount(carPrice / 4);
+        setPrice(carPrice * interval);
+        setDiscount(price / 4);
       }
     } catch (err) {
       console.error(err);
@@ -44,7 +68,7 @@ const SummaryCard = () => {
     try {
       const carPrice = carData?.price; // Safely access the price property
       if (carPrice !== undefined) {
-        setPayable(carPrice - discount);
+        setPayable(price - discount);
       }
     } catch (err) {
       console.error(err);
@@ -98,7 +122,7 @@ const SummaryCard = () => {
                 )}
               </p>
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col items-end">
               <p className="text-xs font-semibold">End</p>
               <p>
                 {format(
@@ -114,12 +138,12 @@ const SummaryCard = () => {
           </div>
           <hr />
           <div className="flex flex-row justify-between text-sm py-1">
-            <p>Price</p>
-            <p className="font-semibold">{useCurrency(carData.price)}</p>
+            <p>Price ({interval} {dayOrDays})</p>
+            <p className="font-semibold">{useCurrency(price)}</p>
           </div>
           <div className="flex flex-row justify-between text-sm py-1">
             <p>Discount</p>
-            <p className="font-semibold">{useCurrency(discount)}</p>
+            <p className="font-semibold">- {useCurrency(discount)}</p>
           </div>
           <hr />
           <div className="flex flex-row justify-between items-center py-1">
