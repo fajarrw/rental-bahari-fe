@@ -15,7 +15,7 @@ const CarList = () => {
       setIsLoading(true);
       const res = await fetch(
         process.env.NEXT_PUBLIC_RB_REST_API_URL +
-          "/api/car/search?" + 
+          "/api/car/search?" +
           createParams(filterAndSortContext)
       );
       const { car } = await res.json();
@@ -34,8 +34,17 @@ const CarList = () => {
         allTransmission = allTransmission + "," + context.transmission[i];
       }
       allTransmission = allTransmission.slice(1);
-      console.log(allTransmission);
+      // console.log(allTransmission);
       params = params + "&transmission=" + allTransmission;
+    }
+    if (context.type != "") {
+      var allType = "";
+      for (let i = 0; i < context.type.length; i++) {
+        allType = allType + "," + context.type[i];
+      }
+      allType = allType.slice(1);
+      console.log(allType);
+      params = params + "&type=" + allType;
     }
     if (params != "" && context.sort) {
       params = params + "&sortBy=price" + "&order=" + context.sort[0];
@@ -46,7 +55,7 @@ const CarList = () => {
 
   useEffect(() => {
     getCarData();
-  }, [filterAndSortContext.sort, filterAndSortContext.transmission]);
+  }, [filterAndSortContext.sort, filterAndSortContext.transmission, filterAndSortContext.type]);
 
   const skeleton = [1, 2, 3];
 

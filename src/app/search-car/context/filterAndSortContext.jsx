@@ -7,9 +7,10 @@ export const FilterAndSortContext = createContext();
 export const FilterAndSortContextFunction = ({ children }) => {
   const [sort, setSort] = useState(["1"]);
   const [transmission, setTransmission] = useState([]);
+  const [type, setType] = useState([]);
 
   return (
-    <FilterAndSortContext.Provider value={{ sort, setSort, transmission, setTransmission }}>
+    <FilterAndSortContext.Provider value={{ sort, setSort, transmission, setTransmission, type, setType }}>
       {children}
     </FilterAndSortContext.Provider>
   );

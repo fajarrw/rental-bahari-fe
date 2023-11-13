@@ -72,7 +72,7 @@ const FilterAndSort = () => {
           <div className="flex flex-col gap-3">
             <h3 className="font-medium text-base">Types</h3>
             <div className="flex flex-col gap-2 text-sm">
-              <div className="flex flex-row gap-2">
+              {/* <div className="flex flex-row gap-2">
                 <input
                   type="checkbox"
                   id="crossover"
@@ -106,7 +106,23 @@ const FilterAndSort = () => {
                 <input type="checkbox" id="wagon" name="wagon" value="Wagon" />
                 <label for="wagon">Wagon</label>
                 <br />
-              </div>
+              </div> */}
+              <CheckboxGroup
+                // label="Select cities"
+                defaultValue={[]}
+                value={filterAndSortContext.type}
+                onValueChange={filterAndSortContext.setType}
+              >
+                <Checkbox size="sm" color="success" value="minivan">
+                  Minivan
+                </Checkbox>
+                <Checkbox size="sm" color="success" value="hatchback">
+                  Hatchback
+                </Checkbox>
+                <Checkbox size="sm" color="success" value="wagon">
+                  Wagon
+                </Checkbox>
+              </CheckboxGroup>
               <a className="text-xs text-rb-darkgreen" onClick={handleClick}>
                 + View More
               </a>
