@@ -25,7 +25,7 @@ export default function Herox() {
                 initial='hidden' 
                 whileInView={'show'} 
                 viewport={{once: false, amount:0.6}} 
-                className="uppercase text-3xl md:text-4xl xl:text-[64px] text-primary xl:leading-[72px] font-extrabold mb-[18px]"> 
+                className="uppercase text-3xl md:text-4xl xl:text-[64px] text-black xl:leading-[72px] font-extrabold mb-[18px]"> 
                     Rent Your <span className="text-[#045757]">Car</span> With US
                 </motion.h1>
 

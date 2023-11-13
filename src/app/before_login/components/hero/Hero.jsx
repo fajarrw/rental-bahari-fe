@@ -18,14 +18,14 @@ export default function Hero() {
        
        <div className="flex flex-col w-full xl:flex-row justify-center items-center xl:justify-center h-full">
             
-            <div className="text-center w-full xl:w-1/2 xl:max-w-[600px]  xl:text-left">
+            <div className="text-center w-full xl:w-1/2 xl:max-w-[600px] xl:text-left">
                 
                 <motion.h1 
                 variants={fadeIn('down', 0.2)} 
                 initial='hidden' 
                 whileInView={'show'} 
                 viewport={{once: false, amount:0.6}} 
-                className="uppercase text-3xl md:text-4xl xl:text-[64px] text-primary xl:leading-[72px] font-extrabold mb-[18px]"> 
+                className="uppercase text-3xl md:text-4xl xl:text-[64px] text-black xl:leading-[72px] font-extrabold mb-[18px]"> 
                     Rent Your <span className="text-[#045757]">Car</span> With US
                 </motion.h1>
 
