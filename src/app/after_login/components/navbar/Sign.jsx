@@ -9,7 +9,7 @@ export default function Sign() {
 
   return (
     <>
-        <Button className="flex items-center justify-between w-full px-4 py-2 text-left text-base md:text-lg text-red-500 hover:bg-gray-50" onPress={onOpen}>
+        <Button className="flex items-center justify-between w-full px-4 py-2 text-left text-base md:text-lg text-red-500 bg-main-white hover:bg-gray-50" onPress={onOpen}>
 
             Sign Out
 
