@@ -31,14 +31,14 @@ export default function Card2() {
           backdrop: "bg-black bg-opacity-25 backdrop-blur-sm insert-0 flex justify-center items-center"
       }}>
 
-        <ModalContent className="relative z-100">
+        <ModalContent className="relative z-50">
         {(onClose) => (
           <ModalHeader className="fixed inset-0 z-50 w-screen overflow-y-scroll">
           
             <ModalBody className="flex h-fit my-auto items-end justify-center p-4 text-center items-center sm:p-0">
-              <div className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:w-full sm:max-w-lg">
+              <div className="relative transform overflow-hidden rounded-lg bg-main-white text-left shadow-xl transition-all sm:w-full sm:max-w-lg">
           
-                <div className="bg-white flex items-center">
+                <div className="bg-main-white flex items-center">
 
                     <div className="">
                       <Image 
@@ -55,7 +55,7 @@ export default function Card2() {
                         </div>
 
                         <div className="h-48 px-6 overflow-y-scroll ">
-                          <p className="block mb-8 font-sans text-base antialiased font-light leading-relaxed text-inherit">
+                          <p className="block mb-8 text-base md:text-lg antialiased font-normal leading-relaxed text-black">
                             Menghadirkan pengalaman pemesanan yang mudah dan kendaraan yang luar biasa adalah komitmen utama kami 
                             dalam memberikan layanan rental mobil. Proses pemesanan yang sederhana dan efisien adalah pintu gerbang 
                             menuju petualangan tanpa kerumitan. Dengan platform online yang ramah pengguna, pelanggan dapat dengan 
@@ -65,7 +65,7 @@ export default function Card2() {
                             administratif sehingga mereka dapat fokus sepenuhnya pada perjalanan yang menunggu di depan.
                           </p>
 
-                          <p className="block font-sans text-base antialiased font-light leading-relaxed text-inherit">
+                          <p className="block mb-2 text-base md:text-lg antialiased font-normal leading-relaxed text-black">
                             Kendaraan-kendaraan unggulan kami menjadi perpanjangan dari komitmen kami terhadap kenyamanan dan 
                             kualitas. Dengan koleksi mobil yang terawat dengan baik dan memiliki performa prima, kami meyakinkan 
                             pelanggan bahwa setiap perjalanan mereka akan menjadi pengalaman mengemudi yang istimewa. Dari kendaraan 
@@ -80,7 +80,7 @@ export default function Card2() {
 
                 </div>
 
-                <ModalFooter className="bg-gray-50 px-4 py-2 sm:flex sm:flex-row sm:px-6">
+                <ModalFooter className="bg-main-white px-4 py-2 sm:flex sm:flex-row sm:px-6">
                   <Button type="button" className="inline-flex justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 w-auto" onPress={onClose}>
                     Close
                   </Button>
