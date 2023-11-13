@@ -15,6 +15,7 @@ import { SearchContext } from '../../context/cari'
 
 import Person from "./Person"
 import Sign from "./Sign";
+import { BsPersonCircle } from "react-icons/bs";
 
 
 export default function Header() {
@@ -52,49 +53,62 @@ export default function Header() {
     console.log(header)
 
   return (
-  <header 
-  className={`${
-    header ? 'bg-[#045757] shadow-md py-5' : 'bg-[#045757] shadow-none py-5'
-  }  fixed w-full max-w-[1920px] mx-auto z-20 transition-all duation-300`}
-  >
+    <header id="navbarx" className="bg-[#045757] shadow-md py-5 w-full max-w-[1920px] mx-auto z-20 transition-all duation-300">
 
-    <div className="xl:container mx-auto flex flex-col xl:flex-row xl:items-center xl:justify-between">
+    <div className="container mx-auto flex flex-col xl:flex-row xl:items-center xl:justify-between">
         <div className="flex justify-between items-center px-4">
 
-            <Link 
-            to='homex' 
+            <Link
+            to='home' 
             smooth={desktopMode} 
             spy={true} 
-            className="cursor-pointer flex flex-row items-center gap-3">
+            className="xl:max-w-[203px] cursor-pointer flex flex-row items-center gap-3">
 
-                <AiFillCar className="text-[#E4E4E4] h-8 w-8"/>
+                <AiFillCar className="text-[#E4E4E4] text-4xl"/>
 
-                <div className="text-xl font-bold text-[#E4E4E4] cursor-pointer">
+                <div className="text-xl hidden md:block font-bold text-[#E4E4E4] cursor-pointer">
                     Rental Bahari
                 </div>
-            </Link> 
+            </Link>
+            
 
-            <div 
-            onClick={() => setNav(!nav)}
-            className="cursor-pointer xl:hidden">
-                {nav ? (<BiX className="text-4xl" />) : (<BiMenuAltRight className="text-4xl" />)}
+            <div className="xl:hidden flex flex-row justify-center gap-2">
+            <div className="h-[36px] flex flex-row items-center px-2">
+            
+            <Link 
+            className="h-[36px] cursor-pointer mx-auto text-[#E4E4E4]" 
+            to='/' 
+            activeClass='active' 
+            smooth={desktopMode} 
+            spy={true}
+            > 
+                <Person />
+            </Link>
+            
+        </div>
+
+                
+
+                <div 
+                    onClick={() => setNav(!nav)}
+                    className="cursor-pointer xl:hidden">
+                    {nav ? (<BiX className="text-4xl text-white" />) : (<BiMenuAltRight className="text-4xl text-white" />)}
+                </div>
             </div>
-
         </div>
 
         <nav 
         onClick={() => setNav(!nav)}
         className={`${
-            nav ? 'max-h-max py-8 px-4 xl:py-0 xl:px-0' : 'max-h-0 xl:max-h-max'
-            } flex flex-col items-center w-full bg-[#045757] gap-y-8 overflow-hidden xl:overflow-visible font-bold 
-            xl:font-medium xl:flex-row xl:w-max xl:gap-x-12 xl:h-max xl:bg-transparent
-            xl:pb-0 transition-all duration-150 text-center xl:text-left 
-            text-sm xl:text-[15px] xl:normal-case`}>
-
+        nav ? ' max-h-max py-8 px-4 xl:py-0 xl:px-0' : 'max-h-0 xl:max-h-max'
+        }  flex absolute top-16 -left-0 z-30 xl:static w-full flex-col items-center w-full bg-dark-green-1 gap-y-8 overflow-hidden xl:overflow-visible font-bold 
+        xl:font-medium xl:flex-row xl:w-max xl:gap-x-12 xl:h-max xl:bg-transparent
+        xl:pb-0 transition-all duration-150 text-center xl:text-left 
+        text-sm xl:text-[15px] xl:normal-case`}>
 
             <Link
             onClick={() => setNav(!nav)} 
-            className="cursor-pointer text-[#E4E4E4]" 
+            className="cursor-pointer mx-auto text-[#E4E4E4] hover:text-gray-500" 
             to='homex' 
             activeClass='active' 
             smooth={desktopMode}
@@ -105,7 +119,7 @@ export default function Header() {
 
             <Link
             onClick={() => setNav(!nav)} 
-            className="cursor-pointer text-[#E4E4E4]" 
+            className="cursor-pointer mx-auto text-[#E4E4E4] hover:text-gray-500" 
             to='aboutx' 
             activeClass='active' 
             smooth={desktopMode} 
@@ -116,7 +130,7 @@ export default function Header() {
 
             <a
             onClick={() => setNav(!nav)} 
-            className="cursor-pointer mx-auto text-[#E4E4E4]" 
+            className="cursor-pointer mx-auto text-[#E4E4E4] hover:text-gray-500" 
             href="/search-car" 
             activeClass='active' 
             smooth={desktopMode} 
@@ -125,41 +139,12 @@ export default function Header() {
                 Cars 
             </a>
 
-            <a
-            onClick={() => setNav(!nav)} 
-            className="xl:hidden cursor-pointer mx-auto text-[#E4E4E4]" 
-            href="/profile" 
-            activeClass='active' 
-            smooth={desktopMode} 
-            spy={true}
-            > 
-                Edit Profile 
-            </a>
+        </nav>
 
-            <a
-            onClick={() => setNav(!nav)} 
-            className="xl:hidden cursor-pointer mx-auto text-[#E4E4E4]" 
-            href="/mybooking" 
-            activeClass='active' 
-            smooth={desktopMode} 
-            spy={true}
-            > 
-                My Booking 
-            </a>
-
-            <Link
-            onClick={() => setNav(!nav)} 
-            className="xl:hidden cursor-pointer mx-auto text-red-500" 
-            to='' 
-            activeClass='active' 
-            smooth={desktopMode} 
-            spy={true}
-            > 
-                <Sign />
-            </Link>
-
+        <div className="flex w-[203px] h-[36px] flex-row items-center gap-4 hidden xl:flex ">
+            
             <Link 
-            className="cursor-pointer hidden xl:block mx-auto text-[#E4E4E4]" 
+            className="h-[36px] cursor-pointer hidden xl:block ml-auto text-[#E4E4E4]" 
             to='/' 
             activeClass='active' 
             smooth={desktopMode} 
@@ -167,10 +152,11 @@ export default function Header() {
             > 
                 <Person />
             </Link>
-
-        </nav>
+            
+        </div>
 
     </div>
-  </header>
+</header>
   )
 }
+
