@@ -8,9 +8,21 @@ export const FilterAndSortContextFunction = ({ children }) => {
   const [sort, setSort] = useState(["1"]);
   const [transmission, setTransmission] = useState([]);
   const [type, setType] = useState([]);
-
+  const [price, setPrice] = useState([100000, 1000000]);
+  
   return (
-    <FilterAndSortContext.Provider value={{ sort, setSort, transmission, setTransmission, type, setType }}>
+    <FilterAndSortContext.Provider
+      value={{
+        sort,
+        setSort,
+        transmission,
+        setTransmission,
+        type,
+        setType,
+        price,
+        setPrice,
+      }}
+    >
       {children}
     </FilterAndSortContext.Provider>
   );

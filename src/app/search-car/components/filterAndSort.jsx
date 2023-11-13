@@ -17,7 +17,7 @@ function handleClick() {
 }
 
 const FilterAndSort = () => {
-  const [value, setValue] = useState([100000, 1000000]);
+  // const [value, setValue] = useState([100000, 1000000]);
   const filterAndSortContext = useContext(FilterAndSortContext);
 
   return (
@@ -41,8 +41,8 @@ const FilterAndSort = () => {
                 step={10000}
                 maxValue={1000000}
                 minValue={100000}
-                value={value}
-                onChange={setValue}
+                value={filterAndSortContext.price}
+                onChange={filterAndSortContext.setPrice}
                 classNames={{
                   base: "max-w-md gap-3",
                   track: "border-s-secondary-100",
@@ -59,8 +59,8 @@ const FilterAndSort = () => {
                 <p className="text-rb-black text-xs font-medium">
                   Selected budget:{" "}
                 </p>
-                {Array.isArray(value) &&
-                  value.map((b) => `${useCurrency(b)}`).join(" – ")}
+                {Array.isArray(filterAndSortContext.price) &&
+                  filterAndSortContext.price.map((b) => `${useCurrency(b)}`).join(" – ")}
               </div>
             </div>
             {/* <div className="flex flex-row justify-between">

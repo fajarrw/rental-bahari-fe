@@ -34,7 +34,6 @@ const CarList = () => {
         allTransmission = allTransmission + "," + context.transmission[i];
       }
       allTransmission = allTransmission.slice(1);
-      // console.log(allTransmission);
       params = params + "&transmission=" + allTransmission;
     }
     if (context.type != "") {
@@ -43,8 +42,10 @@ const CarList = () => {
         allType = allType + "," + context.type[i];
       }
       allType = allType.slice(1);
-      console.log(allType);
       params = params + "&type=" + allType;
+    }
+    if (context.price != "") {
+      params = params + "&minPrice=" + context.price[0] + "&maxPrice=" + context.price[1];
     }
     if (params != "" && context.sort) {
       params = params + "&sortBy=price" + "&order=" + context.sort[0];
@@ -55,7 +56,12 @@ const CarList = () => {
 
   useEffect(() => {
     getCarData();
-  }, [filterAndSortContext.sort, filterAndSortContext.transmission, filterAndSortContext.type]);
+  }, [
+    filterAndSortContext.sort,
+    filterAndSortContext.transmission,
+    filterAndSortContext.type,
+    filterAndSortContext.price
+  ]);
 
   const skeleton = [1, 2, 3];
 
