@@ -61,7 +61,7 @@ export default function DateFunction() {
 
         </Menu.Button>
 
-        <Menu.Items className='text-[15px] space-y-6 shadow-md bg-white absolute w-full z-10 list-none rounded-b-lg'>
+        <Menu.Items className='text-[15px] space-y-6 shadow-md bg-main-white absolute w-full z-10 list-none rounded-b-lg'>
             <DateRange
             onChange={(item) => setDate([item.selection])} 
             editableDateInputs={true} 

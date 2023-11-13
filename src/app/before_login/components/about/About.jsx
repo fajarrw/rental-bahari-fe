@@ -8,7 +8,7 @@ import Card2 from "./Card2";
 
 const About = () => {
   return (
-    <section className=" h-fit xl:h-screen flex items-center bg-dark-green-2" id="about">
+    <section className="h-fit rounded-t-xl flex items-center bg-dark-green-2" id="about">
       <div className=" container mx-auto h-full py-20 xl:py-16 flex w-full flex-col justify-center items-center overflow-hidden">
       
         <h1 className="text-white uppercase text-3xl md:text-4xl text-primary xl:leading-[72px] font-extrabold mb-12">
@@ -17,7 +17,7 @@ const About = () => {
       
         <div className="flex flex-col xl:flex-row items-center justify-center gap-12 xl:gap-20">
 
-          <div className="max-w-sm rounded-xl bg-white overflow-hidden shadow-lg hover:scale-105 duration-500">
+          <div className="max-w-sm rounded-xl bg-main-white overflow-hidden shadow-lg hover:scale-105 duration-500">
 
             <div className="h-56 overflow-hidden text-white shadow-lg rounded-t-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40">
               <Image
@@ -35,7 +35,7 @@ const About = () => {
                 Trusted For Years
               </h5>
 
-              <p className="block font-sans text-base antialiased font-light leading-relaxed text-inherit">
+              <p className="block text-base  antialiased font-normal leading-relaxed text-black">
                 Kepercayaan adalah pijakan utama kami di dunia layanan rental mobil. Kami memahami bahwa mempercayakan kendaraan Anda kepada kami 
                 merupakan tanggung jawab besar, dan itulah mengapa kami mengutamakan integritas dan keandalan dalam setiap aspek layanan kami. 
               </p>
@@ -46,7 +46,7 @@ const About = () => {
 
           </div>
 
-          <div className="max-w-sm rounded-xl bg-white overflow-hidden shadow-lg hover:scale-105 duration-500">
+          <div className="max-w-sm rounded-xl bg-main-white overflow-hidden shadow-lg hover:scale-105 duration-500">
 
             <div className="h-56 overflow-hidden text-white shadow-lg rounded-t-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40">
               <Image
@@ -64,10 +64,10 @@ const About = () => {
                 Easy Booking, Outstanding Vehicles
               </h5>
 
-              <p className="block font-sans text-base antialiased font-light leading-relaxed text-inherit">
+              <p className="block text-base antialiased font-normal leading-relaxed text-black">
                 Menghadirkan pengalaman pemesanan yang mudah dan kendaraan yang luar biasa adalah komitmen utama kami 
                 dalam memberikan layanan rental mobil. Proses pemesanan yang sederhana dan efisien adalah pintu gerbang 
-                menuju petualangan tanpa kerumitan. 
+                menuju petualangan tanpa kerumitan.
               </p>
 
             </div>
