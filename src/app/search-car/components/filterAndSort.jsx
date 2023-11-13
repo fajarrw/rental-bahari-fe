@@ -17,7 +17,7 @@ function handleClick() {
 }
 
 const FilterAndSort = () => {
-  const [value, setValue] = useState([100000, 1000000]);
+  // const [value, setValue] = useState([100000, 1000000]);
   const filterAndSortContext = useContext(FilterAndSortContext);
 
   return (
@@ -41,8 +41,8 @@ const FilterAndSort = () => {
                 step={10000}
                 maxValue={1000000}
                 minValue={100000}
-                value={value}
-                onChange={setValue}
+                value={filterAndSortContext.price}
+                onChange={filterAndSortContext.setPrice}
                 classNames={{
                   base: "max-w-md gap-3",
                   track: "border-s-secondary-100",
@@ -59,8 +59,8 @@ const FilterAndSort = () => {
                 <p className="text-rb-black text-xs font-medium">
                   Selected budget:{" "}
                 </p>
-                {Array.isArray(value) &&
-                  value.map((b) => `${useCurrency(b)}`).join(" – ")}
+                {Array.isArray(filterAndSortContext.price) &&
+                  filterAndSortContext.price.map((b) => `${useCurrency(b)}`).join(" – ")}
               </div>
             </div>
             {/* <div className="flex flex-row justify-between">
@@ -72,7 +72,7 @@ const FilterAndSort = () => {
           <div className="flex flex-col gap-3">
             <h3 className="font-medium text-base">Types</h3>
             <div className="flex flex-col gap-2 text-sm">
-              <div className="flex flex-row gap-2">
+              {/* <div className="flex flex-row gap-2">
                 <input
                   type="checkbox"
                   id="crossover"
@@ -106,7 +106,23 @@ const FilterAndSort = () => {
                 <input type="checkbox" id="wagon" name="wagon" value="Wagon" />
                 <label for="wagon">Wagon</label>
                 <br />
-              </div>
+              </div> */}
+              <CheckboxGroup
+                // label="Select cities"
+                defaultValue={[]}
+                value={filterAndSortContext.type}
+                onValueChange={filterAndSortContext.setType}
+              >
+                <Checkbox size="sm" color="success" value="minivan">
+                  Minivan
+                </Checkbox>
+                <Checkbox size="sm" color="success" value="hatchback">
+                  Hatchback
+                </Checkbox>
+                <Checkbox size="sm" color="success" value="wagon">
+                  Wagon
+                </Checkbox>
+              </CheckboxGroup>
               <a className="text-xs text-rb-darkgreen" onClick={handleClick}>
                 + View More
               </a>
