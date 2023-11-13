@@ -3,7 +3,7 @@ import Image from "next/image"
 
 export default function Footerx() {
   return (
-  <footer className="bg-[#045757] h-fit" id='footerx'>
+  <footer className="bg-dark-green-1 h-fit" id='footerx'>
     <div className="max-w-screen space-y-8 pt-8 lg:space-y-12">
       <div className="flex flex-col lg:flex-row gap-x-8 space-y-6 lg:space-y-0 grid-cols-2 lg:grid-cols-4 lg:pt-0 px-8 lg:px-32">
         <div className="w-full flex justify-start lg:justify-center items-center">
@@ -71,7 +71,7 @@ export default function Footerx() {
 
     </div>
 
-    <div className="bg-[#044343] px-8 lg:px-28 h-[80px] flex items-center gap-x-8 justify-start">
+    <div className="bg-dark-green-2 px-8 lg:px-28 h-[80px] flex items-center gap-x-8 justify-start">
     
       <div className="w-full flex items-center lg:justify-center">
         <ul className="flex gap-4 lg:gap-6 sm:mt-0">

@@ -13,12 +13,12 @@ import { fadeIn } from "./variants"
 export default function Herox() {
   const { searchActive } = useContext(SearchContext)
   return (
-  <section className="h-screen bg-[#b2b7c2]/10" id='homex'>
-    <div className="container mx-auto h-full pt-16">
+  <section className="h-fit bg-main-white" id='homex'>
+    <div className="container mx-auto h-full py-16">
        
        <div className="flex flex-col w-full xl:flex-row justify-center items-center xl:justify-center h-full">
             
-            <div className="text-center w-full xl:w-1/2 xl:max-w-[700px]  xl:text-left">
+            <div className="text-center w-full xl:w-1/2 xl:max-w-[600px]  xl:text-left">
                 
                 <motion.h1 
                 variants={fadeIn('down', 0.2)} 
@@ -54,11 +54,13 @@ export default function Herox() {
             initial='hidden' 
             whileInView={'show'} 
             viewport={{once: false, amount:0.6}}
-            className="relative w-full xl:w-1/2 h-full max-h-[30vh] md:max-h-[35vh] md:max-w-[50vw] xl:max-w-[700px] xl:max-h-[400px] ">
+            className="w-full xl:w-1/2 h-full max-h-[30vh] md:max-h-[35vh] md:max-w-[50vw] xl:max-w-[600px] xl:max-h-[400px] ">
                 <Image 
                 src={'/assets/Hero.png'} 
-                fill 
-                alt="" 
+                width={600}
+                height={600}
+                alt=""
+                className="flex justify-center mx-auto hover:scale-95 duration-500"  
                 style={{ objectFit: 'contain' }} 
                 priority
                 />
