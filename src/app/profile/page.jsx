@@ -1,11 +1,13 @@
 import Image from "next/image";
-import Link from "next/link";
+import { SearchContextFunction } from '../after_login/context/cari';
+import Headerx from '../after_login/components/navbar/headerx';
 
 export default function Profile(){
     return (
-        <main>
+        <SearchContextFunction>
+            <Headerx />
             <div className="flex py-20 justify-center">
-                <div className="flex flex-col bg-slate-100 max-w-[45rem] w-full p-8 rounded-md shadow-lg	">
+                <div className="flex flex-col bg-slate-100 max-w-[45rem] w-full p-8 rounded-md shadow-lg mt-5">
                     <div className="flex pb-10 items-baseline">
                         <h1 className="text-3xl font-bold pr-3">ACCOUNT PROFILE</h1>
                         <a href="/profile/edit">
@@ -72,6 +74,6 @@ export default function Profile(){
 
                 </div>
             </div>
-        </main>
+        </SearchContextFunction>
     );
 }

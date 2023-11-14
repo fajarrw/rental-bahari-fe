@@ -10,9 +10,10 @@ function MyBookingPage() {
     return (
         <SearchContextFunction>
             <Headerx />
-            <div className='flex pt-20 justify-center'>
+            <div className='flex pt-20 justify-center justify-items-center'>
                 <div className='flex flex-col'>
                     <BookingTabs />
+                    <BookingCard />
                     <BookingCard />
                     <BookingCard />
                 </div>
