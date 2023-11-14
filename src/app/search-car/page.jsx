@@ -16,7 +16,7 @@ export default function SearchCar() {
       <DateContextFunction>
         <SearchContextFunction>
           <Header />
-          <main className="flex flex-col md:flex-row pt-20 min-h-screen">
+          <main className="flex flex-col md:flex-row min-h-screen">
             <FilterAndSort />
             <div className="flex flex-col w-full items-center">
               <div className="flex flex-row w-max lg:w-max gap-4 justify-between items-center">
