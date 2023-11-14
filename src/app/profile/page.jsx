@@ -1,11 +1,31 @@
-import Image from "next/image";
-import { SearchContextFunction } from '../after_login/context/cari';
-import Headerx from '../after_login/components/navbar/headerx';
+"use client"
 
-export default function Profile(){
+import Image from "next/image";
+import {useState, useEffect} from "react";
+
+const Profile = () => {
+    const [profile, setProfile] = useState(null);
+
+    const getProfileData = async () => {
+        console.log("Fetching profile data...");
+        try {
+        const res = await fetch("http://localhost:3001/api/assurance/user/65534411b774ee8888b08aa0");
+        const {data} = await res.json();
+        console.log(data);
+        setProfile(data);    
+        } catch (err) {
+        console.error(err);
+        }
+    };
+
+    useEffect(() => {
+        console.log("useEffect called")
+        getProfileData();
+    }, []);
+
+
     return (
-        <SearchContextFunction>
-            <Headerx />
+        <div>
             <div className="flex py-20 justify-center">
                 <div className="flex flex-col bg-slate-100 max-w-[45rem] w-full p-8 rounded-md shadow-lg mt-5">
                     <div className="flex pb-10 items-baseline">
@@ -23,7 +43,7 @@ export default function Profile(){
                     <div>
                         <div className="pb-10">
                             <h1 className="pb-3 text-lg font-semibold">USERNAME</h1>
-                            <h2 className="text-sm">michaeljackson</h2>
+                            <h2 className="text-sm">{profile && profile.username}</h2>
                         </div>
                         <div className="pb-10">
                             <h1 className="pb-3 text-lg font-semibold">PHONE NUMBER</h1>
@@ -74,6 +94,8 @@ export default function Profile(){
 
                 </div>
             </div>
-        </SearchContextFunction>
+        </div>
     );
 }
+
+export default Profile;
