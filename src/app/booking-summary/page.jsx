@@ -7,7 +7,7 @@ export default function BookingSummary() {
   return (
     <SearchContextFunction>
       <Header />
-      <main className="flex flex-col items-center pt-20 min-h-screen">
+      <main className="flex flex-col items-center pt-2 min-h-screen">
         <div className="flex flex-row px-16 py-3 gap-3 w-full">
           <Link href="/search-car" className="font-poppins font-medium">
             &lt;
