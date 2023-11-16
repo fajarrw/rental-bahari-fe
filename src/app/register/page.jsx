@@ -4,22 +4,48 @@ import {useState} from "react";
 import Head from 'next/head';
 import Link from "next/link";
 
-export default function Register(){
+const handleRegister = async (body) => {
+    try{
+        
+        const res = await fetch("http://localhost:3001/api/users", {
+            method : "POST",
+            headers: {
+                "Content-Type": "application/json",
+              },
+            body : JSON.stringify(body)
+        })
+        const data = await res.json()
+        console.log(data)
+    } catch (err){
+        console.error(err)
+    }
+}
+
+export default function UserRegister(){
     const [userInfo, setUserInfo] = useState({
         name:"",
         username:"",
         email: "",
+        telp: "",
         password: "",
-        confirmPassword: "",
+        // confirmPassword: "",
     });
-    const {name, username, email, password, confirmPassword} = userInfo;
+    const {name, username, email, telp, password, confirmPassword} = userInfo;
     const handleChange = ({target}) => {
         const {name, value} = target;
         setUserInfo({...userInfo, [name]: value});
     };
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(userInfo);
+        if(!name || !username || !email || !telp || !password || !confirmPassword) {
+            console.error("Please fill all the fields!");
+            return;
+        }
+        if (password !== confirmPassword) {
+            console.error("Passwords don't match!");
+            return;
+        }
+        handleRegister(userInfo);
     };
     return(
         <div className="flex flex-col items-center justify-center min-h-screen">
@@ -83,6 +109,20 @@ export default function Register(){
                                         name="email"
                                         className="border-2 rounded-xl px-6 py-1.5 w-72 bg-gray-100"
                                         placeholder="Enter email"
+                                        required
+                                    />
+                                </section>
+                            </div>
+                            <div className="flex flex-col gap-1">
+                                <label className="font-medium text-sm text-left">Phone number</label>
+                                <section>
+                                    <input
+                                        type="telp"
+                                        onChange={handleChange}
+                                        value={telp}
+                                        name="telp"
+                                        className="border-2 rounded-xl px-6 py-1.5 w-72 bg-gray-100"
+                                        placeholder="Enter Phone number"
                                         required
                                     />
                                 </section>
