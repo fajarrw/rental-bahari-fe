@@ -10,7 +10,7 @@ const deleteData = async (_id) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const token = await useGetToken();
   try {
-    fetch(`http://localhost:3001/api/car/delete`, {
+    fetch(`${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/car/delete`, {
       method: "DELETE",
       body: JSON.stringify({_id: _id}),
       headers: {

@@ -8,7 +8,9 @@ const CarList = () => {
 
   const getCarData = async () => {
     try {
-      const res = await fetch("http://localhost:3001/api/car/all");
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/car/all`
+      );
       const {car} = await res.json();
       setCarData(car);
     } catch (err) {
