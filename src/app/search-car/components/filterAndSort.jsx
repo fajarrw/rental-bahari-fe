@@ -4,21 +4,15 @@ import React, { useState, useEffect, useContext } from "react";
 import Image from "next/image";
 import {
   Slider,
-  Select,
-  SelectItem,
   CheckboxGroup,
   Checkbox,
 } from "@nextui-org/react";
 import useCurrency from "../../../hooks/useCurrency";
 import { FilterAndSortContext } from "../context/filterAndSortContext";
 
-function handleClick() {
-  console.log("i got clicked");
-}
-
 const FilterAndSort = () => {
-  // const [value, setValue] = useState([100000, 1000000]);
   const filterAndSortContext = useContext(FilterAndSortContext);
+
 
   return (
     <div className="flex flex-row md:flex-col w-full md:w-max py-3 md:p-0 justify-center md:justify-start gap-10 md:gap-0 shadow-lg md:shadow-none">
@@ -60,55 +54,17 @@ const FilterAndSort = () => {
                   Selected budget:{" "}
                 </p>
                 {Array.isArray(filterAndSortContext.price) &&
-                  filterAndSortContext.price.map((b) => `${useCurrency(b)}`).join(" – ")}
+                  filterAndSortContext.price
+                    .map((b) => `${useCurrency(b)}`)
+                    .join(" – ")}
               </div>
             </div>
-            {/* <div className="flex flex-row justify-between">
-              <p className="text-sm">Rp. 50000</p>
-              <p className="text-sm">Rp. 5000000</p>
-            </div> */}
           </div>
           <hr />
           <div className="flex flex-col gap-3">
             <h3 className="font-medium text-base">Types</h3>
             <div className="flex flex-col gap-2 text-sm">
-              {/* <div className="flex flex-row gap-2">
-                <input
-                  type="checkbox"
-                  id="crossover"
-                  name="crossover"
-                  value="Crossover"
-                />
-                <label for="crossover">Crossover</label>
-                <br />
-              </div>
-              <div className="flex flex-row gap-2">
-                <input
-                  type="checkbox"
-                  id="hatchback"
-                  name="hatchback"
-                  value="Hatchback"
-                />
-                <label for="hatchback">Hatchback</label>
-                <br />
-              </div>
-              <div className="flex flex-row gap-2">
-                <input type="checkbox" id="sedan" name="sedan" value="Sedan" />
-                <label for="suv">Sedan</label>
-                <br />
-              </div>
-              <div className="flex flex-row gap-2">
-                <input type="checkbox" id="suv" name="suv" value="SUV" />
-                <label for="suv">SUV</label>
-                <br />
-              </div>
-              <div className="flex flex-row gap-2">
-                <input type="checkbox" id="wagon" name="wagon" value="Wagon" />
-                <label for="wagon">Wagon</label>
-                <br />
-              </div> */}
               <CheckboxGroup
-                // label="Select cities"
                 defaultValue={[]}
                 value={filterAndSortContext.type}
                 onValueChange={filterAndSortContext.setType}
@@ -123,37 +79,13 @@ const FilterAndSort = () => {
                   Wagon
                 </Checkbox>
               </CheckboxGroup>
-              <a className="text-xs text-rb-darkgreen" onClick={handleClick}>
-                + View More
-              </a>
             </div>
           </div>
           <hr />
           <div className="flex flex-col gap-3">
             <h3 className="font-medium text-base">Transmission</h3>
             <div className="flex flex-col gap-2 text-sm">
-              {/* <div className="flex flex-row gap-2">
-                <input
-                  type="checkbox"
-                  id="automatic"
-                  name="automatic"
-                  value="Automatic"
-                />
-                <label for="automatic">Automatic</label>
-                <br />
-              </div>
-              <div className="flex flex-row gap-2">
-                <input
-                  type="checkbox"
-                  id="manual"
-                  name="manual"
-                  value="Manual"
-                />
-                <label for="manual">Manual</label>
-                <br />
-              </div> */}
               <CheckboxGroup
-                // label="Select cities"
                 defaultValue={[]}
                 value={filterAndSortContext.transmission}
                 onValueChange={filterAndSortContext.setTransmission}
@@ -165,9 +97,6 @@ const FilterAndSort = () => {
                   Manual
                 </Checkbox>
               </CheckboxGroup>
-              {/* <p className="text-default-500 text-small">
-                Selected: {filterAndSortContext.transmission}
-              </p> */}
             </div>
           </div>
           <hr />
@@ -183,27 +112,17 @@ const FilterAndSort = () => {
             <label for="sort" className="font-medium text-base w-20">
               Sort by
             </label>
-            {/* <select id="sort" className="text-sm">
-              <option value="Price1">Price: Low to High</option>
-              <option value="Price-1">Price: High to Low</option>
-            </select> */}
-            <Select
-              // labelPlacement="outside-left"
-              // label="Sort by"
-              aria-label="sort selection"
-              selectionMode="single"
-              selectedKeys={filterAndSortContext.sort}
-              onSelectionChange={filterAndSortContext.setSort}
-              className="max-w-xs"
-              radius="sm"
+            <select
+              id="sort"
+              className="text-sm py-2"
+              value={filterAndSortContext.sort}
+              onChange={(e) => {
+                filterAndSortContext.setSort(e.target.value);
+              }}
             >
-              <SelectItem key="1" value="1">
-                Price: Low to High
-              </SelectItem>
-              <SelectItem key="-1" value="-1">
-                Price: High to Low
-              </SelectItem>
-            </Select>
+              <option value="1">Price: Low to High</option>
+              <option value="-1">Price: High to Low</option>
+            </select>
           </div>
         </div>
       </div>
