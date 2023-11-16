@@ -28,14 +28,17 @@ export default function AddCar() {
     try {
       // eslint-disable-next-line react-hooks/rules-of-hooks
       const {value} = await useGetToken();
-      const res = await fetch("http://localhost:3001/api/car/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${value}`,
-        },
-        body: JSON.stringify(carData),
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/car/create`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${value}`,
+          },
+          body: JSON.stringify(carData),
+        }
+      );
       const data = await res.json();
       console.log(data);
     } catch (err) {

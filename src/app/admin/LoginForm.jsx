@@ -6,13 +6,16 @@ import {useLogin} from "@/hooks/useCookies";
 
 async function Login(body) {
   try {
-    const res = await fetch("http://localhost:3001/api/auth/admin", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/auth/admin`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      }
+    );
     if (res.status === 403) return false;
     const data = await res.json();
     // eslint-disable-next-line react-hooks/rules-of-hooks

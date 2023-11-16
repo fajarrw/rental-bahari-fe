@@ -14,6 +14,11 @@ export const useGetToken = async () => {
     return cookieValue.get("token")
 };
 
+export const useGetRole = async () => {
+    const cookieValue = cookies()
+    return cookieValue.get("role")
+};
+
 export const useGetUser = async () => {
     const cookieValue = cookies()
     return cookieValue.get("username")
