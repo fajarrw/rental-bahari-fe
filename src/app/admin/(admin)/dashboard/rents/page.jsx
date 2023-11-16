@@ -1,3 +1,5 @@
+import RentTable from "./RentTable";
+
 export default function CarList() {
   return (
     <main className="bg-[#EDEDED]">
@@ -10,7 +12,7 @@ export default function CarList() {
           View by?: 1day, 3day, 1week, 1mos, 1year, all | number of display? |
           Sort by: penyewa, date | asc, desc
         </h1>
-        <h1>Table Goes Here!</h1>
+        <RentTable />
       </section>
     </main>
   );

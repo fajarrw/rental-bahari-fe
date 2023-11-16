@@ -10,7 +10,7 @@ export default function Cars() {
       </header>
       <section className="px-8 py-6 flex flex-row gap-8">
         <AsideSearchCar />
-        <content className="w-full">
+        <div className="w-full">
           <div className="flex justify-end">
             <Link href={"/admin/dashboard/cars/add"}>
               <button className="btn-primary hover:bg-[#044343] transition-colors duration-200">
@@ -18,10 +18,10 @@ export default function Cars() {
               </button>
             </Link>
           </div>
-          <div className="mt-4">
+          <div className="mt-4 p-10 bg-white rounded-xl shadow-md min-h-[45rem]">
             <CarList />
           </div>
-        </content>
+        </div>
       </section>
     </main>
   );
