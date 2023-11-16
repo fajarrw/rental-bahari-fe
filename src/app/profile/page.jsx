@@ -11,7 +11,7 @@ const Profile = () => {
     const getProfileData = async () => {
         console.log("Fetching profile data...");
         try {
-        const res = await fetch("https://rentalbahari.vercel.app/api/assurance/user/65534411b774ee8888b08aa0");
+        const res = await fetch("http://rentalbahari.vercel.app/api/assurance/user/6555aa8c6feff42ac8e0216f");
         console.log(res)
         const data = await res.json();
         console.log(data);
@@ -34,7 +34,7 @@ const Profile = () => {
                 <div className="flex py-5 justify-center">
                     <div className="flex flex-col bg-slate-100 max-w-[45rem] w-full p-8 rounded-md shadow-lg mt-5">
                         <div className="flex pb-10 items-baseline">
-                            <h1 className="text-3xl font-bold pr-3">ACCOUNT PROFILE</h1>
+                            <h1 className="text-3xl font-bold pr-3">{profile && profile.username}'s Profile</h1>
                             <a href="/profile/edit">
                                 <Image
                                     src="/assets/edit_icon.svg"
@@ -47,8 +47,8 @@ const Profile = () => {
                         </div>
                         <div>
                             <div className="pb-10">
-                                <h1 className="pb-3 text-lg font-semibold">USERNAME</h1>
-                                <h2 className="text-sm">{profile && profile.username}</h2>
+                                <h1 className="pb-3 text-lg font-semibold">NAME</h1>
+                                <h2 className="text-sm">{profile && profile.name}</h2>
                             </div>
                             <div className="pb-10">
                                 <h1 className="pb-3 text-lg font-semibold">PHONE NUMBER</h1>
@@ -59,29 +59,29 @@ const Profile = () => {
                                 <ul className="list-disc">
                                     <li className="flex justify-start">
                                         <span className="w-24">Street</span>
-                                        <span>: {profile && profile.assurance.alamat.jalan}</span>
+                                        <span>: {profile && profile.assurance?.alamat.jalan}</span>
                                     </li>
                                     <li className="flex justify-start">
                                         <span className="w-24">Ward</span>
-                                        <span>: {profile && profile.assurance.alamat.kelurahan}</span>
+                                        <span>: {profile && profile.assurance?.alamat.kelurahan}</span>
                                     </li>
                                     <li className="flex justify-start">
                                         <span className="w-24">Sub-District</span>
-                                        <span>: {profile && profile.assurance.alamat.kecamatan}</span>
+                                        <span>: {profile && profile.assurance?.alamat.kecamatan}</span>
                                     </li>
                                     <li className="flex justify-start">
                                         <span className="w-24">City</span>
-                                        <span>: {profile && profile.assurance.alamat.kota}</span>
+                                        <span>: {profile && profile.assurance?.alamat.kota}</span>
                                     </li>
                                     <li className="flex justify-start">
                                         <span className="w-24">Province</span>
-                                        <span>: {profile && profile.assurance.alamat.provinsi}</span>
+                                        <span>: {profile && profile.assurance?.alamat.provinsi}</span>
                                     </li>
                                 </ul>
                             </div>
                             <div className="pb-10">
                                 <h1 className="pb-3 text-lg font-semibold">NIK</h1>
-                                <h2 className="text-sm">{profile && profile.assurance.nik}</h2>
+                                <h2 className="text-sm">{profile && profile.assurance?.nik}</h2>
                             </div>
                             <div className="pb-1">
                                 <h1 className="pb-3 text-lg font-semibold">FOTO KTP</h1>
