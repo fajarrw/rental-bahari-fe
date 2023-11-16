@@ -3,14 +3,34 @@
 import {FiEye, FiEyeOff} from "react-icons/fi";
 import {useState} from "react";
 import Link from "next/link";
-import Head from 'next/head'
+import Head from 'next/head';
+import {useLogin} from "@/hooks/useCookies";
 
-export default function Login() {
+async function handleLogin(body) {
+    try {
+      const res = await fetch("http://localhost:3001/api/auth/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+      if (res.status === 403) return false;
+      const data = await res.json();
+      console.log(data)
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      useLogin({...data, username: body.username});
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+export default function UserLogin() {
     const [userInfo, setUserInfo] = useState({
-        email: "",
+        username: "",
         password: "",
       });
-      const {email, password} = userInfo;
+      const {username, password} = userInfo;
       const [isPasswordHidden, setIsPasswordHidden] = useState(true);
       const handleChange = ({target}) => {
         const {name, value} = target;
@@ -18,7 +38,7 @@ export default function Login() {
       };
       const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(userInfo);
+        handleLogin(userInfo);
       };
     return(
         <div className='flex flex-col items-center justify-center min-h-screen bg-user-login bg-cover'>
@@ -46,16 +66,16 @@ export default function Login() {
                         <form onSubmit={handleSubmit} className="flex flex-col px-32">
                             <div className="flex flex-col gap-5" >
                                 <div className="flex flex-col gap-2">
-                                    <label className="font-semibold text-left">Email</label>
+                                    <label className="font-semibold text-left">Username</label>
                                     <div>
                                         <input
-                                        type="email"
+                                        type="username"
                                         onChange={handleChange}
-                                        value={email}
-                                        name="email"
-                                        label="Email"
+                                        value={username}
+                                        name="username"
+                                        label="Username"
                                         className="border-2 border-main-black/20 focus:border-dark-green-1 focus:outline-none rounded-2xl px-6 py-3 w-full bg-gray-100"
-                                        placeholder="Enter email"
+                                        placeholder="Enter username"
                                         required
                                     />
                                     </div>
