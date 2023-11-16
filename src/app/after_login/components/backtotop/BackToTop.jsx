@@ -6,7 +6,7 @@ import { FaChevronUp } from 'react-icons/fa6'
 
 import { Link } from 'react-scroll'
 
-export default function BackToTop() {
+export default function BackToTopx() {
 const [isActive, setIsActive] = useState(false)
 useEffect(() => {
     const handleScroll = () => {
@@ -26,10 +26,10 @@ useEffect(() => {
 
   return (
     <Link 
-    to='homex'
+    to='navbarx'
     smooth={true}
     className={`${!isActive && 'hidden'} 
-    fixed bg-dark-green-1 hover:bg-accent-hover w-12 h-12 right-16 bottom-11 z-10 
+    fixed bg-dark-green-1 hover:bg-dark-green-2 w-12 h-12 right-16 bottom-11 z-10 
     cursor-pointer flex justify-center items-center 
     text-white border-2 border-white rounded-xl`}>
         <FaChevronUp  className='text-xl text-white'/>

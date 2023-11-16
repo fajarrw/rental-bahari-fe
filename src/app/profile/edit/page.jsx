@@ -1,10 +1,13 @@
 import Image from "next/image";
+import { SearchContextFunction } from '../../after_login/context/cari';
+import Headerx from '../../after_login/components/navbar/headerx';
 
 export default function Profile(){
     return (
-        <main>
+        <SearchContextFunction>
+            <Headerx />
             <div className="flex py-20 justify-center">
-                <div className="flex flex-col bg-slate-100 max-w-[45rem] w-full p-8 rounded-md shadow-lg mx-2">
+                <div className="flex flex-col bg-slate-100 max-w-[45rem] w-full p-8 rounded-md shadow-lg mx-2 mt-5">
                     <div className="flex pb-10">
                         <h1 className="text-3xl font-bold pr-3">EDIT PROFILE</h1>
                     </div>
@@ -139,6 +142,8 @@ export default function Profile(){
 
                 </div>
             </div>
-        </main>
+        </SearchContextFunction>
+        
+            
     );
 }
