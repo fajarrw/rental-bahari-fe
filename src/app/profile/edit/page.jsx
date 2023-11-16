@@ -1,12 +1,35 @@
+"use client"
+
 import Image from "next/image";
 import { SearchContextFunction } from '../../after_login/context/cari';
 import Headerx from '../../after_login/components/navbar/headerx';
+import { useState, useEffect } from "react";
 
 export default function Profile(){
+    const [profile, setProfile] = useState(null);
+
+    const getProfileData = async () => {
+        console.log("Fetching profile data...");
+        try {
+            const res = await fetch("http://rentalbahari.vercel.app/api/assurance/user/6555aa8c6feff42ac8e0216f");
+            console.log(res)
+            const data = await res.json();
+            console.log(data);
+            setProfile(data);
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+    useEffect(() => {
+        console.log("useEffect called")
+        getProfileData();
+    }, []);
+
     return (
         <SearchContextFunction>
             <Headerx />
-            <div className="flex py-20 justify-center">
+            <div className="flex py-5 justify-center">
                 <div className="flex flex-col bg-slate-100 max-w-[45rem] w-full p-8 rounded-md shadow-lg mx-2 mt-5">
                     <div className="flex pb-10">
                         <h1 className="text-3xl font-bold pr-3">EDIT PROFILE</h1>
@@ -17,11 +40,11 @@ export default function Profile(){
                             <input
                                 type="text"
                                 //onChange={handleChange}
-                                //value={searchInput}
                                 name="username"
                                 label="username"
                                 className="border-2 border-main-black/20 focus:border-dark-green-1 focus:outline-none rounded-md px-4 py-1 w-1/2 bg-transparent"
                                 placeholder="Enter username"
+                                value={profile && profile.name || ""}
                             />
                         </div>
                         <div className="pb-10">
@@ -29,11 +52,11 @@ export default function Profile(){
                             <input
                                 type="text"
                                 // onChange={handleChange}
-                                // value={searchInput}
                                 name="PhoneNumber"
                                 label="PhoneNumber"
                                 className="border-2 border-main-black/20 focus:border-dark-green-1 focus:outline-none rounded-md px-4 py-1 w-1/2 bg-transparent"
                                 placeholder="Enter Phone Number"
+                                value={profile && profile.telp || ""}
                             />
                         </div>
                         <div className="pb-10 space-y-2">
@@ -45,11 +68,11 @@ export default function Profile(){
                                     <input
                                         type="text"
                                         //onChange={handleChange}
-                                        //value={searchInput}
                                         name="Street"
                                         label="Street"
                                         className="border-2 border-main-black/20 focus:border-dark-green-1 focus:outline-none rounded-md px-4 py-1 w-1/2 bg-transparent"
                                         placeholder="Enter Street"
+                                        value={profile && profile.assurance?.alamat.jalan || ""}
                                     />
                                 </li>
                                 <li className="flex justify-start ">
@@ -58,11 +81,11 @@ export default function Profile(){
                                     <input
                                         type="text"
                                         //onChange={handleChange}
-                                        //value={searchInput}
                                         name="Ward"
                                         label="Ward"
                                         className="border-2 border-main-black/20 focus:border-dark-green-1 focus:outline-none rounded-md px-4 py-1 w-1/2 bg-transparent"
                                         placeholder="Enter Ward"
+                                        value={profile && profile.assurance?.alamat.kelurahan || ""}
                                     />
                                 </li>
                                 <li className="flex justify-start">
@@ -71,11 +94,11 @@ export default function Profile(){
                                     <input
                                         type="text"
                                         //onChange={handleChange}
-                                        //value={searchInput}
                                         name="SubDistrict"
                                         label="SubDistrict"
                                         className="border-2 border-main-black/20 focus:border-dark-green-1 focus:outline-none rounded-md px-4 py-1 w-1/2 bg-transparent"
                                         placeholder="Enter Sub-District"
+                                        value={profile && profile.assurance?.alamat.kecamatan || ""}
                                     />
                                 </li>
                                 <li className="flex justify-start">
@@ -84,11 +107,11 @@ export default function Profile(){
                                     <input
                                         type="text"
                                         //onChange={handleChange}
-                                        //value={searchInput}
                                         name="City"
                                         label="City"
                                         className="border-2 border-main-black/20 focus:border-dark-green-1 focus:outline-none rounded-md px-4 py-1 w-1/2 bg-transparent"
                                         placeholder="Enter City"
+                                        value={profile && profile.assurance?.alamat.kota || ""}
                                     />
                                 </li>
                                 <li className="flex justify-start">
@@ -97,11 +120,11 @@ export default function Profile(){
                                     <input
                                         type="text"
                                         //onChange={handleChange}
-                                        //value={searchInput}
                                         name="Province"
                                         label="Province"
                                         className="border-2 border-main-black/20 focus:border-dark-green-1 focus:outline-none rounded-md px-4 py-1 w-1/2 bg-transparent"
                                         placeholder="Enter Province"
+                                        value={profile && profile.assurance?.alamat.provinsi || ""}
                                     />
                                 </li>
                             </ul>
@@ -111,11 +134,11 @@ export default function Profile(){
                             <input
                                 type="text"
                                 //onChange={handleChange}
-                                //value={searchInput}
                                 name="NIK"
                                 label="NIK"
                                 className="border-2 border-main-black/20 focus:border-dark-green-1 focus:outline-none rounded-md px-4 py-1 w-1/2 bg-transparent"
                                 placeholder="Enter NIK"
+                                value={profile && profile.assurance?.nik || ""}
                             />  
                         </div>
                         <div className="pb-10">
