@@ -6,8 +6,10 @@ import { useSearchParams } from "next/navigation";
 import useCurrency from "@/hooks/useCurrency";
 import SummaryCardSkeleton from "./summaryCardSkeleton";
 import { format, differenceInCalendarDays } from "date-fns";
+import { useRouter } from "next/navigation";
 
 const SummaryCard = () => {
+  const router = useRouter();
   const [carData, setCarData] = useState();
   const [price, setPrice] = useState(0);
   const [discount, setDiscount] = useState(0);
@@ -30,7 +32,7 @@ const SummaryCard = () => {
 
   if (intervalCalendar == 0) {
     interval = 0.5;
-  } else if(intervalCalendar == 1)  {
+  } else if (intervalCalendar == 1) {
     interval = intervalCalendar;
     dayOrDays = "day";
   } else {
@@ -138,7 +140,9 @@ const SummaryCard = () => {
           </div>
           <hr />
           <div className="flex flex-row justify-between text-sm py-1">
-            <p>Price ({interval} {dayOrDays})</p>
+            <p>
+              Price ({interval} {dayOrDays})
+            </p>
             <p className="font-semibold">{useCurrency(price)}</p>
           </div>
           <div className="flex flex-row justify-between text-sm py-1">
@@ -154,8 +158,8 @@ const SummaryCard = () => {
             <p>You aren't logged in. Please log in or sign up</p>
           </div>
           <div className="flex flex-row justify-center gap-4 py-2">
-            <button className="btn-secondary font-normal">Sign Up</button>
-            <button className="btn-primary font-normal">Log In</button>
+            <button className="btn-secondary font-normal" onClick={() => router.push("/register")}>Sign Up</button>
+            <button className="btn-primary font-normal" onClick={() => router.push("/login")}>Log In</button>
           </div>
         </div>
       ) : (
