@@ -5,12 +5,14 @@ import Image from "next/image";
 import {
   Slider,
   Select,
+  SelectSection,
   SelectItem,
   CheckboxGroup,
   Checkbox,
 } from "@nextui-org/react";
 import useCurrency from "../../../hooks/useCurrency";
 import { FilterAndSortContext } from "../context/filterAndSortContext";
+import { Listbox } from "@headlessui/react";
 
 function handleClick() {
   console.log("i got clicked");
@@ -19,6 +21,12 @@ function handleClick() {
 const FilterAndSort = () => {
   // const [value, setValue] = useState([100000, 1000000]);
   const filterAndSortContext = useContext(FilterAndSortContext);
+
+  // useEffect(() => {
+  //   console.log(filterAndSortContext.sorts);
+  // }, [filterAndSortContext.sort]);
+
+  // console.log(filterAndSortContext.sorts);
 
   return (
     <div className="flex flex-row md:flex-col w-full md:w-max py-3 md:p-0 justify-center md:justify-start gap-10 md:gap-0 shadow-lg md:shadow-none">
@@ -60,7 +68,9 @@ const FilterAndSort = () => {
                   Selected budget:{" "}
                 </p>
                 {Array.isArray(filterAndSortContext.price) &&
-                  filterAndSortContext.price.map((b) => `${useCurrency(b)}`).join(" – ")}
+                  filterAndSortContext.price
+                    .map((b) => `${useCurrency(b)}`)
+                    .join(" – ")}
               </div>
             </div>
             {/* <div className="flex flex-row justify-between">
@@ -123,9 +133,9 @@ const FilterAndSort = () => {
                   Wagon
                 </Checkbox>
               </CheckboxGroup>
-              <a className="text-xs text-rb-darkgreen" onClick={handleClick}>
+              {/* <a className="text-xs text-rb-darkgreen" onClick={handleClick}>
                 + View More
-              </a>
+              </a> */}
             </div>
           </div>
           <hr />
@@ -183,19 +193,28 @@ const FilterAndSort = () => {
             <label for="sort" className="font-medium text-base w-20">
               Sort by
             </label>
-            {/* <select id="sort" className="text-sm">
-              <option value="Price1">Price: Low to High</option>
-              <option value="Price-1">Price: High to Low</option>
-            </select> */}
-            <Select
+            <select
+              id="sort"
+              className="text-sm py-2"
+              value={filterAndSortContext.sort}
+              onChange={(e) => {
+                filterAndSortContext.setSort(e.target.value);
+              }}
+            >
+              <option value="1">Price: Low to High</option>
+              <option value="-1">Price: High to Low</option>
+            </select>
+            {/* <Select
               // labelPlacement="outside-left"
               // label="Sort by"
               aria-label="sort selection"
               selectionMode="single"
+              defaultSelectedKeys={"1"}
               selectedKeys={filterAndSortContext.sort}
               onSelectionChange={filterAndSortContext.setSort}
               className="max-w-xs"
               radius="sm"
+              size="sm"
             >
               <SelectItem key="1" value="1">
                 Price: Low to High
@@ -203,7 +222,22 @@ const FilterAndSort = () => {
               <SelectItem key="-1" value="-1">
                 Price: High to Low
               </SelectItem>
-            </Select>
+            </Select> */}
+            {/* <Listbox
+              value={filterAndSortContext.sort}
+              onChange={filterAndSortContext.onChangeSort}
+            >
+              <Listbox.Button>
+                {filterAndSortContext.sort[0].label}
+              </Listbox.Button>
+              <Listbox.Options>
+                {filterAndSortContext.sorts.map((sort) => (
+                  <Listbox.Option key={sort.id} value={sort}>
+                    {sort.label}
+                  </Listbox.Option>
+                ))}
+              </Listbox.Options>
+            </Listbox> */}
           </div>
         </div>
       </div>

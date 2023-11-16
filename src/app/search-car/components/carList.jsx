@@ -45,14 +45,21 @@ const CarList = () => {
       params = params + "&type=" + allType;
     }
     if (context.price != "") {
-      params = params + "&minPrice=" + context.price[0] + "&maxPrice=" + context.price[1];
+      params =
+        params +
+        "&minPrice=" +
+        context.price[0] +
+        "&maxPrice=" +
+        context.price[1];
     }
     if (params != "" && context.sort) {
-      params = params + "&sortBy=price" + "&order=" + context.sort[0];
+      params = params + "&sortBy=price" + "&order=" + context.sort;
     }
     return params;
   };
-  console.log(filterAndSortContext);
+  
+  // console.log(filterAndSortContext);
+  // console.log(filterAndSortContext.sort);
 
   useEffect(() => {
     getCarData();
@@ -60,7 +67,7 @@ const CarList = () => {
     filterAndSortContext.sort,
     filterAndSortContext.transmission,
     filterAndSortContext.type,
-    filterAndSortContext.price
+    filterAndSortContext.price,
   ]);
 
   const skeleton = [1, 2, 3];
