@@ -57,9 +57,6 @@ const CarList = () => {
     }
     return params;
   };
-  
-  // console.log(filterAndSortContext);
-  // console.log(filterAndSortContext.sort);
 
   useEffect(() => {
     getCarData();
