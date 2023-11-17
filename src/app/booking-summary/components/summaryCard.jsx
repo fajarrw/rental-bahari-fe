@@ -39,8 +39,7 @@ const SummaryCard = () => {
       0,
       0,
       0
-    ),
-    "E, dd MMM yyyy"
+    )
   );
   const end = formatISO(
     new Date(
@@ -50,8 +49,7 @@ const SummaryCard = () => {
       0,
       0,
       0
-    ),
-    "E, dd MMM yyyy"
+    )
   );
   const rentData = {
     carID: searchParams.get("carId"),
@@ -132,7 +130,6 @@ const SummaryCard = () => {
   const getRole = async () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const role = await useGetRole();
-    // console.log(role);
     if (role?.value == "user") {
       setIsUser(true);
     }
@@ -158,7 +155,7 @@ const SummaryCard = () => {
           <div className="flex flex-col items-center box-info py-3 text-base">
             Congrats! You just saved {useCurrency(discount)}
           </div>
-          <div className="flex flex-row justify-between items-center">
+          <div className="flex flex-row gap-16 justify-between items-center">
             <div className="relative h-20 aspect-video">
               <Image
                 src={carData.imageData}
@@ -216,9 +213,6 @@ const SummaryCard = () => {
             <p>Payable Amount</p>
             <p className="font-semibold text-lg">{useCurrency(payable)}</p>
           </div>
-          <div className="flex flex-col items-center py-1">
-            <p>You aren't logged in. Please log in or sign up</p>
-          </div>
           {isUser ? (
             <div className="flex flex-row justify-center gap-4 py-2">
               <button
@@ -229,20 +223,25 @@ const SummaryCard = () => {
               </button>
             </div>
           ) : (
-            <div className="flex flex-row justify-center gap-4 py-2">
-              <button
-                className="btn-secondary font-normal"
-                onClick={() => router.push("/register")}
-              >
-                Sign Up
-              </button>
-              <button
-                className="btn-primary font-normal"
-                onClick={() => router.push("/login")}
-              >
-                Log In
-              </button>
-            </div>
+            <>
+              <div className="flex flex-col items-center py-1">
+                <p>You aren't logged in. Please log in or sign up</p>
+              </div>
+              <div className="flex flex-row justify-center gap-4 py-2">
+                <button
+                  className="btn-secondary font-normal"
+                  onClick={() => router.push("/register")}
+                >
+                  Sign Up
+                </button>
+                <button
+                  className="btn-primary font-normal"
+                  onClick={() => router.push("/login")}
+                >
+                  Log In
+                </button>
+              </div>
+            </>
           )}
         </div>
       ) : (
