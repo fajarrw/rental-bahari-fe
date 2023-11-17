@@ -5,11 +5,6 @@ import { createContext, useContext, useState } from "react";
 export const FilterAndSortContext = createContext();
 
 export const FilterAndSortContextFunction = ({ children }) => {
-  // const sorts = [
-  //   { id: 1, value: "1", label: "Price: Low to High" },
-  //   { id: 2, value: "-1", label: "Price: High to Low" },
-  // ];
-
   const [sort, setSort] = useState("1");
   const [transmission, setTransmission] = useState([]);
   const [type, setType] = useState([]);
