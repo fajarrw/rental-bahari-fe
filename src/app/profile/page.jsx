@@ -4,17 +4,20 @@ import Image from "next/image";
 import { SearchContextFunction } from '../after_login/context/cari';
 import Headerx from '../after_login/components/navbar/headerx';
 import {useState, useEffect} from "react";
+import {useGetUser} from "@/hooks/useCookies";
 
 const Profile = () => {
     const [profile, setProfile] = useState(null);
-
+    
     const getProfileData = async () => {
-        console.log("Fetching profile data...");
+        let name = await useGetUser();
+        name = await name.value?name.value:"fajar";
+        console.log(name)
+
         try {
-        const res = await fetch("http://rentalbahari.vercel.app/api/assurance/user/6555aa8c6feff42ac8e0216f");
-        console.log(res)
+        const res = await fetch(`http://rentalbahari.vercel.app/api/assurance/user/${name}`);
         const data = await res.json();
-        console.log(data);
+        console.log(data)
         setProfile(data);    
         } catch (err) {
         console.error(err);
@@ -22,7 +25,6 @@ const Profile = () => {
     };
 
     useEffect(() => {
-        console.log("useEffect called")
         getProfileData();
     }, []);
 
