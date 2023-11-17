@@ -8,8 +8,7 @@ export default function Admin({children}) {
   const getRole = async () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const role = await useGetRole();
-    role === "admin" ? setIsAdmin(true) : r.push("/admin");
-    setIsAdmin(role?.value);
+    role?.value === "admin" ? setIsAdmin(true) : r.push("/admin");
   };
 
   useEffect(() => {

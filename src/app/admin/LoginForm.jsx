@@ -3,8 +3,9 @@
 import {FiEye, FiEyeOff} from "react-icons/fi";
 import {useState} from "react";
 import {useLogin} from "@/hooks/useCookies";
+import {useRouter} from "next/navigation";
 
-async function Login(body) {
+async function Login(body, router) {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/auth/admin`,
@@ -20,6 +21,8 @@ async function Login(body) {
     const data = await res.json();
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useLogin({...data, username: body.username});
+    router.push("/admin/dashboard");
+    return;
   } catch (err) {
     console.error(err);
   }
@@ -32,6 +35,7 @@ export default function LoginForm() {
   });
   const {username, password} = userInfo;
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
+  const r = useRouter();
 
   const handleChange = ({target}) => {
     const {name, value} = target;
@@ -40,13 +44,12 @@ export default function LoginForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    Login(userInfo);
+    Login(userInfo, r);
   };
 
   const handleReset = () => {
     setUserInfo({username: "", password: ""});
   };
-
   return (
     <div className="bg-main-white w-80 sm:w-96 md:w-3/5 h-[27rem] rounded-b-xl md:rounded-bl-none md:rounded-tr-xl md:rounded-br-xl px-8 py-12">
       <form
