@@ -5,8 +5,9 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import useCurrency from "@/hooks/useCurrency";
 import SummaryCardSkeleton from "./summaryCardSkeleton";
-import { format, differenceInCalendarDays } from "date-fns";
+import { format, formatISO, differenceInCalendarDays } from "date-fns";
 import { useRouter } from "next/navigation";
+import { useGetRole, useGetToken } from "@/hooks/useCookies";
 
 const SummaryCard = () => {
   const router = useRouter();
@@ -14,6 +15,7 @@ const SummaryCard = () => {
   const [price, setPrice] = useState(0);
   const [discount, setDiscount] = useState(0);
   const [payable, setPayable] = useState(0);
+  const [isUser, setIsUser] = useState(false);
   const searchParams = useSearchParams();
   var interval = 0;
   const intervalCalendar = differenceInCalendarDays(
@@ -29,6 +31,34 @@ const SummaryCard = () => {
     )
   );
   var dayOrDays = "days";
+  const start = formatISO(
+    new Date(
+      searchParams.get("start").slice(6, 10),
+      searchParams.get("start").slice(3, 5),
+      searchParams.get("start").slice(0, 2),
+      0,
+      0,
+      0
+    ),
+    "E, dd MMM yyyy"
+  );
+  const end = formatISO(
+    new Date(
+      searchParams.get("end").slice(6, 10),
+      searchParams.get("end").slice(3, 5),
+      searchParams.get("end").slice(0, 2),
+      0,
+      0,
+      0
+    ),
+    "E, dd MMM yyyy"
+  );
+  const rentData = {
+    carID: searchParams.get("carId"),
+    start: start,
+    end: end,
+    status: "on",
+  };
 
   if (intervalCalendar == 0) {
     interval = 0.5;
@@ -48,6 +78,28 @@ const SummaryCard = () => {
       );
       const { car } = await res.json();
       setCarData(car);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const postRentData = async (rentData) => {
+    try {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const { value } = await useGetToken();
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/rent/create`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${value}`,
+          },
+          body: JSON.stringify(rentData),
+        }
+      );
+      const data = await res.json();
+      console.log(data);
     } catch (err) {
       console.error(err);
     }
@@ -77,8 +129,18 @@ const SummaryCard = () => {
     }
   };
 
+  const getRole = async () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const role = await useGetRole();
+    // console.log(role);
+    if (role?.value == "user") {
+      setIsUser(true);
+    }
+  };
+
   useEffect(() => {
     getCarData();
+    getRole();
   }, []);
 
   useEffect(() => {
@@ -157,10 +219,31 @@ const SummaryCard = () => {
           <div className="flex flex-col items-center py-1">
             <p>You aren't logged in. Please log in or sign up</p>
           </div>
-          <div className="flex flex-row justify-center gap-4 py-2">
-            <button className="btn-secondary font-normal" onClick={() => router.push("/register")}>Sign Up</button>
-            <button className="btn-primary font-normal" onClick={() => router.push("/login")}>Log In</button>
-          </div>
+          {isUser ? (
+            <div className="flex flex-row justify-center gap-4 py-2">
+              <button
+                className="btn-primary font-normal"
+                onClick={() => postRentData(rentData)}
+              >
+                Confirm Order
+              </button>
+            </div>
+          ) : (
+            <div className="flex flex-row justify-center gap-4 py-2">
+              <button
+                className="btn-secondary font-normal"
+                onClick={() => router.push("/register")}
+              >
+                Sign Up
+              </button>
+              <button
+                className="btn-primary font-normal"
+                onClick={() => router.push("/login")}
+              >
+                Log In
+              </button>
+            </div>
+          )}
         </div>
       ) : (
         <SummaryCardSkeleton />
