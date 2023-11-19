@@ -11,7 +11,7 @@ const Profile = () => {
     
     const getProfileData = async () => {
         let name = await useGetUser();
-        name = await name.value?name.value:"fajar";
+        name = await name?name.value:"fajar";
         console.log(name)
 
         try {
