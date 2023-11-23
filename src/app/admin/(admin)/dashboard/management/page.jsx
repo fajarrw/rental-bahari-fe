@@ -1,3 +1,5 @@
+import AdminTable from "./AdminTable";
+
 export default function CarList() {
   return (
     <main className="bg-[#EDEDED]">
@@ -6,7 +8,7 @@ export default function CarList() {
         <div></div>
       </header>
       <section className="px-8 py-6">
-        <h1>List of Admins</h1>
+        <AdminTable />
       </section>
     </main>
   );
