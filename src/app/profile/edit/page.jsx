@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image";
-import { SearchContextFunction } from '../../after_login/context/cari';
+import { SearchContextFunctionx } from '../../after_login/context/cari';
 import Headerx from '../../after_login/components/navbar/headerx';
 import { useState, useEffect } from "react";
 import {useGetUser} from "@/hooks/useCookies";
@@ -69,7 +69,7 @@ export default function Profile(){
       };
 
     return (
-        <SearchContextFunction>
+        <SearchContextFunctionx>
             <Headerx />
             <div className="flex py-5 justify-center">
                 <div className="flex flex-col bg-slate-100 max-w-[45rem] w-full p-8 rounded-md shadow-lg mx-2 mt-5">
@@ -219,7 +219,7 @@ export default function Profile(){
 
                 </div>
             </div>
-        </SearchContextFunction>
+        </SearchContextFunctionx>
         
             
     );

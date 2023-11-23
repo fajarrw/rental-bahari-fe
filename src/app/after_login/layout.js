@@ -1,4 +1,4 @@
-import { SearchContextFunction } from './context/cari'
+import { SearchContextFunctionx } from './context/cari'
 
 export const metadata = {
     title: 'Rental Bahari',
@@ -11,10 +11,10 @@ export const metadata = {
   
   export default function RootLayout({ children }) {
     return (
-      <SearchContextFunction>
+      <SearchContextFunctionx>
         <html lang="en">
           <body>{children}</body>
         </html>
-      </SearchContextFunction>
+      </SearchContextFunctionx>
     )
   }

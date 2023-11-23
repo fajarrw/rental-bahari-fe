@@ -1,14 +1,14 @@
 "use client";
 
 import React  from 'react';
-import { SearchContextFunction } from '../after_login/context/cari';
+import { SearchContextFunctionx } from '../after_login/context/cari';
 import Headerx from '../after_login/components/navbar/headerx';
 import BookingCard from './components/mybookingCard'; 
 import BookingTabs from './components/bookingTabs';
 
 function MyBookingPage() {
     return (
-        <SearchContextFunction>
+        <SearchContextFunctionx>
             <Headerx />
             <div className='flex pt-20 justify-center justify-items-center'>
                 <div className='flex flex-col'>
@@ -18,7 +18,7 @@ function MyBookingPage() {
                     <BookingCard />
                 </div>
             </div>
-        </SearchContextFunction>
+        </SearchContextFunctionx>
     );
 }
 
