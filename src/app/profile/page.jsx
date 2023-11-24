@@ -1,8 +1,8 @@
 "use client"
 
 import Image from "next/image";
-import { SearchContextFunctionx } from '../after_login/context/cari';
-import Headerx from '../after_login/components/navbar/headerx';
+import { SearchContextFunctionx } from '@/app/after_login/context/cari';
+import Headerx from '@/app/after_login/components/navbar/Headerx';
 import {useState, useEffect} from "react";
 import {useGetUser} from "@/hooks/useCookies";
 
@@ -10,6 +10,7 @@ const Profile = () => {
     const [profile, setProfile] = useState(null);
     
     const getProfileData = async () => {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
         let name = await useGetUser();
         name = await name?name.value:"fajar";
         console.log(name)
@@ -36,7 +37,7 @@ const Profile = () => {
                 <div className="flex py-5 justify-center">
                     <div className="flex flex-col bg-slate-100 max-w-[45rem] w-full p-8 rounded-md shadow-lg mt-5">
                         <div className="flex pb-10 items-baseline">
-                            <h1 className="text-3xl font-bold pr-3">{profile && profile.username}'s Profile</h1>
+                            <h1 className="text-3xl font-bold pr-3">{profile && profile.username}&apos;s Profile</h1>
                             <a href="/profile/edit">
                                 <Image
                                     src="/assets/edit_icon.svg"

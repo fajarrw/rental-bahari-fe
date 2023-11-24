@@ -12,7 +12,7 @@ import { DateRange } from "react-date-range";
 import { format, addDays } from "date-fns";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
-import { DateContext } from "../context/dateContext";
+import { DateContext } from "@/app/search-car/context/dateContext";
 
 export default function DateFunctionx() {
   const dateContext = useContext(DateContext);

@@ -1,6 +1,6 @@
 "use client";
 
-import DateFunctionx from "./DateFunctionx";
+import DateFunctionx from "./dateFunctionx";
 import Image from "next/image";
 
 const SearchBar = () => {
