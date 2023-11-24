@@ -2,17 +2,12 @@
 
 import React, { useState, useEffect, useContext } from "react";
 import Image from "next/image";
-import {
-  Slider,
-  CheckboxGroup,
-  Checkbox,
-} from "@nextui-org/react";
-import useCurrency from "../../../hooks/useCurrency";
-import { FilterAndSortContext } from "../context/filterAndSortContext";
+import { Slider, CheckboxGroup, Checkbox } from "@nextui-org/react";
+import useCurrency from "@/hooks/useCurrency";
+import { FilterAndSortContext } from "@/app/search-car/context/filterAndSortContext";
 
 const FilterAndSort = () => {
   const filterAndSortContext = useContext(FilterAndSortContext);
-
 
   return (
     <div className="flex flex-row md:flex-col w-full md:w-max py-3 md:p-0 justify-center md:justify-start gap-10 md:gap-0 shadow-lg md:shadow-none">
@@ -55,7 +50,13 @@ const FilterAndSort = () => {
                 </p>
                 {Array.isArray(filterAndSortContext.price) &&
                   filterAndSortContext.price
-                    .map((b) => `${useCurrency(b)}`)
+                    .map(
+                      (b) =>
+                        `${
+                          // eslint-disable-next-line react-hooks/rules-of-hooks
+                          useCurrency(b)
+                        }`
+                    )
                     .join(" – ")}
               </div>
             </div>

@@ -3,7 +3,7 @@
 import { useState, useEffect, useContext } from "react";
 import CarCard from "./carCard";
 import CarCardSkeleton from "./carCardSkeleton";
-import { FilterAndSortContext } from "../context/filterAndSortContext";
+import { FilterAndSortContext } from "@/app/search-car/context/filterAndSortContext";
 
 const CarList = () => {
   const [carData, setCarData] = useState();

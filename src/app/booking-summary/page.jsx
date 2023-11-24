@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import SummaryCard from "./components/summaryCard";
-import { SearchContextFunction } from "../before_login/context/search";
-import { SearchContextFunctionx } from "../after_login/context/cari";
-import Header from "../before_login/components/navbar/header";
-import Headerx from "../after_login/components/navbar/headerx";
+import { SearchContextFunction } from "@/app/before_login/context/search";
+import { SearchContextFunctionx } from "@/app/after_login/context/cari";
+import Header from "@/app/before_login/components/navbar/Header";
+import Headerx from "@/app/after_login/components/navbar/Headerx";
 import { useGetRole } from "@/hooks/useCookies";
 import { useState, useEffect } from "react";
 

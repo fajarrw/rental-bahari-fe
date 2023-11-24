@@ -1,8 +1,8 @@
 "use client"
 
 import Image from "next/image";
-import { SearchContextFunctionx } from '../../after_login/context/cari';
-import Headerx from '../../after_login/components/navbar/headerx';
+import { SearchContextFunctionx } from '@/app/after_login/context/cari';
+import Headerx from '@/app/after_login/components/navbar/Headerx';
 import { useState, useEffect } from "react";
 import {useGetUser} from "@/hooks/useCookies";
 import update from 'immutability-helper';
@@ -42,6 +42,7 @@ export default function Profile(){
       );
     
     const getProfileData = async () => {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
         let name = await useGetUser();
         name = await name?name.value:"fajar";
         console.log(name)

@@ -2,7 +2,7 @@
 
 import { useContext } from "react"
 import Search from "./Search"
-import { SearchContext } from "../../context/search"
+import { SearchContext } from "@/app/before_login/context/search"
 
 import Image from "next/image"
 

@@ -4,7 +4,7 @@ import React, { useContext } from "react";
 import Image from "next/image";
 import useCurrency from "@/hooks/useCurrency";
 import { useRouter } from "next/navigation";
-import { DateContext } from "../context/dateContext";
+import { DateContext } from "@/app/search-car/context/dateContext";
 import { format } from "date-fns";
 
 const CarCard = ({ item }) => {

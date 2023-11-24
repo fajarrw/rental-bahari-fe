@@ -1,8 +1,8 @@
 "use client";
 
 import React  from 'react';
-import { SearchContextFunctionx } from '../after_login/context/cari';
-import Headerx from '../after_login/components/navbar/headerx';
+import { SearchContextFunctionx } from '@/app/after_login/context/cari';
+import Headerx from '@/app/after_login/components/navbar/Headerx';
 import BookingCard from './components/mybookingCard'; 
 import BookingTabs from './components/bookingTabs';
 

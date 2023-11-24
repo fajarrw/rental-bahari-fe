@@ -119,7 +119,7 @@ export default function UserLogin() {
                                 </button>
                             </div>
                             <div className="flex items-center justify-center text-xs mb-4">
-                                <span>Don't have an account?&nbsp;</span>
+                                <span>Don&apos;t have an account?&nbsp;</span>
                                 <Link href="/register" className="underline">Sign up</Link>
                             </div>
                         </form >
