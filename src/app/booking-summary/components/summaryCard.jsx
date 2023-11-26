@@ -180,7 +180,7 @@ const SummaryCard = () => {
                 {format(
                   new Date(
                     searchParams.get("start").slice(6, 10),
-                    searchParams.get("start").slice(3, 5),
+                    searchParams.get("start").slice(3, 5) - 1,
                     searchParams.get("start").slice(0, 2)
                   ),
                   "E, dd MMM yyyy"
@@ -193,7 +193,7 @@ const SummaryCard = () => {
                 {format(
                   new Date(
                     searchParams.get("end").slice(6, 10),
-                    searchParams.get("end").slice(3, 5),
+                    searchParams.get("end").slice(3, 5) - 1,
                     searchParams.get("end").slice(0, 2)
                   ),
                   "E, dd MMM yyyy"
