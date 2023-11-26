@@ -34,9 +34,9 @@ const SummaryCard = () => {
   const start = formatISO(
     new Date(
       searchParams.get("start").slice(6, 10),
-      searchParams.get("start").slice(3, 5),
+      searchParams.get("start").slice(3, 5) - 1,
       searchParams.get("start").slice(0, 2),
-      0,
+      7,
       0,
       0
     )
@@ -44,9 +44,9 @@ const SummaryCard = () => {
   const end = formatISO(
     new Date(
       searchParams.get("end").slice(6, 10),
-      searchParams.get("end").slice(3, 5),
+      searchParams.get("end").slice(3, 5) - 1,
       searchParams.get("end").slice(0, 2),
-      0,
+      7,
       0,
       0
     )
