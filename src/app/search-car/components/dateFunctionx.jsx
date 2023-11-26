@@ -13,13 +13,41 @@ import { format, addDays } from "date-fns";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { DateContext } from "@/app/search-car/context/dateContext";
+import { useSearchParams } from "next/navigation";
 
 export default function DateFunctionx() {
   const dateContext = useContext(DateContext);
   const [isOpen, setIsOpen] = useState(false);
+  const searchParams = useSearchParams();
 
-  console.log(format(dateContext.date[0].startDate, "dd-MM-yy"));
-  console.log(format(dateContext.date[0].endDate, "dd-MM-yy"));
+  const getDateParams = () => {
+    if (searchParams.get("start") && searchParams.get("end")) {
+      const start = new Date(
+        searchParams.get("start").slice(6, 10),
+        searchParams.get("start").slice(3, 5),
+        searchParams.get("start").slice(0, 2)
+      );
+      const end = new Date(
+        searchParams.get("end").slice(6, 10),
+        searchParams.get("end").slice(3, 5),
+        searchParams.get("end").slice(0, 2)
+      );
+      dateContext.setDate([
+        {
+          startDate: start,
+          endDate: end,
+          key: "selection",
+        },
+      ]);
+    }
+  };
+
+  useEffect(() => {
+    getDateParams();
+  }, []);
+
+  // console.log(format(dateContext.date[0].startDate, "dd-MM-yy"));
+  // console.log(format(dateContext.date[0].endDate, "dd-MM-yy"));
 
   return (
     <Menu as="div" className="w-full xl:max-w-[296px] cursor-pointer relative">
