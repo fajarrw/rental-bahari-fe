@@ -8,15 +8,19 @@ import SummaryCardSkeleton from "./summaryCardSkeleton";
 import { format, formatISO, differenceInCalendarDays } from "date-fns";
 import { useRouter } from "next/navigation";
 import { useGetRole, useGetToken } from "@/hooks/useCookies";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SummaryCard = () => {
-  const router = useRouter();
   const [carData, setCarData] = useState();
   const [price, setPrice] = useState(0);
   const [discount, setDiscount] = useState(0);
   const [payable, setPayable] = useState(0);
   const [isUser, setIsUser] = useState(false);
+
+  const router = useRouter();
   const searchParams = useSearchParams();
+
   var interval = 0;
   const intervalCalendar = differenceInCalendarDays(
     new Date(
@@ -84,6 +88,7 @@ const SummaryCard = () => {
 
   const postRentData = async (rentData) => {
     try {
+      toast.info("Creating a booking...");
       // eslint-disable-next-line react-hooks/rules-of-hooks
       const { value } = await useGetToken();
       const res = await fetch(
@@ -99,6 +104,11 @@ const SummaryCard = () => {
       );
       const data = await res.json();
       console.log(data);
+      if (res.status == 201) {
+        toast.success("A new booking is created");
+      } else {
+        toast.warn("Error while creating a booking");
+      }
     } catch (err) {
       console.error(err);
     }
@@ -151,6 +161,18 @@ const SummaryCard = () => {
 
   return (
     <div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       {carData ? (
         <div className="flex flex-col max-w-[25rem] w-full items-stretch gap-3 md:shadow-xl pt-4 pb-10 px-6">
           {/* <div className="flex flex-col items-center box-info py-3 text-base">
@@ -237,7 +259,7 @@ const SummaryCard = () => {
           {isUser ? (
             <div className="flex flex-row justify-center gap-4 py-2">
               <button
-                className="btn-primary font-normal"
+                className="btn-primary font-normal flex flex-row gap-4 items-center"
                 onClick={() => postRentData(rentData)}
               >
                 Confirm Order
