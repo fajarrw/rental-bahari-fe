@@ -2,10 +2,12 @@ import Link from "next/link";
 import Image from "next/image";
 import MainLogo from "../../../public/assets/admin-login-logo.svg";
 import LoginForm from "./LoginForm";
+import {Toaster} from "sonner";
 
 export default function Admin() {
   return (
     <div className="w-full min-h-screen flex flex-col justify-start items-center bg-admin-login bg-cover py-20 overflow-hidden">
+      <Toaster richColors />
       <div className="flex flex-col gap-8">
         <div className="flex flex-col items-center md:flex-row md:items-start w-[45rem] shadow-lg">
           <div className="bg-dark-green-1 w-80 sm:w-96 md:w-2/5 h-48 md:h-[27rem] rounded-t-xl md:rounded-tr-none md:rounded-bl-xl md:rounded-tl-xl">
