@@ -25,9 +25,7 @@ async function Login(body, router, loadSetter) {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useLogin({...data, username: body.username});
     toast.success("Login successful, Hi Admin!");
-    setInterval(() => {
-      router.push("/admin/dashboard");
-    }, 2000);
+    router.push("/admin/dashboard");
     return;
   } catch (err) {
     console.error(err);
