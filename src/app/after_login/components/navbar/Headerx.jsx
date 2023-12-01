@@ -11,7 +11,7 @@ import { AiFillCar } from "react-icons/ai";
 
 import { BiMenuAltRight, BiX } from "react-icons/bi"
 
-import { SearchContext } from '../../context/cari'
+import { SearchContext } from '@/app/after_login/context/cari'
 
 import Person from "./Person"
 import Sign from "./Sign";

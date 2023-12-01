@@ -34,9 +34,9 @@ const SummaryCard = () => {
   const start = formatISO(
     new Date(
       searchParams.get("start").slice(6, 10),
-      searchParams.get("start").slice(3, 5),
+      searchParams.get("start").slice(3, 5) - 1,
       searchParams.get("start").slice(0, 2),
-      0,
+      7,
       0,
       0
     )
@@ -44,9 +44,9 @@ const SummaryCard = () => {
   const end = formatISO(
     new Date(
       searchParams.get("end").slice(6, 10),
-      searchParams.get("end").slice(3, 5),
+      searchParams.get("end").slice(3, 5) - 1,
       searchParams.get("end").slice(0, 2),
-      0,
+      7,
       0,
       0
     )
@@ -153,7 +153,11 @@ const SummaryCard = () => {
       {carData ? (
         <div className="flex flex-col max-w-[25rem] w-full items-stretch gap-3 md:shadow-xl pt-4 pb-10 px-6">
           <div className="flex flex-col items-center box-info py-3 text-base">
-            Congrats! You just saved {useCurrency(discount)}
+            Congrats! You just saved{" "}
+            {
+              // eslint-disable-next-line react-hooks/rules-of-hooks
+              useCurrency(discount)
+            }
           </div>
           <div className="flex flex-row gap-16 justify-between items-center">
             <div className="relative h-20 aspect-video">
@@ -176,7 +180,7 @@ const SummaryCard = () => {
                 {format(
                   new Date(
                     searchParams.get("start").slice(6, 10),
-                    searchParams.get("start").slice(3, 5),
+                    searchParams.get("start").slice(3, 5) - 1,
                     searchParams.get("start").slice(0, 2)
                   ),
                   "E, dd MMM yyyy"
@@ -189,7 +193,7 @@ const SummaryCard = () => {
                 {format(
                   new Date(
                     searchParams.get("end").slice(6, 10),
-                    searchParams.get("end").slice(3, 5),
+                    searchParams.get("end").slice(3, 5) - 1,
                     searchParams.get("end").slice(0, 2)
                   ),
                   "E, dd MMM yyyy"
@@ -202,16 +206,32 @@ const SummaryCard = () => {
             <p>
               Price ({interval} {dayOrDays})
             </p>
-            <p className="font-semibold">{useCurrency(price)}</p>
+            <p className="font-semibold">
+              {
+                // eslint-disable-next-line react-hooks/rules-of-hooks
+                useCurrency(price)
+              }
+            </p>
           </div>
           <div className="flex flex-row justify-between text-sm py-1">
             <p>Discount</p>
-            <p className="font-semibold">- {useCurrency(discount)}</p>
+            <p className="font-semibold">
+              -{" "}
+              {
+                // eslint-disable-next-line react-hooks/rules-of-hooks
+                useCurrency(discount)
+              }
+            </p>
           </div>
           <hr />
           <div className="flex flex-row justify-between items-center py-1">
             <p>Payable Amount</p>
-            <p className="font-semibold text-lg">{useCurrency(payable)}</p>
+            <p className="font-semibold text-lg">
+              {
+                // eslint-disable-next-line react-hooks/rules-of-hooks
+                useCurrency(payable)
+              }
+            </p>
           </div>
           {isUser ? (
             <div className="flex flex-row justify-center gap-4 py-2">
@@ -225,7 +245,7 @@ const SummaryCard = () => {
           ) : (
             <>
               <div className="flex flex-col items-center py-1">
-                <p>You aren't logged in. Please log in or sign up</p>
+                <p>You aren&apos;t logged in. Please log in or sign up</p>
               </div>
               <div className="flex flex-row justify-center gap-4 py-2">
                 <button
