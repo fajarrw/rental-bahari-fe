@@ -5,6 +5,18 @@ import useCurrency from "@/hooks/useCurrency";
 import {AiFillEdit, AiFillDelete} from "react-icons/ai";
 import {useState} from "react";
 import {useGetToken} from "@/hooks/useCookies";
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+  Input,
+  useDisclosure,
+  Select,
+  SelectItem,
+} from "@nextui-org/react";
 
 const deleteData = async (_id) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -23,12 +35,151 @@ const deleteData = async (_id) => {
   }
 };
 
+const editData = async (data) => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const token = await useGetToken();
+  try {
+    fetch(`${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/car/edit`, {
+      method: "PUT",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+const EditButton = ({item}) => {
+  const {isOpen, onOpen, onOpenChange} = useDisclosure();
+  const [carData, setCarData] = useState(item);
+
+  const handleChange = ({target}) => {
+    const {name, value} = target;
+    setCarData({
+      ...carData,
+      [name]: value,
+    });
+    console.log(carData);
+  };
+
+  return (
+    <>
+      <Button isIconOnly onPress={onOpen} className="bg-amber-400">
+        <AiFillEdit size={25} />
+      </Button>
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">
+                Edit Car Details
+              </ModalHeader>
+              <ModalBody>
+                <Input
+                  label="Car name"
+                  name="name"
+                  variant="bordered"
+                  value={carData.name}
+                  onChange={handleChange}
+                />
+                <Input
+                  label="Model"
+                  variant="bordered"
+                  value={carData.model}
+                  name="model"
+                  onChange={handleChange}
+                />
+                <Input
+                  label="Type"
+                  variant="bordered"
+                  value={carData.type}
+                  name="type"
+                  onChange={handleChange}
+                />
+                <Select
+                  label="Transmission"
+                  variant="bordered"
+                  selectedKeys={[carData.transmission]}
+                  name="transmission"
+                  onChange={handleChange}
+                >
+                  <SelectItem value="automatic" key={"automatic"}>
+                    automatic
+                  </SelectItem>
+                  <SelectItem value="manual" key={"manual"}>
+                    manual
+                  </SelectItem>
+                </Select>
+                <Input
+                  label="Price"
+                  type="number"
+                  variant="bordered"
+                  value={carData.price}
+                  name="price"
+                  onChange={handleChange}
+                />
+                <Input
+                  label="Seats"
+                  type="number"
+                  variant="bordered"
+                  value={carData.seatNumber}
+                  name="seatNumber"
+                  onChange={handleChange}
+                />
+              </ModalBody>
+              <ModalFooter>
+                <Button variant="light" onPress={onClose}>
+                  No, Cancel
+                </Button>
+                <Button color="danger" onPress={() => editData(carData)}>
+                  Yes, Update
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+    </>
+  );
+};
+
+const DeleteButton = ({id, name}) => {
+  const {isOpen, onOpen, onOpenChange} = useDisclosure();
+
+  return (
+    <>
+      <Button isIconOnly onPress={onOpen} className="bg-red-400">
+        <AiFillDelete size={25} />
+      </Button>
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">
+                Are you sure to delete {name}
+              </ModalHeader>
+              <ModalBody>This action is irreversible.</ModalBody>
+              <ModalFooter>
+                <Button variant="light" onPress={onClose}>
+                  No, Cancel
+                </Button>
+                <Button color="danger" onPress={() => deleteData(id)}>
+                  Yes, Delete
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+    </>
+  );
+};
+
 const CarCard = ({item}) => {
   const [isHover, setIsHover] = useState(false);
-
-  const handleDelete = () => {
-    deleteData(item._id);
-  };
 
   return (
     <div className="flex flex-row w-full">
@@ -73,15 +224,8 @@ const CarCard = ({item}) => {
             (!isHover ? "lg:invisible" : "flex flex-row")
           }
         >
-          <button className="bg-amber-400 h-max p-2 rounded-md hover:bg-amber-300 transition-colors active:bg-amber-500 active:scale-95">
-            <AiFillEdit size={25} />
-          </button>
-          <button
-            onClick={handleDelete}
-            className="bg-red-400 h-max p-2 rounded-md hover:bg-red-300 transition-colors"
-          >
-            <AiFillDelete size={25} />
-          </button>
+          <EditButton item={item} />
+          <DeleteButton name={item.name} id={item._id} />
         </div>
       </div>
     </div>
