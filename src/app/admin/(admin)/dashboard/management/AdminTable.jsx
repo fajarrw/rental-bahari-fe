@@ -9,7 +9,15 @@ import {
   TableRow,
   TableCell,
   getKeyValue,
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  ModalContent,
+  useDisclosure,
 } from "@nextui-org/react";
+import {Toaster, toast} from "sonner";
 
 const COLUMNS = [
   {
@@ -19,6 +27,10 @@ const COLUMNS = [
   {
     key: "lastLogin",
     label: "LAST_LOGIN",
+  },
+  {
+    key: "action",
+    label: "ACTION",
   },
 ];
 
@@ -30,7 +42,6 @@ const dateOptions = {
 };
 
 const getAdmin = async (callback) => {
-  console.log("hello");
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/admin`
@@ -43,11 +54,70 @@ const getAdmin = async (callback) => {
         "en-UK",
         dateOptions
       );
+      item.action = <DeleteButton id={item._id} />;
     });
     callback(admin);
   } catch (err) {
     console.error(err);
   }
+};
+
+const deleteAdmin = async (id) => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/admin/${id}`,
+      {
+        method: "DELETE",
+      }
+    );
+    if (res.status !== 204) {
+      toast.error("Failed to delete admin");
+      return;
+    }
+    toast.success("Admin deleted successfully");
+    window.location.reload();
+  } catch (err) {
+    console.error(err);
+    toast.error("Internal server error");
+  }
+};
+
+const DeleteButton = ({id}) => {
+  const {isOpen, onOpen, onOpenChange} = useDisclosure();
+  return (
+    <>
+      <Button color="danger" onClick={onOpen}>
+        Delete
+      </Button>
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">
+                Are you sure to delete?
+              </ModalHeader>
+              <ModalBody>This action is irreversible.</ModalBody>
+              <ModalFooter>
+                <Button variant="light" onPress={onClose}>
+                  No, Cancel
+                </Button>
+                <Button
+                  color="danger"
+                  onPress={() => {
+                    toast.info("Deleting admin...", {duration: 5000});
+                    deleteAdmin(id);
+                    onClose();
+                  }}
+                >
+                  Yes, Delete
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+    </>
+  );
 };
 
 export default function AdminTable() {
@@ -60,6 +130,7 @@ export default function AdminTable() {
   }, [adminList]);
   return (
     <div className="w-1/2">
+      <Toaster richColors />
       <Table isStriped aria-label="Example table with dynamic content">
         <TableHeader columns={COLUMNS}>
           {(column) => (
