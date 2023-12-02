@@ -64,7 +64,7 @@ const CarList = () => {
         {carData.map((item, i) => {
           return (
             <div key={i}>
-              <CarCard item={item} />
+              <CarCard item={item} getData={getCarData} />
             </div>
           );
         })}

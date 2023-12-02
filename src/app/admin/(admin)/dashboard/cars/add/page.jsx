@@ -5,6 +5,7 @@ import {FiChevronLeft} from "react-icons/fi";
 import {useState} from "react";
 import {useGetToken} from "@/hooks/useCookies";
 import {useImage} from "@/hooks/useImage";
+import {Toaster, toast} from "sonner";
 
 export default function AddCar() {
   const [carInfo, setCarInfo] = useState({
@@ -28,19 +29,24 @@ export default function AddCar() {
     try {
       // eslint-disable-next-line react-hooks/rules-of-hooks
       const {value} = await useGetToken();
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/car/create`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${value}`,
-          },
-          body: JSON.stringify(carData),
-        }
-      );
-      const data = await res.json();
-      console.log(data);
+      await fetch(`${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/car/create`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${value}`,
+        },
+        body: JSON.stringify(carData),
+      });
+      toast.success("Car added successfully");
+      setCarInfo({
+        imageData: "",
+        name: "",
+        type: "",
+        model: "",
+        transmission: "",
+        price: "",
+        seatNumber: "",
+      });
     } catch (err) {
       console.error(err);
     }
@@ -53,11 +59,13 @@ export default function AddCar() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    toast.info("Adding car...");
     postCarData(carInfo);
   };
 
   return (
     <main className="bg-[#EDEDED]">
+      <Toaster richColors />
       <header className="border-b border-main-black/20">
         <Link
           href={"/admin/dashboard/cars"}

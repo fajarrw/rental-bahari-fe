@@ -17,8 +17,9 @@ import {
   Select,
   SelectItem,
 } from "@nextui-org/react";
+import {Toaster, toast} from "sonner";
 
-const deleteData = async (_id) => {
+const deleteData = async (_id, getData) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const token = await useGetToken();
   try {
@@ -29,6 +30,12 @@ const deleteData = async (_id) => {
         "Content-Type": "application/json",
         Authorization: token,
       },
+    }).then(() => {
+      toast.success("Car deleted successfully");
+      toast.info("Updating your data...");
+      getData().then(() => {
+        toast.success("Data updated");
+      });
     });
   } catch (err) {
     console.error(err);
@@ -146,7 +153,7 @@ const EditButton = ({item}) => {
   );
 };
 
-const DeleteButton = ({id, name}) => {
+const DeleteButton = ({id, name, getData}) => {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
   return (
@@ -166,7 +173,14 @@ const DeleteButton = ({id, name}) => {
                 <Button variant="light" onPress={onClose}>
                   No, Cancel
                 </Button>
-                <Button color="danger" onPress={() => deleteData(id)}>
+                <Button
+                  color="danger"
+                  onPress={() => {
+                    toast.info("Deleting car...", {duration: 5000});
+                    deleteData(id, getData);
+                    onClose();
+                  }}
+                >
                   Yes, Delete
                 </Button>
               </ModalFooter>
@@ -178,11 +192,12 @@ const DeleteButton = ({id, name}) => {
   );
 };
 
-const CarCard = ({item}) => {
+const CarCard = ({item, getData}) => {
   const [isHover, setIsHover] = useState(false);
 
   return (
     <div className="flex flex-row w-full">
+      <Toaster richColors />
       <div
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
@@ -225,7 +240,7 @@ const CarCard = ({item}) => {
           }
         >
           <EditButton item={item} />
-          <DeleteButton name={item.name} id={item._id} />
+          <DeleteButton name={item.name} id={item._id} getData={getData} />
         </div>
       </div>
     </div>
