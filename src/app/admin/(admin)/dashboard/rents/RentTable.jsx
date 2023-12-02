@@ -47,9 +47,12 @@ const COLUMNS = [
 
 const finishRent = async (id) => {
   try {
-    const res = await fetch(`http://localhost:3001/api/rent/finish/${id}`, {
-      method: "PUT",
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/rent/finish/${id}`,
+      {
+        method: "PUT",
+      }
+    );
     if (res.status !== 200) {
       toast.error("Internal server error");
       return;
@@ -64,19 +67,22 @@ const finishRent = async (id) => {
 const deleteRent = async (id) => {
   try {
     const body = {_id: id};
-    const res = await fetch(`http://localhost:3001/api/rent/delete`, {
-      method: "DELETE",
-      body: JSON.stringify(body),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/rent/delete`,
+      {
+        method: "DELETE",
+        body: JSON.stringify(body),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     if (res.status !== 200) {
       toast.error("Internal server error");
       return;
     }
     toast.success("Rent deleted");
-    // window.location.reload();
+    window.location.reload();
   } catch (err) {
     console.error(err);
   }
@@ -84,9 +90,12 @@ const deleteRent = async (id) => {
 
 const getCustomerData = async (custId) => {
   try {
-    const res = await fetch(`http://localhost:3001/api/users/${custId}`, {
-      method: "GET",
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/users/${custId}`,
+      {
+        method: "GET",
+      }
+    );
     if (res.status !== 200) {
       toast.error("Internal server error");
       return;
@@ -99,9 +108,12 @@ const getCustomerData = async (custId) => {
 };
 const getCarData = async (carId, customerData, setter) => {
   try {
-    const res = await fetch(`http://localhost:3001/api/car/id/${carId}`, {
-      method: "GET",
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/car/id/${carId}`,
+      {
+        method: "GET",
+      }
+    );
     if (res.status !== 200) {
       toast.error("Internal server error");
       return;
