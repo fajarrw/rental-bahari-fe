@@ -6,7 +6,7 @@ import {useLogin} from "@/hooks/useCookies";
 import {useRouter} from "next/navigation";
 import {toast} from "sonner";
 
-async function Login(body, router, loadSetter) {
+async function Login(body, router) {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/auth/admin`,

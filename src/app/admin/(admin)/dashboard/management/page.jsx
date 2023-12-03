@@ -8,7 +8,7 @@ export default function ManageAdmin() {
         <h1 className="text-xl font-semibold px-8 py-4">Manage Admin</h1>
         <div></div>
       </header>
-      <section className="px-8 py-6">
+      <section className="flex flex-col gap-4 px-8 py-6">
         <div className="flex justify-end">
           <Button
             as={Link}

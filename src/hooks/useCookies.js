@@ -9,6 +9,12 @@ export const useLogin = (data) => {
     cookies().set('username', username, { maxAge: 54000, httpOnly: true });
 }
 
+export const useLogout = () => {
+    cookies().delete('token');
+    cookies().delete('role');
+    cookies().delete('username');
+}
+
 export const useGetToken = async () => {
     const cookieValue = cookies()
     return cookieValue.get("token")

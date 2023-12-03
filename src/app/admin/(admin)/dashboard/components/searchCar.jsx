@@ -2,15 +2,19 @@
 
 import {useState} from "react";
 
-export default function AsideSearchCar() {
+export default function AsideSearchCar({searchSetter}) {
   const [searchInput, setSearchInput] = useState("");
   const handleChange = ({target}) => {
     setSearchInput(target.value);
   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    searchSetter(searchInput);
+  };
 
   return (
     <div className="bg-white p-4 rounded-lg drop-shadow-md h-fit">
-      <form className="flex flex-col gap-6">
+      <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-2">
           <label>Search cars:</label>
           <input
