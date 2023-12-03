@@ -10,7 +10,7 @@ import update from 'immutability-helper';
 async function Submit(body) {
     console.log("on Submit funct", body)
     try {
-      const res = await fetch("http://localhost:3001/api/assurance/profile", {
+      const res = await fetch("http://rentalbahari.vercel.app/api/assurance/profile", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
