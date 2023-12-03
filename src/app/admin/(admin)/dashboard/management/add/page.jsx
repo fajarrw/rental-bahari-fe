@@ -63,7 +63,7 @@ export default function AddAdmin() {
       <header className="border-b border-main-black/20">
         <Link
           href={"/admin/dashboard/management"}
-          className="py-2 px-8 flex items-center gap-1"
+          className="py-2 px-8 flex items-center gap-1 w-fit"
         >
           <FiChevronLeft size={25} />
           <button className="text-xl font-semibold py-2 font-poppins">

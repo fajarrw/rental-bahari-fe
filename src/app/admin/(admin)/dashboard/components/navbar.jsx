@@ -24,7 +24,7 @@ const dateOptions = {
 
 export default function Navbar() {
   return (
-    <nav className="flex flex-row sticky top-0 justify-between items-center bg-white drop-shadow-md min-w-min">
+    <nav className="flex flex-row sticky z-[999] top-0 justify-between items-center bg-white drop-shadow-md min-w-min overflow-x-auto">
       <div className="flex flex-row justify-center">
         <Link href={"/"} className="px-5 py-3 bg-dark-green-1 text-main-white">
           Rental Bahari

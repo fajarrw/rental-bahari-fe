@@ -129,7 +129,7 @@ export default function AdminTable() {
     console.log(adminList);
   }, [adminList]);
   return (
-    <div className="w-1/2">
+    <div className="w-full md:w-2/3 lg:w-1/2">
       <Toaster richColors />
       <Table isStriped aria-label="Example table with dynamic content">
         <TableHeader columns={COLUMNS}>
