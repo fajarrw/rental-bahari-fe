@@ -21,7 +21,7 @@ export default function CarList() {
         <h1 className="text-xl font-semibold px-8 py-4">Rent List</h1>
         <div></div>
       </header>
-      <section className="px-8 py-6">
+      <section className="px-8 py-6 flex flex-col gap-4">
         <div className="flex flex-row gap-20">
           <RadioGroup
             label="Sort"

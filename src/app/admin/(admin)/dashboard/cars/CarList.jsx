@@ -32,14 +32,14 @@ const CustomSkeleton = () => {
   );
 };
 
-const CarList = () => {
+const CarList = ({query}) => {
   const [carData, setCarData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const getCarData = async () => {
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/car/all`
+        `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/car/search?model=${query}`
       );
       const {car} = await res.json();
       setCarData(car);
@@ -51,7 +51,8 @@ const CarList = () => {
 
   useEffect(() => {
     getCarData();
-  }, []);
+  }, [query]);
+
   return (
     <div className="h-[40rem] overflow-auto">
       <div className={`${isLoading ? "" : "hidden"}` + " w-full h-full"}>
