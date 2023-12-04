@@ -14,9 +14,7 @@ export default function RootLayout({ children }) {
   return (
     <DateContextFunction>
       <SearchContextFunctionx>
-        <html lang="en">
-          <body>{children}</body>
-        </html>
+        <div>{children}</div>
       </SearchContextFunctionx>
     </DateContextFunction >
   )
