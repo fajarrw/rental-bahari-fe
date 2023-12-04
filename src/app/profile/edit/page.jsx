@@ -10,7 +10,7 @@ import update from 'immutability-helper';
 async function Submit(body) {
     console.log("on Submit funct", body)
     try {
-      const res = await fetch("http://rentalbahari.vercel.app/api/assurance/profile", {
+      const res = await fetch("https://rentalbahari.vercel.app/api/assurance/profile", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -47,7 +47,7 @@ export default function Profile(){
         name = await name?name.value:"fajar";
         console.log(name)
         try {
-            const res = await fetch(`http://rentalbahari.vercel.app/api/assurance/user/${name}`);
+            const res = await fetch(`https://rentalbahari.vercel.app/api/assurance/user/${name}`);
             const data = await res.json();
             console.log('data')
             setProfile(data);

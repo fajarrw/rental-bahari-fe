@@ -16,7 +16,7 @@ const Profile = () => {
         console.log(name)
 
         try {
-        const res = await fetch(`http://rentalbahari.vercel.app/api/assurance/user/${name}`);
+        const res = await fetch(`https://rentalbahari.vercel.app/api/assurance/user/${name}`);
         const data = await res.json();
         console.log(data)
         setProfile(data);    
