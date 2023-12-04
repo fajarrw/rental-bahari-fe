@@ -6,7 +6,7 @@ const BookingList = ({ bookings }) => {
   return (
     <div>
       {bookings.map((booking) => (
-        <BookingCard key={booking.id} booking={booking} />
+        <BookingCard key={booking._id} booking={booking} />
       ))}
     </div>
   );

@@ -46,7 +46,7 @@ function MyBookingPage() {
         console.log(name)
 
         try {
-            const res = await fetch("http://localhost:3001/api/rent/search/name", {
+            const res = await fetch("https://rentalbahari.vercel.app/api/rent/search/name", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
