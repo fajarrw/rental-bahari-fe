@@ -1,39 +1,105 @@
+"use client"
+
 import Image from "next/image";
-import { SearchContextFunction } from '../../after_login/context/cari';
-import Headerx from '../../after_login/components/navbar/headerx';
+import { SearchContextFunctionx } from '@/app/after_login/context/cari';
+import Headerx from '@/app/after_login/components/navbar/Headerx';
+import { useState, useEffect } from "react";
+import {useGetUser} from "@/hooks/useCookies";
+import update from 'immutability-helper';
+
+async function Submit(body) {
+    console.log("on Submit funct", body)
+    try {
+      const res = await fetch("http://rentalbahari.vercel.app/api/assurance/profile", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+      const data = await res.json();
+      console.log(data)
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
 export default function Profile(){
+    const [profile, setProfile] = useState(({
+        assurance: {
+          alamat: {
+            jalan: "",
+            kelurahan: "",
+            kecamatan: "",
+            kota: "",
+            provinsi: "",
+          },
+          nik: "",
+        },
+        name: "",
+        telp: ""
+      })
+      );
+    
+    const getProfileData = async () => {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        let name = await useGetUser();
+        name = await name?name.value:"fajar";
+        console.log(name)
+        try {
+            const res = await fetch(`http://rentalbahari.vercel.app/api/assurance/user/${name}`);
+            const data = await res.json();
+            console.log('data')
+            setProfile(data);
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+    useEffect(() => {
+        console.log("useEffect called")
+        getProfileData();
+        
+    }, []);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // Add logic for handling form submission here
+        console.log('Form submitted:', profile);
+        Submit(profile);
+      };
+
     return (
-        <SearchContextFunction>
+        <SearchContextFunctionx>
             <Headerx />
-            <div className="flex py-20 justify-center">
+            <div className="flex py-5 justify-center">
                 <div className="flex flex-col bg-slate-100 max-w-[45rem] w-full p-8 rounded-md shadow-lg mx-2 mt-5">
                     <div className="flex pb-10">
                         <h1 className="text-3xl font-bold pr-3">EDIT PROFILE</h1>
                     </div>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <div className="pb-10">
                             <h1 className="pb-3 text-lg font-semibold">USERNAME</h1>
                             <input
                                 type="text"
-                                //onChange={handleChange}
-                                //value={searchInput}
                                 name="username"
                                 label="username"
                                 className="border-2 border-main-black/20 focus:border-dark-green-1 focus:outline-none rounded-md px-4 py-1 w-1/2 bg-transparent"
                                 placeholder="Enter username"
+                                value={profile && profile.name || ""}
+                                onChange={(e) => setProfile({ ...profile, name: e.target.value })}
                             />
                         </div>
                         <div className="pb-10">
                             <h1 className="pb-3 text-lg font-semibold">PHONE NUMBER</h1>
                             <input
                                 type="text"
-                                // onChange={handleChange}
-                                // value={searchInput}
                                 name="PhoneNumber"
                                 label="PhoneNumber"
                                 className="border-2 border-main-black/20 focus:border-dark-green-1 focus:outline-none rounded-md px-4 py-1 w-1/2 bg-transparent"
                                 placeholder="Enter Phone Number"
+                                value={profile && profile.telp || ""}
+                                onChange={(e) => setProfile({ ...profile, telp: e.target.value })}
                             />
                         </div>
                         <div className="pb-10 space-y-2">
@@ -44,12 +110,14 @@ export default function Profile(){
                                     <span className="pr-3">:</span>
                                     <input
                                         type="text"
-                                        //onChange={handleChange}
-                                        //value={searchInput}
                                         name="Street"
                                         label="Street"
                                         className="border-2 border-main-black/20 focus:border-dark-green-1 focus:outline-none rounded-md px-4 py-1 w-1/2 bg-transparent"
                                         placeholder="Enter Street"
+                                        value={profile && profile.assurance?.alamat.jalan || ""}
+                                        onChange={(e) => {
+                                            setProfile(update(profile, {assurance: {alamat: {jalan: { $set: e.target.value },},},}))
+                                        }}
                                     />
                                 </li>
                                 <li className="flex justify-start ">
@@ -57,12 +125,14 @@ export default function Profile(){
                                     <span className="pr-3">:</span>
                                     <input
                                         type="text"
-                                        //onChange={handleChange}
-                                        //value={searchInput}
                                         name="Ward"
                                         label="Ward"
                                         className="border-2 border-main-black/20 focus:border-dark-green-1 focus:outline-none rounded-md px-4 py-1 w-1/2 bg-transparent"
                                         placeholder="Enter Ward"
+                                        value={profile && profile.assurance?.alamat.kelurahan || ""}
+                                        onChange={(e) => {
+                                            setProfile(update(profile, {assurance: {alamat: {kelurahan: { $set: e.target.value },},},}))
+                                        }}
                                     />
                                 </li>
                                 <li className="flex justify-start">
@@ -70,12 +140,14 @@ export default function Profile(){
                                     <span className="pr-3">:</span>
                                     <input
                                         type="text"
-                                        //onChange={handleChange}
-                                        //value={searchInput}
                                         name="SubDistrict"
                                         label="SubDistrict"
                                         className="border-2 border-main-black/20 focus:border-dark-green-1 focus:outline-none rounded-md px-4 py-1 w-1/2 bg-transparent"
                                         placeholder="Enter Sub-District"
+                                        value={profile && profile.assurance?.alamat.kecamatan || ""}
+                                        onChange={(e) => {
+                                            setProfile(update(profile, {assurance: {alamat: {kecamatan: { $set: e.target.value },},},}))
+                                        }}
                                     />
                                 </li>
                                 <li className="flex justify-start">
@@ -83,12 +155,14 @@ export default function Profile(){
                                     <span className="pr-3">:</span>
                                     <input
                                         type="text"
-                                        //onChange={handleChange}
-                                        //value={searchInput}
                                         name="City"
                                         label="City"
                                         className="border-2 border-main-black/20 focus:border-dark-green-1 focus:outline-none rounded-md px-4 py-1 w-1/2 bg-transparent"
                                         placeholder="Enter City"
+                                        value={profile && profile.assurance?.alamat.kota || ""}
+                                        onChange={(e) => {
+                                            setProfile(update(profile, {assurance: {alamat: {kota: { $set: e.target.value },},},}))
+                                        }}
                                     />
                                 </li>
                                 <li className="flex justify-start">
@@ -96,12 +170,14 @@ export default function Profile(){
                                     <span className="pr-3">:</span>
                                     <input
                                         type="text"
-                                        //onChange={handleChange}
-                                        //value={searchInput}
                                         name="Province"
                                         label="Province"
                                         className="border-2 border-main-black/20 focus:border-dark-green-1 focus:outline-none rounded-md px-4 py-1 w-1/2 bg-transparent"
                                         placeholder="Enter Province"
+                                        value={profile && profile.assurance?.alamat.provinsi || ""}
+                                        onChange={(e) => {
+                                            setProfile(update(profile, {assurance: {alamat: {provinsi: { $set: e.target.value },},},}))
+                                        }}
                                     />
                                 </li>
                             </ul>
@@ -110,12 +186,14 @@ export default function Profile(){
                             <h1 className="pb-3 text-lg font-semibold">NIK</h1>
                             <input
                                 type="text"
-                                //onChange={handleChange}
-                                //value={searchInput}
                                 name="NIK"
                                 label="NIK"
                                 className="border-2 border-main-black/20 focus:border-dark-green-1 focus:outline-none rounded-md px-4 py-1 w-1/2 bg-transparent"
                                 placeholder="Enter NIK"
+                                value={profile && profile.assurance?.nik || ""}
+                                onChange={(e) => {
+                                    setProfile(update(profile, {assurance: {nik: { $set: e.target.value },},}))
+                                }}
                             />  
                         </div>
                         <div className="pb-10">
@@ -142,7 +220,7 @@ export default function Profile(){
 
                 </div>
             </div>
-        </SearchContextFunction>
+        </SearchContextFunctionx>
         
             
     );

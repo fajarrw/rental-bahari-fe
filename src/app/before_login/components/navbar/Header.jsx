@@ -12,7 +12,7 @@ import { BiMenuAltRight, BiX } from "react-icons/bi"
 
 import { BsPersonCircle } from "react-icons/bs";
 
-import { SearchContext } from '../../context/search'
+import { SearchContext } from '@/app/before_login/context/search'
 
 
 

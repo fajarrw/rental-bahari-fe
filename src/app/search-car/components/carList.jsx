@@ -3,7 +3,7 @@
 import { useState, useEffect, useContext } from "react";
 import CarCard from "./carCard";
 import CarCardSkeleton from "./carCardSkeleton";
-import { FilterAndSortContext } from "../context/filterAndSortContext";
+import { FilterAndSortContext } from "@/app/search-car/context/filterAndSortContext";
 
 const CarList = () => {
   const [carData, setCarData] = useState();
@@ -45,14 +45,18 @@ const CarList = () => {
       params = params + "&type=" + allType;
     }
     if (context.price != "") {
-      params = params + "&minPrice=" + context.price[0] + "&maxPrice=" + context.price[1];
+      params =
+        params +
+        "&minPrice=" +
+        context.price[0] +
+        "&maxPrice=" +
+        context.price[1];
     }
     if (params != "" && context.sort) {
-      params = params + "&sortBy=price" + "&order=" + context.sort[0];
+      params = params + "&sortBy=price" + "&order=" + context.sort;
     }
     return params;
   };
-  console.log(filterAndSortContext);
 
   useEffect(() => {
     getCarData();
@@ -60,7 +64,7 @@ const CarList = () => {
     filterAndSortContext.sort,
     filterAndSortContext.transmission,
     filterAndSortContext.type,
-    filterAndSortContext.price
+    filterAndSortContext.price,
   ]);
 
   const skeleton = [1, 2, 3];

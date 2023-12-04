@@ -3,20 +3,30 @@
 import {FiEye, FiEyeOff} from "react-icons/fi";
 import {useState} from "react";
 import {useLogin} from "@/hooks/useCookies";
+import {useRouter} from "next/navigation";
+import {toast} from "sonner";
 
-async function Login(body) {
+async function Login(body, router) {
   try {
-    const res = await fetch("http://localhost:3001/api/auth/admin", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
-    });
-    if (res.status === 403) return false;
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/auth/admin`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      }
+    );
+    if (res.status === 403) return toast("Access denied");
+    if (res.status === 404)
+      return toast.error("Your admin credentials were not found");
     const data = await res.json();
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useLogin({...data, username: body.username});
+    toast.success("Login successful, Hi Admin!");
+    router.push("/admin/dashboard");
+    return;
   } catch (err) {
     console.error(err);
   }
@@ -29,6 +39,8 @@ export default function LoginForm() {
   });
   const {username, password} = userInfo;
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
+  const [isLoading, setLoading] = useState(false);
+  const r = useRouter();
 
   const handleChange = ({target}) => {
     const {name, value} = target;
@@ -37,13 +49,13 @@ export default function LoginForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    Login(userInfo);
+    toast.info("Logging you in...");
+    Login(userInfo, r, setLoading);
   };
 
   const handleReset = () => {
     setUserInfo({username: "", password: ""});
   };
-
   return (
     <div className="bg-main-white w-80 sm:w-96 md:w-3/5 h-[27rem] rounded-b-xl md:rounded-bl-none md:rounded-tr-xl md:rounded-br-xl px-8 py-12">
       <form
