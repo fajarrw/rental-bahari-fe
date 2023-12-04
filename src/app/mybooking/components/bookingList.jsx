@@ -1,6 +1,6 @@
 // BookingList.js
 import React from 'react';
-import BookingCard from './BookingCard';
+import BookingCard from './bookingCard';
 
 const BookingList = ({ bookings }) => {
   return (
