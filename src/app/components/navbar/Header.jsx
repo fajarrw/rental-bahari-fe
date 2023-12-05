@@ -54,7 +54,7 @@ function HeaderLoggedIn() {
 
   return (
     <header
-      id="navbarx"
+      id="navbar"
       className="bg-[#045757] shadow-md py-5 w-full max-w-[1920px] mx-auto z-20 transition-all duation-300"
     >
       <div className="container mx-auto flex flex-col xl:flex-row xl:items-center xl:justify-between">
