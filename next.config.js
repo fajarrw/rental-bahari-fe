@@ -9,11 +9,6 @@ const nextConfig = {
                 source: '/admin/dashboard',
                 destination: '/admin/dashboard/cars',
                 permanent: true
-            },
-            {
-                source: '/',
-                destination: '/before_login',
-                permanent: false
             }
         ]
     }

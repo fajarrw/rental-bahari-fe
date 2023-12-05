@@ -2,13 +2,13 @@
 
 import Link from "next/link";
 import SummaryCard from "./components/summaryCard";
-import { SearchContextFunction } from "@/app/before_login/context/search";
-import { SearchContextFunctionx } from "@/app/after_login/context/cari";
-import Header from "@/app/before_login/components/navbar/Header";
+import {SearchContextFunction} from "@/app/context/search";
+import {SearchContextFunctionx} from "@/app/after_login/context/cari";
+import Header from "@/app/components/navbar/Header";
 import Headerx from "@/app/after_login/components/navbar/Headerx";
-import { useGetRole } from "@/hooks/useCookies";
-import { useState, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
+import {useGetRole} from "@/hooks/useCookies";
+import {useState, useEffect} from "react";
+import {useSearchParams} from "next/navigation";
 
 export default function BookingSummary() {
   const [isUser, setIsUser] = useState(false);
@@ -20,7 +20,7 @@ export default function BookingSummary() {
     if (role?.value == "user") {
       setIsUser(true);
     }
-    console.log({ isUser });
+    console.log({isUser});
   };
 
   useEffect(() => {
