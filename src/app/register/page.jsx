@@ -46,13 +46,14 @@ export default function UserRegister(){
             return;
         }
         handleRegister(userInfo);
+        
     };
     return(
         <div className="flex flex-col items-center justify-center min-h-screen">
             <Head>
                 <title>Rental Bahari | Register</title>
             </Head>
-            <main className="flex-col md:flex-row flex items-center justify-center w-full flex-1 py-100 text-center bg-reg-bg bg-contain">
+            <main className="flex-col bg-reg-bg bg-cover md:flex-row md:bg-contain flex items-center justify-center w-full flex-1 py-100 text-center">
                 {/* Logo section */}
                 <div className='w-1/2 p-5 flex flex-col items-center justify-center '>
                         <img src='/assets/white-logo.png' className="img-white-logo1 mb-5 " alt="Logo" />
