@@ -10,10 +10,10 @@ function formatDate(inputDate) {
 
 const BookingCard = ({ booking }) => {
   return (
-    <div className="flex bg-slate-100 space-x-6 max-w-[45rem] p-8 rounded-md shadow-lg m-5 justify-center">
+    <div className="flex flex-col sm:flex-row sm:space-y-0 space-y-6 bg-slate-100 space-x-6 max-w-[45rem] p-8 rounded-md shadow-lg m-5 justify-center">
       <div className='h-28'>
         <Image  
-          src="/assets/2023-EQE350-SEDAN-AVP-DR.png"
+          src={booking.car.imageData}
           alt="filter"
           width={500}
           height={500}
@@ -43,13 +43,13 @@ const BookingCard = ({ booking }) => {
       </div>
       <div className='space-y-4'>
         <div className='flex flex-col justify-center space-y-1'>
-          <h1 className='text-center'>{formatDate(booking.start)}</h1>
-          <div className="flex justify-center items-center">
+          <h1 className='text-start sm:text-center'>{formatDate(booking.start)}</h1>
+          <div className="flex justify-start sm:justify-center items-center">
             <hr className="w-2/3 border-t border-black"></hr>
           </div>      
-          <h1 className='text-center'>{formatDate(booking.end)}</h1>
+          <h1 className='text-start sm:text-center'>{formatDate(booking.end)}</h1>
         </div>
-        <h1 className='text-3xl font-semibold'>{booking.totalPrice}</h1>
+        <h1 className='text-3xl font-semibold'>Rp {booking.totalPrice}</h1>
       </div>
     </div>
   );
