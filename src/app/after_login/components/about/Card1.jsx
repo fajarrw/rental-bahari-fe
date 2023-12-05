@@ -11,7 +11,7 @@ export default function Card1() {
 
   return (
     <>
-      <div class="p-6 pt-0">
+      <div className="p-6 pt-0">
         <Button
           className="select-none rounded-lg bg-dark-green-2 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md transition-all hover:shadow-lg hover:shadow-dark-green-2 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
           type="button"
@@ -49,8 +49,8 @@ export default function Card1() {
                       alt=""  
                       />
                                       
-                      <div class="py-4">
-                        <div class="mx-6 font-bold text-xl mb-4 px-0">
+                      <div className="py-4">
+                        <div className="mx-6 font-bold text-xl mb-4 px-0">
                           Trusted For Years
                         </div>
 

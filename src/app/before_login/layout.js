@@ -1,4 +1,4 @@
-import { SearchContextFunction } from './context/search'
+import { SearchContextFunction } from '../context/search'
 import { DateContextFunction } from "@/app/search-car/context/dateContext";
 
 export const metadata = {

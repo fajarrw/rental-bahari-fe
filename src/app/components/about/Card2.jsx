@@ -43,7 +43,7 @@ export default function Card2() {
         <ModalContent className="relative z-50">
           {(onClose) => (
             <ModalHeader className="fixed inset-0 z-50 w-screen overflow-y-scroll">
-              <ModalBody className="flex h-fit my-auto items-end justify-center p-4 text-center m:p-0">
+              <ModalBody className="flex h-fit my-auto justify-center p-4 text-center items-center sm:p-0">
                 <div className="relative transform overflow-hidden rounded-lg bg-main-white text-left shadow-xl transition-all sm:w-full sm:max-w-lg">
                   <div className="bg-main-white flex items-center">
                     <div className="">
