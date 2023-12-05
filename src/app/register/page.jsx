@@ -61,7 +61,7 @@ export default function UserRegister() {
       <Head>
         <title>Rental Bahari | Register</title>
       </Head>
-      <main className="flex-col md:flex-row flex items-center justify-center w-full flex-1 py-100 text-center bg-reg-bg bg-contain">
+      <main className="flex-col bg-reg-bg bg-cover md:bg-contain md:flex-row flex items-center justify-center w-full flex-1 py-100 text-center">
         {/* Logo section */}
         <div className="w-1/2 p-5 flex flex-col items-center justify-center ">
           <img
@@ -84,7 +84,7 @@ export default function UserRegister() {
               <p>Rent Easily, Drive Hapily!</p>
             </div>
           </div>
-          {/* <RegisterForm /> */}
+
           <form
             onSubmit={handleSubmit}
             className="flex flex-col px-20 md:px-28 lg:px-36 xl:px-44"
