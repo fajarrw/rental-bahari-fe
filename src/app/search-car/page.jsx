@@ -4,14 +4,14 @@ import "./styles.css";
 import CarList from "./components/carList";
 import FilterAndSort from "./components/filterAndSort";
 import SearchBar from "./components/searchBar";
-import { SearchContextFunction } from "@/app/before_login/context/search";
-import { SearchContextFunctionx } from "@/app/after_login/context/cari";
-import Header from "@/app/before_login/components/navbar/Header";
+import {SearchContextFunction} from "@/app/context/search";
+import {SearchContextFunctionx} from "@/app/after_login/context/cari";
+import Header from "@/app/components/navbar/Header";
 import Headerx from "@/app/after_login/components/navbar/Headerx";
-import { useGetRole } from "@/hooks/useCookies";
-import { useState, useEffect } from "react";
-import { DateContextFunction } from "./context/dateContext";
-import { FilterAndSortContextFunction } from "./context/filterAndSortContext";
+import {useGetRole} from "@/hooks/useCookies";
+import {useState, useEffect} from "react";
+import {DateContextFunction} from "./context/dateContext";
+import {FilterAndSortContextFunction} from "./context/filterAndSortContext";
 
 export default function SearchCar() {
   const [isUser, setIsUser] = useState(false);
@@ -34,7 +34,7 @@ export default function SearchCar() {
       <DateContextFunction>
         <SearchContextFunctionx>
           <SearchContextFunction>
-            {isUser ? <Headerx /> : <Header />}
+            <Header />
             <main className="flex flex-col md:flex-row min-h-screen">
               <FilterAndSort />
               <div className="flex flex-col w-full items-center">
