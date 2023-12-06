@@ -3,21 +3,24 @@
 import {useState} from "react";
 import Head from "next/head";
 import Link from "next/link";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const handleRegister = async (body) => {
   try {
     const res = await fetch(
-      `${process.env.process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/users`,
+      `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/users`,
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(body),
+        body: JSON.stringify(body)
       }
     );
     const data = await res.json();
     console.log(data);
+    toast.success("Account Created Successfully")
   } catch (err) {
     console.error(err);
   }
@@ -196,6 +199,7 @@ export default function UserRegister() {
               </Link>
             </div>
           </form>
+          <ToastContainer theme="dark"></ToastContainer>
         </div>
       </main>
     </div>
