@@ -16,8 +16,11 @@ Rental Bahari merupakan aplikasi berbasis web yang bertujuan untuk memudahkan pe
 
 ## Links
 - Deployed Website   : https://rental-bahari-fe.vercel.app
+- Deployed API       : https://rentalbahari.vercel.app
 - Presentation Video : https://youtu.be/M88ZSEKxNXA
 - Presentation Slide : https://www.canva.com/design/DAFzj3F16MU/l7GUvFsVTxpXFHNJ6c3spQ/edit
+- Frontend Repo      : https://github.com/fajarrw/rental-bahari-fe
+- Backend Repo       : https://github.com/fajarrw/rentalBahari
 
 ## Tech Stack
 - NodeJS
@@ -29,8 +32,8 @@ Rental Bahari merupakan aplikasi berbasis web yang bertujuan untuk memudahkan pe
 - Postman
 - Figma
 
-## How to run this program
-
+## How to run this program locally
+This is the frontend side of the app. Follow these instructions to run the program locally:
 1. Clone the repository 
 ```bash
 git clone https://github.com/fajarrw/rental-bahari-fe.git
