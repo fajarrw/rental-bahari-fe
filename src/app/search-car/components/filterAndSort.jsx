@@ -70,11 +70,14 @@ const FilterAndSort = () => {
                 value={filterAndSortContext.type}
                 onValueChange={filterAndSortContext.setType}
               >
+                <Checkbox size="sm" color="success" value="hatchback">
+                  Hatchback
+                </Checkbox>
                 <Checkbox size="sm" color="success" value="minivan">
                   Minivan
                 </Checkbox>
-                <Checkbox size="sm" color="success" value="hatchback">
-                  Hatchback
+                <Checkbox size="sm" color="success" value="sedan">
+                  Sedan
                 </Checkbox>
                 <Checkbox size="sm" color="success" value="wagon">
                   Wagon
