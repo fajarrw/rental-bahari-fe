@@ -18,7 +18,7 @@ Rental Bahari merupakan aplikasi berbasis web yang bertujuan untuk memudahkan pe
 - Deployed Website   : https://rental-bahari-fe.vercel.app
 - Deployed API       : https://rentalbahari.vercel.app
 - Presentation Video : https://youtu.be/M88ZSEKxNXA
-- Presentation Slide : https://www.canva.com/design/DAFzj3F16MU/l7GUvFsVTxpXFHNJ6c3spQ/edit
+- Presentation Slide : https://www.canva.com/design/DAFzj3F16MU/l7GUvFsVTxpXFHNJ6c3spQ/view
 - Frontend Repo      : https://github.com/fajarrw/rental-bahari-fe
 - Backend Repo       : https://github.com/fajarrw/rentalBahari
 
