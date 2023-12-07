@@ -5,8 +5,10 @@ import Head from "next/head";
 import Link from "next/link";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from 'next/navigation';
 
 const handleRegister = async (body) => {
+  
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/users`,
@@ -20,13 +22,13 @@ const handleRegister = async (body) => {
     );
     const data = await res.json();
     console.log(data);
-    toast.success("Account Created Successfully")
   } catch (err) {
     console.error(err);
   }
 };
 
 export default function UserRegister() {
+  const router = useRouter();
   const [userInfo, setUserInfo] = useState({
     name: "",
     username: "",
@@ -40,7 +42,7 @@ export default function UserRegister() {
     const {name, value} = target;
     setUserInfo({...userInfo, [name]: value});
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (
       !name ||
@@ -57,7 +59,16 @@ export default function UserRegister() {
       console.error("Passwords don't match!");
       return;
     }
-    handleRegister(userInfo);
+    try {
+      await handleRegister(userInfo);
+      toast.success("Account Created Successfully");
+      setTimeout(() => {
+        router.push("/login");
+      }, 3000);
+    } catch (err) {
+      console.error(err);
+    }
+
   };
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
