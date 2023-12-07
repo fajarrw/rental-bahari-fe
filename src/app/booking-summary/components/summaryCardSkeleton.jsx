@@ -3,9 +3,7 @@
 const SummaryCardSkeleton = () => {
   return (
     <div className="flex flex-col max-w-[25rem] w-full items-stretch gap-3 md:shadow-xl pt-4 pb-10 px-6">
-      <span className="skeleton-loader h-12 w-80"></span>
-
-      <div className="flex flex-row justify-between items-center">
+      <div className="flex flex-row justify-between items-center pt-8">
         <div className="relative h-20 aspect-video">
           <span className="skeleton-loader h-full w-32"></span>
         </div>
@@ -26,10 +24,10 @@ const SummaryCardSkeleton = () => {
         <span className="skeleton-loader h-4 w-16"></span>
         <span className="skeleton-loader h-4 w-32"></span>
       </div>
-      <div className="flex flex-row justify-between text-sm py-1">
+      {/* <div className="flex flex-row justify-between text-sm py-1">
         <span className="skeleton-loader h-4 w-16"></span>
         <span className="skeleton-loader h-4 w-32"></span>
-      </div>
+      </div> */}
       <hr />
       <div className="flex flex-row justify-between items-center py-1">
         <span className="skeleton-loader h-6 w-32"></span>
