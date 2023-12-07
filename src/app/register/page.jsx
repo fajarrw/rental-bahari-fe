@@ -80,7 +80,7 @@ export default function UserRegister() {
         <div className="w-1/2 p-5 flex flex-col items-center justify-center ">
           <img
             src="/assets/white-logo.png"
-            className="img-white-logo1 mb-5 "
+            className="w-40 h-24 md:h-40 md:w-64 mb-5 "
             alt="Logo"
           />
         </div>
