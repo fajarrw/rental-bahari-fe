@@ -300,7 +300,7 @@ function HeaderNotLoggedIn() {
           </a>
         </nav>
 
-        <div className="flex flex-row items-center gap-4 xl:flex px-4">
+        <div className="flex hidden flex-row items-center gap-4 xl:flex px-4">
           <div className="border-2 bg-transparent rounded-xl px-3 py-1 cursor-pointer hover:bg-dark-green-2">
             <a
               className="cursor-pointer mx-auto text-[#E4E4E4] hover:text-gray-200"
