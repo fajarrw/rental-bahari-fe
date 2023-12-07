@@ -13,7 +13,7 @@
 Rental Bahari merupakan aplikasi berbasis web yang bertujuan untuk memudahkan pengguna dalam melakukan penyewaan mobil melalui aplikasi.
 
 ## Links
-- Deployed Website   : 
+- Deployed Website   : https://rental-bahari-fe.vercel.app
 - Presentation Video : https://youtu.be/M88ZSEKxNXA
 - Presentation Slide : https://www.canva.com/design/DAFzj3F16MU/l7GUvFsVTxpXFHNJ6c3spQ/edit
 
