@@ -5,6 +5,7 @@ import {useState} from "react";
 import Link from "next/link";
 import Head from "next/head";
 import {useLogin} from "@/hooks/useCookies";
+import { useRouter } from 'next/navigation';
 
 async function handleLogin(body) {
   try {
@@ -29,6 +30,7 @@ async function handleLogin(body) {
 }
 
 export default function UserLogin() {
+  const router = useRouter();
   const [userInfo, setUserInfo] = useState({
     username: "",
     password: "",
@@ -39,9 +41,16 @@ export default function UserLogin() {
     const {name, value} = target;
     setUserInfo({...userInfo, [name]: value});
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    handleLogin(userInfo);
+    try {
+      await handleLogin(userInfo);
+      setTimeout(() => {
+        router.push("/");
+      }, 1000);
+    } catch (err) {
+      console.error(err);
+    }
   };
   return (
     <div className="flex items-center justify-center min-h-screen bg-user-login bg-cover">
