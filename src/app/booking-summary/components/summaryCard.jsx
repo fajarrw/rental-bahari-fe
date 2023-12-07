@@ -59,7 +59,8 @@ const SummaryCard = () => {
   };
 
   if (intervalCalendar == 0) {
-    interval = 0.5;
+    interval = 1;
+    dayOrDays = "day";
   } else if (intervalCalendar == 1) {
     interval = intervalCalendar;
     dayOrDays = "day";
@@ -152,14 +153,14 @@ const SummaryCard = () => {
     <div>
       {carData ? (
         <div className="flex flex-col max-w-[25rem] w-full items-stretch gap-3 md:shadow-xl pt-4 pb-10 px-6">
-          <div className="flex flex-col items-center box-info py-3 text-base">
+          {/* <div className="flex flex-col items-center box-info py-3 text-base">
             Congrats! You just saved{" "}
             {
               // eslint-disable-next-line react-hooks/rules-of-hooks
               useCurrency(discount)
             }
-          </div>
-          <div className="flex flex-row gap-16 justify-between items-center">
+          </div> */}
+          <div className="flex flex-row gap-16 justify-between items-center pt-8">
             <div className="relative h-20 aspect-video">
               <Image
                 src={carData.imageData}
@@ -213,7 +214,7 @@ const SummaryCard = () => {
               }
             </p>
           </div>
-          <div className="flex flex-row justify-between text-sm py-1">
+          {/* <div className="flex flex-row justify-between text-sm py-1">
             <p>Discount</p>
             <p className="font-semibold">
               -{" "}
@@ -222,14 +223,14 @@ const SummaryCard = () => {
                 useCurrency(discount)
               }
             </p>
-          </div>
+          </div> */}
           <hr />
           <div className="flex flex-row justify-between items-center py-1">
             <p>Payable Amount</p>
             <p className="font-semibold text-lg">
               {
                 // eslint-disable-next-line react-hooks/rules-of-hooks
-                useCurrency(payable)
+                useCurrency(price)
               }
             </p>
           </div>
