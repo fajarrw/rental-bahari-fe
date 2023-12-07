@@ -143,7 +143,7 @@ function HeaderLoggedIn() {
           </a>
         </nav>
 
-        <div className="flex w-[203px] h-[36px] flex-row items-center gap-4 xl:flex ">
+        <div className="flex w-[203px] h-[36px] flex-row items-center gap-4 xl:flex hidden">
           <Link
             className="h-[36px] cursor-pointer hidden xl:block ml-auto text-[#E4E4E4]"
             to="/"
