@@ -3,14 +3,16 @@
 </h1>
 
 ## Members
-- Antonius Daiva Prabawisesa - 21/479269/TK/52842
-- Fajar Rizky Widodo - 20/463599/TK/51591
-- Petrus Aria C Rambing - 21/480757/TK/53050
-- Siti Hashifah Qatrunnada - 21/483101/TK/53401
-- Zildiray Alfirli - 21/482759/TK/53363
+| No | Nama | NIM |
+| --- | --- | --- |
+| 1. | Antonius Daiva Prabawisesa | 21/479269/TK/52842 |
+| 2. | Fajar Rizky Widodo | 20/463599/TK/51591 |
+| 3. | Petrus Aria C Rambing | 21/480757/TK/53050 |
+| 4. | Siti Hashifah Qatrunnada | 21/483101/TK/53401 |
+| 5. | Zildiray Alfirli | 21/482759/TK/53363 |
 
-## Deskripsi Aplikasi
-Rental Bahari merupakan aplikasi berbasis web yang bertujuan untuk memudahkan pengguna dalam melakukan penyewaan mobil melalui aplikasi.
+## App Description
+Rental Bahari merupakan aplikasi berbasis web yang bertujuan untuk memudahkan pengguna dalam melakukan penyewaan mobil melalui aplikasi. Aplikasi ini memungkinkan pengguna untuk melakukan penyewaan mobil melalui aplikasi, mencari mobil menggunakan filter, serta melihat status dan riwayat penyewaan yang telah dilakukan.
 
 ## Links
 - Deployed Website   : https://rental-bahari-fe.vercel.app
@@ -23,6 +25,7 @@ Rental Bahari merupakan aplikasi berbasis web yang bertujuan untuk memudahkan pe
 - MongoDB
 - NextJs
 - TailwindCSS
+- Vercel
 - Postman
 - Figma
 
