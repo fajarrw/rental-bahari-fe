@@ -21,8 +21,7 @@ const SummaryCard = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  var interval = 0;
-  const intervalCalendar = differenceInCalendarDays(
+  var interval = differenceInCalendarDays(
     new Date(
       searchParams.get("end").slice(6, 10),
       searchParams.get("end").slice(3, 5),
@@ -33,7 +32,7 @@ const SummaryCard = () => {
       searchParams.get("start").slice(3, 5),
       searchParams.get("start").slice(0, 2)
     )
-  );
+  ) + 1;
   var dayOrDays = "days";
   const start = formatISO(
     new Date(
@@ -62,14 +61,8 @@ const SummaryCard = () => {
     status: "on",
   };
 
-  if (intervalCalendar == 0) {
-    interval = 1;
+  if (interval <= 1) {
     dayOrDays = "day";
-  } else if (intervalCalendar == 1) {
-    interval = intervalCalendar;
-    dayOrDays = "day";
-  } else {
-    interval = intervalCalendar;
   }
 
   const getCarData = async () => {
