@@ -11,17 +11,19 @@ const Profile = () => {
     
     const getProfileData = async () => {
         // eslint-disable-next-line react-hooks/rules-of-hooks
-        let name = await useGetUser();
-        name = await name?name.value:"fajar";
-        console.log(name)
+        // let name = await useGetUser();
+        // name = await name?name.value:"fajar";
+        // console.log(name)
 
         try {
-        const res = await fetch(`https://rentalbahari.vercel.app/api/assurance/user/${name}`);
-        const data = await res.json();
-        console.log(data)
-        setProfile(data);    
+            const res = await fetch(`${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/assurance/`, {
+                credentials: 'include', // Include cookies in the request
+            });
+            const data = await res.json();
+            console.log(data);
+            setProfile(data);
         } catch (err) {
-        console.error(err);
+            console.error(err);
         }
     };
 

@@ -38,22 +38,20 @@ function MyBookingPage() {
   const [RentData, setRentData] = useState(null);
 
   const getRentData = async () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    let name = await useGetUser();
-    name = (await name) ? name.value : "fajar";
-    console.log(name);
-
     try {
       const res = await fetch(
-        "https://rentalbahari.vercel.app/api/rent/search/name",
+        `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/rent`,
         {
-          method: "POST",
+          method: "GET", // Use GET method to fetch data
+          credentials: 'include',
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({name: name}),
         }
       );
+      if (!res.ok) {
+        throw new Error(`Error: ${res.status}`);
+      }
       const data = await res.json();
       setRentData(data.rents);
     } catch (err) {
@@ -77,7 +75,7 @@ function MyBookingPage() {
             <p className="pt-10">No bookings found.</p>
           )}
         </div>
-        <div className="flex-1w-full"></div>
+        <div className="flex-1 w-full"></div>
       </div>
     </SearchContextFunctionx>
   );

@@ -83,15 +83,14 @@ const SummaryCard = () => {
     try {
       toast.info("Creating a booking...");
       // eslint-disable-next-line react-hooks/rules-of-hooks
-      const { value } = await useGetToken();
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/rent/create`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${value}`,
           },
+          credentials: 'include',
           body: JSON.stringify(rentData),
         }
       );

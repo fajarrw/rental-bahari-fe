@@ -51,6 +51,7 @@ const finishRent = async (id) => {
       `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/rent/finish/${id}`,
       {
         method: "PUT",
+        credentials: "include",
       }
     );
     if (res.status !== 200) {
@@ -75,6 +76,7 @@ const deleteRent = async (id) => {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
       }
     );
     if (res.status !== 200) {

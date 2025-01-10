@@ -31,9 +31,10 @@ export default function AddCar() {
       const {value} = await useGetToken();
       await fetch(`${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/car/create`, {
         method: "POST",
+        credentials: 'include',
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${value}`,
+          // Authorization: `Bearer ${value}`,
         },
         body: JSON.stringify(carData),
       });
