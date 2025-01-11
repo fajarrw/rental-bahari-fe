@@ -10,6 +10,7 @@ const postAdminData = async (adminData, setter) => {
       `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/admin`,
       {
         method: "POST",
+        credentials: 'include',
         headers: {
           "Content-Type": "application/json",
         },

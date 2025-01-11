@@ -16,7 +16,7 @@ export default function AsideSearchCar({searchSetter}) {
     <div className="bg-white p-4 rounded-lg drop-shadow-md h-fit">
       <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-2">
-          <label>Search cars:</label>
+          <label>Search by Car Model (Case Sensitive):</label>
           <input
             type="text"
             onChange={handleChange}

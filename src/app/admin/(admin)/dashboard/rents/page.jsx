@@ -15,6 +15,7 @@ export default function CarList() {
     setQuery({...query, [name]: value});
   };
   const {order, status, sortBy} = query;
+  
   return (
     <main className="bg-[#EDEDED]">
       <header className="border-b border-main-black/20">

@@ -51,7 +51,7 @@ const finishRent = async (id) => {
       `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/rent/finish/${id}`,
       {
         method: "PUT",
-        credentials: "include",
+        credentials: 'include',
       }
     );
     if (res.status !== 200) {
@@ -72,6 +72,7 @@ const deleteRent = async (id) => {
       `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/rent/delete`,
       {
         method: "DELETE",
+        credentials: 'include',
         body: JSON.stringify(body),
         headers: {
           "Content-Type": "application/json",
@@ -96,6 +97,7 @@ const getCustomerData = async (custId) => {
       `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/users/${custId}`,
       {
         method: "GET",
+        credentials: 'include',
       }
     );
     if (res.status !== 200) {
@@ -114,6 +116,7 @@ const getCarData = async (carId, customerData, setter) => {
       `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/car/id/${carId}`,
       {
         method: "GET",
+        credentials: 'include',
       }
     );
     if (res.status !== 200) {
@@ -319,7 +322,9 @@ const dateOptions = {
 const getRentData = async (setter, queries) => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/rent/search?order=${queries.order}&sortBy=${queries.sortBy}&status=${queries.status}`
+      `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/rent/search?order=${queries.order}&sortBy=${queries.sortBy}&status=${queries.status}`, {
+        credentials: 'include',
+      }
     );
     const data = await res.json();
     // if (!data.rent) return;

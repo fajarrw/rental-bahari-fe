@@ -26,6 +26,7 @@ const deleteData = async (_id, getData) => {
     fetch(`${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/car/delete`, {
       method: "DELETE",
       body: JSON.stringify({_id: _id}),
+      credentials: 'include',
       headers: {
         "Content-Type": "application/json",
         Authorization: token,
@@ -48,6 +49,7 @@ const editData = async (data) => {
   try {
     fetch(`${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/car/edit`, {
       method: "PUT",
+      credentials: 'include',
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",

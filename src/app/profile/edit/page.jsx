@@ -1,230 +1,158 @@
-"use client"
+"use client";
 
 import Image from "next/image";
-import { SearchContextFunctionx } from '@/app/after_login/context/cari';
-import Headerx from '@/app/after_login/components/navbar/Headerx';
+import { SearchContextFunctionx } from "@/app/after_login/context/cari";
+import Headerx from "@/app/after_login/components/navbar/Headerx";
 import { useState, useEffect } from "react";
-import {useGetUser} from "@/hooks/useCookies";
-import update from 'immutability-helper';
 
 async function Submit(body) {
-    console.log("on Submit funct", body)
+  console.log("on Submit funct", body);
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/assurance/profile`, {
+      method: "PUT",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+    const data = await res.json();
+    console.log(data);
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+export default function Profile() {
+  const [profile, setProfile] = useState({
+    name: "",
+    telp: "",
+    assurance: {
+      alamat: {
+        jalan: "",
+        kelurahan: "",
+        kecamatan: "",
+        kota: "",
+        provinsi: "",
+      },
+      nik: "",
+    },
+  });
+
+  const getProfileData = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/assurance/profile`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-        credentials: 'include',
+      const res = await fetch(`${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/users/`, {
+        credentials: "include", // Include cookies in the request
       });
       const data = await res.json();
-      console.log(data)
+      console.log("Profile data fetched:", data);
+      setProfile(data);
     } catch (err) {
       console.error(err);
     }
-}
+  };
 
-export default function Profile(){
-    const [profile, setProfile] = useState(({
-        assurance: {
-          alamat: {
-            jalan: "",
-            kelurahan: "",
-            kecamatan: "",
-            kota: "",
-            provinsi: "",
-          },
-          nik: "",
+  useEffect(() => {
+    console.log("Fetching profile data...");
+    getProfileData();
+  }, []);
+
+  const handleInputChange = (field, value) => {
+    setProfile((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+
+  const handleNestedChange = (field, subField, value) => {
+    setProfile((prev) => ({
+      ...prev,
+      assurance: {
+        ...prev.assurance,
+        alamat: {
+          ...prev.assurance?.alamat,
+          [subField]: value,
         },
-        name: "",
-        telp: ""
-      })
-      );
-    
-    const getProfileData = async () => {
-        // eslint-disable-next-line react-hooks/rules-of-hooks
-        // let name = await useGetUser();
-        // name = await name?name.value:"fajar";
-        // console.log(name)
-        try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/assurance/`, {
-                credentials: 'include', // Include cookies in the request
-            });
-            const data = await res.json();
-            console.log('data')
-            setProfile(data);
-        } catch (err) {
-            console.error(err);
-        }
-    };
+      },
+    }));
+  };
 
-    useEffect(() => {
-        console.log("useEffect called")
-        getProfileData();
-        
-    }, []);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Form submitted:", profile);
+    Submit(profile);
+  };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Add logic for handling form submission here
-        console.log('Form submitted:', profile);
-        Submit(profile);
-      };
-
-    return (
-        <SearchContextFunctionx>
-            <Headerx />
-            <div className="flex py-5 justify-center">
-                <div className="flex flex-col bg-slate-100 max-w-[45rem] w-full p-8 rounded-md shadow-lg mx-2 mt-5">
-                    <div className="flex pb-10">
-                        <h1 className="text-3xl font-bold pr-3">EDIT PROFILE</h1>
-                    </div>
-                    <form onSubmit={handleSubmit}>
-                        <div className="pb-10">
-                            <h1 className="pb-3 text-lg font-semibold">USERNAME</h1>
-                            <input
-                                type="text"
-                                name="username"
-                                label="username"
-                                className="border-2 border-main-black/20 focus:border-dark-green-1 focus:outline-none rounded-md px-4 py-1 w-1/2 bg-transparent"
-                                placeholder="Enter username"
-                                value={profile && profile.name || ""}
-                                onChange={(e) => setProfile({ ...profile, name: e.target.value })}
-                            />
-                        </div>
-                        <div className="pb-10">
-                            <h1 className="pb-3 text-lg font-semibold">PHONE NUMBER</h1>
-                            <input
-                                type="text"
-                                name="PhoneNumber"
-                                label="PhoneNumber"
-                                className="border-2 border-main-black/20 focus:border-dark-green-1 focus:outline-none rounded-md px-4 py-1 w-1/2 bg-transparent"
-                                placeholder="Enter Phone Number"
-                                value={profile && profile.telp || ""}
-                                onChange={(e) => setProfile({ ...profile, telp: e.target.value })}
-                            />
-                        </div>
-                        <div className="pb-10 space-y-2">
-                            <h1 className="pb-3 text-lg font-semibold">ADDRESS</h1>
-                            <ul className="list-disc">
-                                <li className="flex justify-start items-center">
-                                    <span className="w-24">Street</span>
-                                    <span className="pr-3">:</span>
-                                    <input
-                                        type="text"
-                                        name="Street"
-                                        label="Street"
-                                        className="border-2 border-main-black/20 focus:border-dark-green-1 focus:outline-none rounded-md px-4 py-1 w-1/2 bg-transparent"
-                                        placeholder="Enter Street"
-                                        value={profile && profile.assurance?.alamat.jalan || ""}
-                                        onChange={(e) => {
-                                            setProfile(update(profile, {assurance: {alamat: {jalan: { $set: e.target.value },},},}))
-                                        }}
-                                    />
-                                </li>
-                                <li className="flex justify-start ">
-                                    <span className="w-24">Ward</span>
-                                    <span className="pr-3">:</span>
-                                    <input
-                                        type="text"
-                                        name="Ward"
-                                        label="Ward"
-                                        className="border-2 border-main-black/20 focus:border-dark-green-1 focus:outline-none rounded-md px-4 py-1 w-1/2 bg-transparent"
-                                        placeholder="Enter Ward"
-                                        value={profile && profile.assurance?.alamat.kelurahan || ""}
-                                        onChange={(e) => {
-                                            setProfile(update(profile, {assurance: {alamat: {kelurahan: { $set: e.target.value },},},}))
-                                        }}
-                                    />
-                                </li>
-                                <li className="flex justify-start">
-                                    <span className="w-24">Sub-District</span>
-                                    <span className="pr-3">:</span>
-                                    <input
-                                        type="text"
-                                        name="SubDistrict"
-                                        label="SubDistrict"
-                                        className="border-2 border-main-black/20 focus:border-dark-green-1 focus:outline-none rounded-md px-4 py-1 w-1/2 bg-transparent"
-                                        placeholder="Enter Sub-District"
-                                        value={profile && profile.assurance?.alamat.kecamatan || ""}
-                                        onChange={(e) => {
-                                            setProfile(update(profile, {assurance: {alamat: {kecamatan: { $set: e.target.value },},},}))
-                                        }}
-                                    />
-                                </li>
-                                <li className="flex justify-start">
-                                    <span className="w-24">City</span>
-                                    <span className="pr-3">:</span>
-                                    <input
-                                        type="text"
-                                        name="City"
-                                        label="City"
-                                        className="border-2 border-main-black/20 focus:border-dark-green-1 focus:outline-none rounded-md px-4 py-1 w-1/2 bg-transparent"
-                                        placeholder="Enter City"
-                                        value={profile && profile.assurance?.alamat.kota || ""}
-                                        onChange={(e) => {
-                                            setProfile(update(profile, {assurance: {alamat: {kota: { $set: e.target.value },},},}))
-                                        }}
-                                    />
-                                </li>
-                                <li className="flex justify-start">
-                                    <span className="w-24">Province</span>
-                                    <span className="pr-3">:</span>
-                                    <input
-                                        type="text"
-                                        name="Province"
-                                        label="Province"
-                                        className="border-2 border-main-black/20 focus:border-dark-green-1 focus:outline-none rounded-md px-4 py-1 w-1/2 bg-transparent"
-                                        placeholder="Enter Province"
-                                        value={profile && profile.assurance?.alamat.provinsi || ""}
-                                        onChange={(e) => {
-                                            setProfile(update(profile, {assurance: {alamat: {provinsi: { $set: e.target.value },},},}))
-                                        }}
-                                    />
-                                </li>
-                            </ul>
-                        </div>
-                        <div className="pb-10">
-                            <h1 className="pb-3 text-lg font-semibold">NIK</h1>
-                            <input
-                                type="text"
-                                name="NIK"
-                                label="NIK"
-                                className="border-2 border-main-black/20 focus:border-dark-green-1 focus:outline-none rounded-md px-4 py-1 w-1/2 bg-transparent"
-                                placeholder="Enter NIK"
-                                value={profile && profile.assurance?.nik || ""}
-                                onChange={(e) => {
-                                    setProfile(update(profile, {assurance: {nik: { $set: e.target.value },},}))
-                                }}
-                            />  
-                        </div>
-                        <div className="pb-10">
-                            <h1 className="pb-3 text-lg font-semibold">FOTO KTP</h1>
-                            <div className="flex">
-                                <h2 className="text-sm pr-2">foto_ktp.jpg</h2>
-                                <Image
-                                    src="/assets/open-file.svg"
-                                    width={16}
-                                    height={16}
-                                    alt="filter"
-                                />
-                            </div>
-                        </div>
-                        <div className="pb-1">
-                            <button 
-                                className="btn-primary poppins font-normal"
-                                type="submit"
-                            >
-                                Submit Changes
-                            </button>
-                        </div>
-                    </form>
-
-                </div>
+  return (
+    <SearchContextFunctionx>
+      <Headerx />
+      <div className="flex py-5 justify-center">
+        <div className="flex flex-col bg-slate-100 max-w-[45rem] w-full p-8 rounded-md shadow-lg mx-2 mt-5">
+          <div className="flex pb-10">
+            <h1 className="text-3xl font-bold pr-3">EDIT PROFILE</h1>
+          </div>
+          <form onSubmit={handleSubmit}>
+            <div className="pb-10">
+              <h1 className="pb-3 text-lg font-semibold">NAME</h1>
+              <input
+                type="text"
+                className="border-2 border-main-black/20 focus:border-dark-green-1 focus:outline-none rounded-md px-4 py-1 w-1/2 bg-transparent"
+                placeholder="Enter name"
+                value={profile.name}
+                onChange={(e) => handleInputChange("name", e.target.value)}
+              />
             </div>
-        </SearchContextFunctionx>
-        
-            
-    );
+            <div className="pb-10">
+              <h1 className="pb-3 text-lg font-semibold">PHONE NUMBER</h1>
+              <input
+                type="text"
+                className="border-2 border-main-black/20 focus:border-dark-green-1 focus:outline-none rounded-md px-4 py-1 w-1/2 bg-transparent"
+                placeholder="Enter Phone Number"
+                value={profile.telp}
+                onChange={(e) => handleInputChange("telp", e.target.value)}
+              />
+            </div>
+            <div className="pb-10 space-y-2">
+              <h1 className="pb-3 text-lg font-semibold">ADDRESS</h1>
+              {["jalan", "kelurahan", "kecamatan", "kota", "provinsi"].map((field) => (
+                <div key={field} className="flex justify-start items-center">
+                  <span className="w-24 capitalize">{field}</span>
+                  <span className="pr-3">:</span>
+                  <input
+                    type="text"
+                    className="border-2 border-main-black/20 focus:border-dark-green-1 focus:outline-none rounded-md px-4 py-1 w-1/2 bg-transparent"
+                    placeholder={`Enter ${field}`}
+                    value={profile.assurance?.alamat[field]}
+                    onChange={(e) => handleNestedChange("alamat", field, e.target.value)}
+                  />
+                </div>
+              ))}
+            </div>
+            <div className="pb-10">
+              <h1 className="pb-3 text-lg font-semibold">NIK</h1>
+              <input
+                type="text"
+                className="border-2 border-main-black/20 focus:border-dark-green-1 focus:outline-none rounded-md px-4 py-1 w-1/2 bg-transparent"
+                placeholder="Enter NIK"
+                value={profile.assurance?.nik}
+                onChange={(e) => handleInputChange("nik", e.target.value)}
+              />
+            </div>
+            <div className="pb-10">
+              <h1 className="pb-3 text-lg font-semibold">FOTO KTP</h1>
+              <div className="flex">
+                <h2 className="text-sm pr-2">foto_ktp.jpg</h2>
+                <Image src="/assets/open-file.svg" width={16} height={16} alt="filter" />
+              </div>
+            </div>
+            <div className="pb-1">
+              <button className="btn-primary poppins font-normal" type="submit">
+                Submit Changes
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </SearchContextFunctionx>
+  );
 }

@@ -44,7 +44,9 @@ const dateOptions = {
 const getAdmin = async (callback) => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/admin`
+      `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/admin`, {
+        credentials: 'include',
+      }
     );
     const data = await res.json();
     if (!data.admin) return;
@@ -68,6 +70,7 @@ const deleteAdmin = async (id) => {
       `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/admin/${id}`,
       {
         method: "DELETE",
+        credentials: 'include',
       }
     );
     if (res.status !== 204) {
