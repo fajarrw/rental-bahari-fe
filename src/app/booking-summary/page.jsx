@@ -16,11 +16,10 @@ export default function BookingSummary() {
 
   const getRole = async () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const role = await useGetRole();
-    if (role?.value == "user") {
+    const role = await useGetToken();
+    if (role?.value != undefined) {
       setIsUser(true);
     }
-    console.log({isUser});
   };
 
   useEffect(() => {

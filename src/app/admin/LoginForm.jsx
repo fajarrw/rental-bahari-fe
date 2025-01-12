@@ -1,10 +1,10 @@
 "use client";
 
-import {FiEye, FiEyeOff} from "react-icons/fi";
-import {useState} from "react";
-import {useLogin} from "@/hooks/useCookies";
-import {useRouter} from "next/navigation";
-import {toast} from "sonner";
+import { FiEye, FiEyeOff } from "react-icons/fi";
+import { useState } from "react";
+import { useLogin } from "@/hooks/useCookies";
+import { useRouter} from "next/navigation";
+import { toast } from "sonner";
 
 async function Login(body, router) {
   try {
@@ -12,18 +12,17 @@ async function Login(body, router) {
       `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/auth/admin`,
       {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(body),
       }
     );
-    if (res.status === 403) return toast("Access denied");
-    if (res.status === 404)
-      return toast.error("Your admin credentials were not found");
+    if (res.status === 403) return toast("Access denied. Your admin credentials are not found");
     const data = await res.json();
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    useLogin({...data, username: body.username});
+    // useLogin({...data, username: body.username});
     toast.success("Login successful, Hi Admin!");
     router.push("/admin/dashboard");
     return;

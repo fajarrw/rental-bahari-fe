@@ -1,22 +1,14 @@
 "use client";
 
-import {useContext, useEffect, useState} from "react";
-
-import {Link} from "react-scroll";
-
-import {useMediaQuery} from "react-responsive";
-
-import {AiFillCar} from "react-icons/ai";
-
-import {BiMenuAltRight, BiX} from "react-icons/bi";
-
-import {BsPersonCircle} from "react-icons/bs";
-
-import {SearchContext} from "@/app/context/search";
-
+import { useContext, useEffect, useState } from "react";
+import { Link } from "react-scroll";
+import { useMediaQuery } from "react-responsive";
+import { AiFillCar } from "react-icons/ai";
+import { BiMenuAltRight, BiX } from "react-icons/bi";
+import { BsPersonCircle } from "react-icons/bs";
+import { SearchContext } from "@/app/context/search";
 import Person from "./Person";
-
-import {useGetRole} from "@/hooks/useCookies";
+import { useGetToken } from "@/hooks/useCookies";
 
 function HeaderLoggedIn() {
   const {setSearchActive} = useContext(SearchContext);
@@ -337,8 +329,8 @@ export default function Header() {
 
   const getRole = async () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const role = await useGetRole();
-    if (role?.value == "user") {
+    const token = await useGetToken();
+    if (token?.value != undefined) {
       setIsUser(true);
     }
     console.log({isUser});

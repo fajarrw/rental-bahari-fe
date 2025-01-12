@@ -22,7 +22,7 @@ export default function Sign() {
   const handleLogout = () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useLogout().then(() => {
-      r.push("/");
+      window.location.href = "/";
     });
   };
 

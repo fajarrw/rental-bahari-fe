@@ -13,6 +13,7 @@ async function handleLogin(body) {
       `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/auth/`,
       {
         method: "POST",
+        credentials: "include", 
         headers: {
           "Content-Type": "application/json",
         },
@@ -23,7 +24,7 @@ async function handleLogin(body) {
     const data = await res.json();
     console.log(data);
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    useLogin({...data, username: body.username});
+    // useLogin({...data, username: body.username});
   } catch (err) {
     console.error(err);
   }

@@ -14,6 +14,7 @@ const handleRegister = async (body) => {
       `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/users`,
       {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },

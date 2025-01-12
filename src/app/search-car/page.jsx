@@ -4,25 +4,25 @@ import "./styles.css";
 import CarList from "./components/carList";
 import FilterAndSort from "./components/filterAndSort";
 import SearchBar from "./components/searchBar";
-import {SearchContextFunction} from "@/app/context/search";
-import {SearchContextFunctionx} from "@/app/after_login/context/cari";
+import { SearchContextFunction } from "@/app/context/search";
+import { SearchContextFunctionx } from "@/app/after_login/context/cari";
 import Header from "@/app/components/navbar/Header";
 import Headerx from "@/app/after_login/components/navbar/Headerx";
-import {useGetRole} from "@/hooks/useCookies";
-import {useState, useEffect} from "react";
-import {DateContextFunction} from "./context/dateContext";
-import {FilterAndSortContextFunction} from "./context/filterAndSortContext";
+import { useGetRole, useGetToken } from "@/hooks/useCookies";
+import { useState, useEffect } from "react";
+import { DateContextFunction } from "./context/dateContext";
+import { FilterAndSortContextFunction } from "./context/filterAndSortContext";
 
 export default function SearchCar() {
   const [isUser, setIsUser] = useState(false);
 
   const getRole = async () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const role = await useGetRole();
-    if (role?.value == "user") {
+    const role = await useGetToken();
+    if (role?.value != undefined) {
       setIsUser(true);
     }
-    console.log({isUser});
+    // console.log({isUser});
   };
 
   useEffect(() => {
