@@ -1,10 +1,10 @@
 "use client";
 
-import {FiEye, FiEyeOff} from "react-icons/fi";
-import {useState} from "react";
+import { FiEye, FiEyeOff } from "react-icons/fi";
+import { useState } from "react";
 import Link from "next/link";
 import Head from "next/head";
-import {useLogin} from "@/hooks/useCookies";
+import { useLogin } from "@/hooks/useCookies";
 import { useRouter } from 'next/navigation';
 
 async function handleLogin(body) {
@@ -13,7 +13,7 @@ async function handleLogin(body) {
       `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/auth/`,
       {
         method: "POST",
-        credentials: "include", 
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
@@ -23,8 +23,8 @@ async function handleLogin(body) {
     if (res.status === 403) return false;
     const data = await res.json();
     console.log(data);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    // useLogin({...data, username: body.username});
+    // Store the token in cookies
+    useLogin({ accessToken: data.token, role: data.role, username: body.username });
   } catch (err) {
     console.error(err);
   }
@@ -36,11 +36,11 @@ export default function UserLogin() {
     username: "",
     password: "",
   });
-  const {username, password} = userInfo;
+  const { username, password } = userInfo;
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
-  const handleChange = ({target}) => {
-    const {name, value} = target;
-    setUserInfo({...userInfo, [name]: value});
+  const handleChange = ({ target }) => {
+    const { name, value } = target;
+    setUserInfo({ ...userInfo, [name]: value });
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
