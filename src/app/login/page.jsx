@@ -22,10 +22,10 @@ async function handleLogin(body) {
     );
     if (res.status === 403) return false;
     const data = await res.json();
-    console.log(data);
+    // console.log(data);
     // Store the token in cookies
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    useLogin({ accessToken: data.token, role: data.role, username: body.username });
+    useLogin({ accessToken: data.accessToken, role: data.role });
   } catch (err) {
     console.error(err);
   }

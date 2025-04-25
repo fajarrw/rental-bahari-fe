@@ -23,6 +23,8 @@ async function Login(body, router) {
     const data = await res.json();
     // eslint-disable-next-line react-hooks/rules-of-hooks
     // useLogin({...data, username: body.username});
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useLogin({ ...data })
     toast.success("Login successful, Hi Admin!");
     router.push("/admin/dashboard");
     return;
