@@ -1,5 +1,3 @@
-"use client";
-
 import "./styles.css";
 import CarList from "./components/carList";
 import FilterAndSort from "./components/filterAndSort";
@@ -8,39 +6,13 @@ import { SearchContextFunction } from "@/app/context/search";
 import { SearchContextFunctionx } from "@/app/after_login/context/cari";
 import Header from "@/app/components/navbar/Header";
 import Headerx from "@/app/after_login/components/navbar/Headerx";
-import { useGetRole, useGetToken } from "@/hooks/useCookies";
-import { useState, useEffect } from "react";
 import { DateContextFunction } from "./context/dateContext";
 import { FilterAndSortContextFunction } from "./context/filterAndSortContext";
+import { getToken } from "@/utils/cookies";
 
 export default function SearchCar() {
-  const [isUser, setIsUser] = useState(false);
-
-  useEffect(() => {
-    const checkUserRole = async () => {
-      try {
-        // Wait for the promise to resolve
-        const resolvedRole = await useGetToken();
-
-        // If resolvedRole has the expected value, update the state
-        if (resolvedRole?.value !== undefined) {
-          setIsUser(true);
-        } else {
-          setIsUser(false);
-        }
-      } catch (error) {
-        console.error('Error fetching role:', error);
-        setIsUser(false); // Handle errors if needed
-	  }
-    };
-
-    checkUserRole(); // Call the async function to resolve the role
-  }, []); // This dependency ensures the effect runs when `role` changes
-
-  useEffect(() => {
-    console.log({ isUser }); // Logs updated value of `isUser`
-  }, [isUser]);
-
+  const token = getToken(); // Server-side function to get the token
+  const isUser = !!token; // Determine if the user is logged in
 
   return (
     <FilterAndSortContextFunction>

@@ -42,8 +42,6 @@ function HeaderLoggedIn() {
     };
   });
 
-  // console.log(header);
-
   return (
     <header
       id="navbar"
@@ -333,18 +331,6 @@ export default function Header() {
       setIsUser(true);
     }
   }, [token]);
-  // const getRole = async () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    // const token = await useGetToken();
-    // if (token?.value != undefined) {
-      // setIsUser(true);
-    // }
-    // console.log({isUser});
-  // };
-
-  // useEffect(() => {
-    // getRole();
-  // }, []);
 
   return <>{isUser ? <HeaderLoggedIn /> : <HeaderNotLoggedIn />}</>;
 }
