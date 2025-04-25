@@ -20,6 +20,7 @@ export default function BookingSummary() {
     if (role?.value != undefined) {
       setIsUser(true);
     }
+	console.log({isUser});
   };
 
   useEffect(() => {

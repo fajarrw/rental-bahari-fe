@@ -42,7 +42,7 @@ function HeaderLoggedIn() {
     };
   });
 
-  console.log(header);
+  // console.log(header);
 
   return (
     <header
@@ -183,7 +183,7 @@ function HeaderNotLoggedIn() {
     };
   });
 
-  console.log(header);
+  // console.log(header);
 
   return (
     <header
@@ -326,19 +326,25 @@ function HeaderNotLoggedIn() {
 
 export default function Header() {
   const [isUser, setIsUser] = useState(false);
-
-  const getRole = async () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const token = await useGetToken();
-    if (token?.value != undefined) {
-      setIsUser(true);
-    }
-    console.log({isUser});
-  };
+  const token = useGetToken(); // Call the custom hook directly here
 
   useEffect(() => {
-    getRole();
-  }, []);
+    if (token?.value !== undefined) {
+      setIsUser(true);
+    }
+  }, [token]);
+  // const getRole = async () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    // const token = await useGetToken();
+    // if (token?.value != undefined) {
+      // setIsUser(true);
+    // }
+    // console.log({isUser});
+  // };
+
+  // useEffect(() => {
+    // getRole();
+  // }, []);
 
   return <>{isUser ? <HeaderLoggedIn /> : <HeaderNotLoggedIn />}</>;
 }

@@ -16,25 +16,38 @@ import { FilterAndSortContextFunction } from "./context/filterAndSortContext";
 export default function SearchCar() {
   const [isUser, setIsUser] = useState(false);
 
-  const getRole = async () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const role = await useGetToken();
-    if (role?.value != undefined) {
-      setIsUser(true);
-    }
-    // console.log({isUser});
-  };
+  useEffect(() => {
+    const checkUserRole = async () => {
+      try {
+        // Wait for the promise to resolve
+        const resolvedRole = await useGetToken();
+
+        // If resolvedRole has the expected value, update the state
+        if (resolvedRole?.value !== undefined) {
+          setIsUser(true);
+        } else {
+          setIsUser(false);
+        }
+      } catch (error) {
+        console.error('Error fetching role:', error);
+        setIsUser(false); // Handle errors if needed
+	  }
+    };
+
+    checkUserRole(); // Call the async function to resolve the role
+  }, []); // This dependency ensures the effect runs when `role` changes
 
   useEffect(() => {
-    getRole();
-  }, []);
+    console.log({ isUser }); // Logs updated value of `isUser`
+  }, [isUser]);
+
 
   return (
     <FilterAndSortContextFunction>
       <DateContextFunction>
         <SearchContextFunctionx>
           <SearchContextFunction>
-            <Header />
+            {isUser ? <Headerx /> : <Header />}
             <main className="flex flex-col md:flex-row min-h-screen">
               <FilterAndSort />
               <div className="flex flex-col w-full items-center">

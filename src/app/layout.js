@@ -1,7 +1,8 @@
 import './globals.css';
 import { Providers } from './providers';
-import { SearchContextFunction } from './context/search'
+import { SearchContextFunction } from './context/search';
 import { DateContextFunction } from "./search-car/context/dateContext";
+import { SearchContextFunctionx } from './after_login/context/cari';
 
 export const metadata = {
   title: 'Rental Bahari',
@@ -18,9 +19,11 @@ export default function RootLayout({ children }) {
       <body>
         <DateContextFunction>
           <SearchContextFunction>
-            <Providers>
-              {children}
-            </Providers>
+            <SearchContextFunctionx>
+              <Providers>
+                {children}
+              </Providers>
+            </SearchContextFunctionx>
           </SearchContextFunction>
         </DateContextFunction>
       </body>

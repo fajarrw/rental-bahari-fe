@@ -1,15 +1,10 @@
 "use client";
 
 import {useContext, useEffect, useState} from "react";
-
 import {Link} from "react-scroll";
-
 import {useMediaQuery} from "react-responsive";
-
 import {AiFillCar} from "react-icons/ai";
-
 import {BiMenuAltRight, BiX} from "react-icons/bi";
-
 import {SearchContext} from "@/app/after_login/context/cari";
 
 import Person from "../../../components/navbar/Person";
@@ -48,7 +43,7 @@ export default function Header() {
     };
   });
 
-  console.log(header);
+
 
   return (
     <header
