@@ -3,43 +3,53 @@
 import Image from "next/image";
 import { SearchContextFunctionx } from '@/app/after_login/context/cari';
 import Headerx from '@/app/after_login/components/navbar/Headerx';
-import {useState, useEffect} from "react";
+import { useState, useEffect} from "react";
+import getToken from '@/utils/cookies';
+// import { useGetToken } from "@/hooks/useCookies";
 
 const Profile = () => {
     const [profile, setProfile] = useState(null);
     const [assurance, setAssurance] = useState(null);
-
-    const getProfileData = async () => {
+    const [isUser, setIsUser] = useState(false);
+  
+    const getProfileData = async (tokenValue) => {
         try {
             const res = await fetch(`${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/users/`, {
-                credentials: 'include', 
+                headers: {
+                    'Authorization': `Bearer ${tokenValue}`,
+                },
             });
             const data = await res.json();
-            console.log(data);
             setProfile(data);
         } catch (err) {
             console.error(err);
         }
     };
-
-    const getAssuranceData = async () => {
+  
+    const getAssuranceData = async (tokenValue) => {
         try {
             const res = await fetch(`${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/assurance/`, {
-                credentials: 'include', 
+                headers: {
+                'Authorization': `Bearer ${tokenValue}`,
+                },
             });
             const data = await res.json();
-            console.log(data);
             setAssurance(data);
         } catch (err) {
             console.error(err);
         }
     };
-
+  
     useEffect(() => {
-        getProfileData();
-        getAssuranceData();
-    }, []);
-
+        const tokenValue = getToken();
+        if (tokenValue) {
+            setIsUser(true);
+            getProfileData(tokenValue);
+            getAssuranceData(tokenValue);
+        } else {
+            setIsUser(false);
+        }
+  }, []);
 
     return (
         <SearchContextFunctionx>

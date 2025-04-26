@@ -1,3 +1,5 @@
+"use client"
+
 import "./styles.css";
 import CarList from "./components/carList";
 import FilterAndSort from "./components/filterAndSort";
@@ -8,11 +10,21 @@ import Header from "@/app/components/navbar/Header";
 import Headerx from "@/app/after_login/components/navbar/Headerx";
 import { DateContextFunction } from "./context/dateContext";
 import { FilterAndSortContextFunction } from "./context/filterAndSortContext";
-import { getToken } from "@/utils/cookies";
+import getToken from "@/utils/cookies";
+import { useGetToken } from "@/hooks/useCookies";
+import { useEffect, useState } from "react";
 
 export default function SearchCar() {
-  const token = getToken(); // Server-side function to get the token
-  const isUser = !!token; // Determine if the user is logged in
+  const [isUser, setIsUser] = useState(null);
+  
+  useEffect(() => {
+    const tokenValue = getToken();
+    !!tokenValue ? setIsUser(true) : setIsUser(false);
+  }, []);
+
+  if (isUser === null) {
+    return <div>Loading...</div>; // Show a loading state until the client-side logic is ready
+  }
 
   return (
     <FilterAndSortContextFunction>

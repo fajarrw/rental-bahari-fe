@@ -7,7 +7,8 @@ import useCurrency from "@/hooks/useCurrency";
 import SummaryCardSkeleton from "./summaryCardSkeleton";
 import { format, formatISO, differenceInCalendarDays } from "date-fns";
 import { useRouter } from "next/navigation";
-import { useGetRole, useGetToken } from "@/hooks/useCookies";
+// import { useGetRole, useGetToken } from "@/hooks/useCookies";
+import getToken from "@/utils/cookies"
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -17,6 +18,7 @@ const SummaryCard = () => {
   const [discount, setDiscount] = useState(0);
   const [payable, setPayable] = useState(0);
   const [isUser, setIsUser] = useState(false);
+  const [token, setToken] = useState(null);
 
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -89,8 +91,8 @@ const SummaryCard = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
           },
-          credentials: 'include',
           body: JSON.stringify(rentData),
         }
       );
@@ -130,17 +132,16 @@ const SummaryCard = () => {
     }
   };
 
-  const getRole = async () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const role = await useGetToken();
-    if (role?.value != undefined) {
-      setIsUser(true);
-    }
-  };
-
   useEffect(() => {
     getCarData();
-    getRole();
+    const valueToken = getToken();
+    if (valueToken) {
+      setIsUser(true);
+      setToken(valueToken);
+    } else {
+      setIsUser(false);
+      setToken(null);
+    }
   }, []);
 
   useEffect(() => {

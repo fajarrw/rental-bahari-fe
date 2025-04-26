@@ -7,6 +7,7 @@ import BookingList from "./components/bookingList";
 import BookingTabs from "./components/bookingTabs";
 import {useState, useEffect} from "react";
 import {useGetUser} from "@/hooks/useCookies";
+import getToken from '@/utils/cookies';
 
 const sampleData = [
   {
@@ -37,15 +38,13 @@ const sampleData = [
 function MyBookingPage() {
   const [RentData, setRentData] = useState(null);
 
-  const getRentData = async () => {
+  const getRentData = async (tokenValue) => {
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/rent`,
         {
-          method: "GET", // Use GET method to fetch data
-          credentials: 'include',
           headers: {
-            "Content-Type": "application/json",
+            'Authorization': `Bearer ${tokenValue}`,
           },
         }
       );
@@ -60,8 +59,11 @@ function MyBookingPage() {
   };
 
   useEffect(() => {
-    getRentData();
-  }, []);
+      const tokenValue = getToken();
+      if (tokenValue) {
+        getRentData(tokenValue);
+      }
+    }, []);
 
   return (
     <SearchContextFunctionx>
