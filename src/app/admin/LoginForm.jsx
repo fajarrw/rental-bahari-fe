@@ -19,18 +19,23 @@ async function Login(body, router) {
         body: JSON.stringify(body),
       }
     );
-    if (res.status === 403) return toast("Access denied. Your admin credentials are not found");
+  
     const data = await res.json();
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    // useLogin({...data, username: body.username});
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useLogin({ ...data })
-    toast.success("Login successful, Hi Admin!");
+  
+    if (!res.ok) {
+      return toast.error("Login failed.");
+    }
+  
+    // Only proceed if response is OK (2xx)
+    useLogin({ ...data });
+    toast.success("Login successful. Hi, Admin!");
     router.push("/admin/dashboard");
-    return;
+  
   } catch (err) {
     console.error(err);
+    toast.error("Something went wrong. Please try again.");
   }
+  
 }
 
 export default function LoginForm() {

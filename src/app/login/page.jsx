@@ -38,7 +38,7 @@ export default function UserLogin() {
     password: "",
   });
   const { username, password } = userInfo;
-  const [isPasswordHidden, setIsPasswordHidden] = useState(true);
+  const [ isPasswordHidden, setIsPasswordHidden ] = useState(true);
   const handleChange = ({ target }) => {
     const { name, value } = target;
     setUserInfo({ ...userInfo, [name]: value });
@@ -117,12 +117,12 @@ export default function UserLogin() {
                     />
                     <div className="inset-y-0 pr-5 absolute right-0 flex items-center">
                       {isPasswordHidden ? (
-                        <FiEyeOff
+                        <FiEye
                           size={20}
                           onClick={() => setIsPasswordHidden(!isPasswordHidden)}
                         />
                       ) : (
-                        <FiEye
+                        <FiEyeOff
                           size={20}
                           onClick={() => setIsPasswordHidden(!isPasswordHidden)}
                         />

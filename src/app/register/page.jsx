@@ -1,14 +1,14 @@
 "use client";
 
-import {useState} from "react";
+import { useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/navigation';
+import { FiEyeOff, FiEye } from "react-icons/fi";
 
 const handleRegister = async (body) => {
-  
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/users`,
@@ -21,30 +21,34 @@ const handleRegister = async (body) => {
         body: JSON.stringify(body)
       }
     );
-    const data = await res.json();
-    console.log(data);
+    return res; // ✅ return the response so you can check res.ok outside
   } catch (err) {
     console.error(err);
+    throw err; // Optional: rethrow to handle outside
   }
 };
 
 export default function UserRegister() {
   const router = useRouter();
-  const [userInfo, setUserInfo] = useState({
+  const [ userInfo, setUserInfo ] = useState({
     name: "",
     username: "",
     email: "",
     telp: "",
     password: "",
-    // confirmPassword: "",
   });
-  const {name, username, email, telp, password, confirmPassword} = userInfo;
+  const [ isPasswordHidden, setIsPasswordHidden ] = useState(true);
+  const [ isConfirmPasswordHidden, setIsConfirmPasswordHidden ] = useState(true);
+  const { name, username, email, telp, password, confirmPassword } = userInfo;
+  
   const handleChange = ({target}) => {
     const {name, value} = target;
     setUserInfo({...userInfo, [name]: value});
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (
       !name ||
       !username ||
@@ -53,24 +57,32 @@ export default function UserRegister() {
       !password ||
       !confirmPassword
     ) {
-      console.error("Please fill all the fields!");
+      toast.error("Please fill all the fields!");
       return;
-    }
-    if (password !== confirmPassword) {
-      console.error("Passwords don't match!");
-      return;
-    }
-    try {
-      await handleRegister(userInfo);
-      toast.success("Account Created Successfully");
-      setTimeout(() => {
-        router.push("/login");
-      }, 3000);
-    } catch (err) {
-      console.error(err);
     }
 
+    if (password !== confirmPassword) {
+      toast.error("Passwords don't match!");
+      return;
+    }
+
+    try {
+      const res = await handleRegister(userInfo);
+  
+      if (res.ok) {
+        toast.success("Account Created Successfully");
+        setTimeout(() => {
+          router.push("/login");
+        }, 3000);
+      } else {
+        toast.error("Failed to sign up");
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("Error!");
+    }
   };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <Head>
@@ -172,11 +184,26 @@ export default function UserRegister() {
                   <input
                     onChange={handleChange}
                     value={password}
+                    type={isPasswordHidden ? "password" : "show"}
                     name="password"
                     placeholder="Enter password"
                     className="border-2 border-main-black/20 focus:border-dark-green-1 focus:outline-none rounded-2xl px-6 py-2 w-full bg-gray-100"
                     required
                   />
+                  <div className="inset-y-0 pr-5 absolute right-0 flex items-center">
+                    {isPasswordHidden ? (
+                        <FiEye
+                          size={20}
+                          onClick={() => setIsPasswordHidden(!isPasswordHidden)}
+                        />
+                      ) : (
+                        <FiEyeOff
+                          size={20}
+                          onClick={() => setIsPasswordHidden(!isPasswordHidden)}
+                        />
+                      )
+                    }
+                  </div>
                 </div>
               </div>
               <div className="flex flex-col gap-2">
@@ -187,11 +214,26 @@ export default function UserRegister() {
                   <input
                     onChange={handleChange}
                     value={confirmPassword}
+                    type={isConfirmPasswordHidden ? "password" : "show"}
                     name="confirmPassword"
                     placeholder="Confirm password"
                     className="border-2 border-main-black/20 focus:border-dark-green-1 focus:outline-none rounded-2xl px-6 py-2 w-full bg-gray-100"
                     required
                   />
+                  <div className="inset-y-0 pr-5 absolute right-0 flex items-center">
+                    {isConfirmPasswordHidden ? (
+                        <FiEye
+                          size={20}
+                          onClick={() => setIsConfirmPasswordHidden(!isConfirmPasswordHidden)}
+                        />
+                      ) : (
+                        <FiEyeOff
+                          size={20}
+                          onClick={() => setIsConfirmPasswordHidden(!isConfirmPasswordHidden)}
+                        />
+                      )
+                    }
+                  </div>
                 </div>
               </div>
             </div>

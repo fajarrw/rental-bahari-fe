@@ -1,6 +1,6 @@
 "use client";
 
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import {
   Table,
   TableHeader,
@@ -17,7 +17,8 @@ import {
   ModalContent,
   useDisclosure,
 } from "@nextui-org/react";
-import {Toaster, toast} from "sonner";
+import { Toaster, toast } from "sonner";
+import getToken from "@/utils/cookies";
 
 const COLUMNS = [
   {
@@ -41,15 +42,19 @@ const dateOptions = {
   day: "numeric",
 };
 
-const getAdmin = async (callback) => {
+const getAdmin = async (callback, tokenValue) => {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/admin`, {
-        credentials: 'include',
+        headers: {
+          'Authorization': `Bearer ${tokenValue}`,
+        },
       }
     );
+
     const data = await res.json();
     if (!data.admin) return;
+
     const {admin} = data;
     admin.forEach((item) => {
       item.lastLogin = new Date(item.lastLogin).toLocaleString(
@@ -58,19 +63,23 @@ const getAdmin = async (callback) => {
       );
       item.action = <DeleteButton id={item._id} />;
     });
+
     callback(admin);
   } catch (err) {
     console.error(err);
   }
 };
 
-const deleteAdmin = async (id) => {
+const deleteAdmin = async (id, tokenValue) => {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/admin/${id}`,
       {
         method: "DELETE",
         credentials: 'include',
+        headers: {
+          "Authorization": `Bearer ${tokenValue}`,
+        }
       }
     );
     if (res.status !== 204) {
@@ -108,7 +117,8 @@ const DeleteButton = ({id}) => {
                   color="danger"
                   onPress={() => {
                     toast.info("Deleting admin...", {duration: 5000});
-                    deleteAdmin(id);
+                    const tokenValue = getToken();
+                    deleteAdmin(id, tokenValue);
                     onClose();
                   }}
                 >
@@ -125,12 +135,16 @@ const DeleteButton = ({id}) => {
 
 export default function AdminTable() {
   const [adminList, setAdminList] = useState([]);
+  
   useEffect(() => {
-    getAdmin(setAdminList);
+    const tokenValue = getToken();
+    getAdmin(setAdminList, tokenValue);
   }, []);
+  
   useEffect(() => {
     console.log(adminList);
   }, [adminList]);
+  
   return (
     <div className="w-full md:w-2/3 lg:w-1/2">
       <Toaster richColors />
@@ -151,5 +165,5 @@ export default function AdminTable() {
         </TableBody>
       </Table>
     </div>
-  );
+  )
 }

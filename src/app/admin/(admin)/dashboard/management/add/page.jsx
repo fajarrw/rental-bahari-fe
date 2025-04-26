@@ -3,24 +3,27 @@ import {useState} from "react";
 import {Toaster, toast} from "sonner";
 import Link from "next/link";
 import {FiChevronLeft, FiEye, FiEyeOff} from "react-icons/fi";
+import getToken from "@/utils/cookies";
 
-const postAdminData = async (adminData, setter) => {
+const postAdminData = async (adminData, setter, tokenValue) => {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/admin`,
       {
         method: "POST",
-        credentials: 'include',
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${tokenValue}`,
         },
         body: JSON.stringify(adminData),
       }
     );
-    if (res.status !== 201) {
-      toast.error("Internal server error");
+
+    if (!res.ok) {
+      toast.error("Error");
       return;
     }
+
     toast.success("Admin added successfully");
     setter({
       username: "",
@@ -48,7 +51,8 @@ export default function AddAdmin() {
   const handleSubmit = (e) => {
     e.preventDefault();
     toast.info("Adding new admin...");
-    postAdminData(adminData, setAdminData);
+    const tokenValue = getToken();
+    postAdminData(adminData, setAdminData, tokenValue);
   };
 
   const handleReset = () => {
@@ -60,7 +64,7 @@ export default function AddAdmin() {
 
   return (
     <main className="bg-[#EDEDED]">
-      <Toaster richColors />
+      <Toaster richColors position="top-right"/>
       <header className="border-b border-main-black/20">
         <Link
           href={"/admin/dashboard/management"}
