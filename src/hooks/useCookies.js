@@ -20,14 +20,14 @@ export const useLogin = (data) => {
         path: '/',
         sameSite: 'None',
         secure: true,
-        httpOnly: true,
+        httpOnly: false,
     });
     cookies().set('role', role, {
         maxAge: 54000,
         path: '/',
         sameSite: 'None',
         secure: true,
-        httpOnly: true,
+        httpOnly: false,
     });
     // cookies().set('username', username, { maxAge: 54000, httpOnly: true });
 }
