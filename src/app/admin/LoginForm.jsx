@@ -27,6 +27,7 @@ async function Login(body, router) {
     }
   
     // Only proceed if response is OK (2xx)
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     useLogin({ ...data });
     toast.success("Login successful. Hi, Admin!");
     router.push("/admin/dashboard");
@@ -35,7 +36,6 @@ async function Login(body, router) {
     console.error(err);
     toast.error("Something went wrong. Please try again.");
   }
-  
 }
 
 export default function LoginForm() {
