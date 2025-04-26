@@ -82,7 +82,7 @@ const deleteAdmin = async (id, tokenValue) => {
         }
       }
     );
-    if (res.status !== 204) {
+    if (!res.ok) {
       toast.error("Failed to delete admin");
       return;
     }

@@ -98,12 +98,12 @@ export default function LoginForm() {
               />
               <div className="inset-y-0 pr-5 absolute right-0 flex items-center">
                 {isPasswordHidden ? (
-                  <FiEyeOff
+                  <FiEye
                     size={20}
                     onClick={() => setIsPasswordHidden(!isPasswordHidden)}
                   />
                 ) : (
-                  <FiEye
+                  <FiEyeOff
                     size={20}
                     onClick={() => setIsPasswordHidden(!isPasswordHidden)}
                   />

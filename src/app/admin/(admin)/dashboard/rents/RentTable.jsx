@@ -17,6 +17,7 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import {Toaster, toast} from "sonner";
+import getToken from "@/utils/cookies";
 
 const COLUMNS = [
   {
@@ -45,19 +46,23 @@ const COLUMNS = [
   },
 ];
 
-const finishRent = async (id) => {
+const finishRent = async (id, tokenValue) => {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/rent/finish/${id}`,
       {
         method: "PUT",
-        credentials: 'include',
+        headers: {
+          "Authorization": `Bearer ${tokenValue}`,
+        },
       }
     );
-    if (res.status !== 200) {
-      toast.error("Internal server error");
+
+    if (!res.ok) {
+      toast.error("Error");
       return;
     }
+
     toast.success("Status updated");
     window.location.reload();
   } catch (err) {
@@ -65,25 +70,26 @@ const finishRent = async (id) => {
   }
 };
 
-const deleteRent = async (id) => {
+const deleteRent = async (id, tokenValue) => {
   try {
     const body = {_id: id};
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/rent/delete`,
       {
         method: "DELETE",
-        credentials: 'include',
         body: JSON.stringify(body),
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${tokenValue}`,
         },
-        credentials: "include",
       }
     );
-    if (res.status !== 200) {
-      toast.error("Internal server error");
+
+    if (!res.ok) {
+      toast.error("Error");
       return;
     }
+
     toast.success("Rent deleted");
     window.location.reload();
   } catch (err) {
@@ -91,38 +97,44 @@ const deleteRent = async (id) => {
   }
 };
 
-const getCustomerData = async (custId) => {
+const getCustomerData = async (custId, tokenValue) => {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/users/${custId}`,
       {
         method: "GET",
-        credentials: 'include',
+        headers: {
+          "Authorization": `Bearer ${tokenValue}`,
+        },
       }
     );
-    if (res.status !== 200) {
-      toast.error("Internal server error");
+    if (!res.ok) {
+      toast.error("Error");
       return;
     }
+
     const data = await res.json();
     return data.user;
   } catch (err) {
     console.error(err);
   }
 };
-const getCarData = async (carId, customerData, setter) => {
+const getCarData = async (carId, customerData, setter, tokenValue) => {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/car/id/${carId}`,
       {
         method: "GET",
-        credentials: 'include',
+        headers: {
+          "Authorization": `Bearer ${tokenValue}`,
+        },
       }
     );
-    if (res.status !== 200) {
-      toast.error("Internal server error");
+    if (!res.ok) {
+      toast.error("Error");
       return;
     }
+
     const data = await res.json();
     setter({
       custData: customerData,
@@ -139,16 +151,19 @@ const DetailButton = ({item}) => {
     custData: null,
     carData: null,
   });
+
   useEffect(() => {
     console.log(rentData);
   }, [rentData]);
+  
   return (
     <>
       <Button
         variant="light"
         onPress={() => {
-          getCustomerData(item.customerID).then((customerData) => {
-            getCarData(item.carID, customerData, setRentData);
+          const tokenValue = getToken();
+          getCustomerData(item.customerID, tokenValue).then((customerData) => {
+            getCarData(item.carID, customerData, setRentData, tokenValue);
           });
 
           onOpen();
@@ -288,7 +303,8 @@ const FinishButton = ({id}) => {
                   color="primary"
                   onPress={() => {
                     toast.info("Finishing rent...", {duration: 5000});
-                    finishRent(id);
+                    const tokenValue = getToken();
+                    finishRent(id, tokenValue);
                     onClose();
                   }}
                 >
@@ -319,11 +335,13 @@ const dateOptions = {
   day: "numeric",
 };
 
-const getRentData = async (setter, queries) => {
+const getRentData = async (setter, queries, tokenValue) => {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/rent/search?order=${queries.order}&sortBy=${queries.sortBy}&status=${queries.status}`, {
-        credentials: 'include',
+        headers: {
+          'Authorization': `Bearer ${tokenValue}`,
+        },
       }
     );
     const data = await res.json();
@@ -342,12 +360,15 @@ const getRentData = async (setter, queries) => {
 
 export default function RentTable({queries}) {
   const [rentData, setRentData] = useState([]);
+  
   useEffect(() => {
-    getRentData(setRentData, queries);
+    const tokenValue = getToken();
+    getRentData(setRentData, queries, tokenValue);
   }, [queries]);
+  
   return (
     <div>
-      <Toaster richColors />
+      <Toaster richColors position="top-right"/>
       <Table
         isStriped
         aria-label="Example table with dynamic content"

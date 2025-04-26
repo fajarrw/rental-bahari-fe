@@ -4,7 +4,8 @@ import {RiSettings5Fill} from "react-icons/ri";
 import useCurrency from "@/hooks/useCurrency";
 import {AiFillEdit, AiFillDelete} from "react-icons/ai";
 import {useState} from "react";
-import {useGetToken} from "@/hooks/useCookies";
+// import {useGetToken} from "@/hooks/useCookies";
+import getToken from "@/utils/cookies";
 import {
   Modal,
   ModalContent,
@@ -19,46 +20,56 @@ import {
 } from "@nextui-org/react";
 import {Toaster, toast} from "sonner";
 
-const deleteData = async (_id, getData) => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const token = await useGetToken();
+const deleteData = async (_id, getData, tokenValue) => {
   try {
-    fetch(`${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/car/delete`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/car/delete`, {
       method: "DELETE",
-      body: JSON.stringify({_id: _id}),
-      credentials: 'include',
+      body: JSON.stringify({ _id }),
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
-        Authorization: token,
+        "Authorization": `Bearer ${tokenValue}`,
       },
-    }).then(() => {
+    });
+  
+    if (res.ok) {
       toast.success("Car deleted successfully");
       toast.info("Updating your data...");
-      getData().then(() => {
-        toast.success("Data updated");
-      });
-    });
+      await getData();
+      toast.success("Data updated");
+    } else {
+      toast.error("Failed to delete car");
+    }
   } catch (err) {
     console.error(err);
-  }
+    toast.error("Error");
+  }  
 };
 
-const editData = async (data) => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const token = await useGetToken();
+const editData = async (data, tokenValue) => {
   try {
-    fetch(`${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/car/edit`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/car/edit`, {
       method: "PUT",
       credentials: 'include',
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
-        Authorization: token,
+        "Authorization": `Bearer ${tokenValue}`,
       },
     });
+
+    if (res.ok) {
+      toast.success("Car edited successfully");
+      // toast.info("Updating your data...");
+      // await getData();
+      // toast.success("Data updated");
+    } else {
+      toast.error("Failed to edit car");
+    }
   } catch (err) {
     console.error(err);
-  }
+    toast.error("Error");
+  }  
 };
 
 const EditButton = ({item}) => {
@@ -143,7 +154,12 @@ const EditButton = ({item}) => {
                 <Button variant="light" onPress={onClose}>
                   No, Cancel
                 </Button>
-                <Button color="danger" onPress={() => editData(carData)}>
+                <Button 
+                  color="danger" 
+                  onPress={() => {
+                    const tokenValue = getToken();
+                    editData(carData, tokenValue);
+                  }}>
                   Yes, Update
                 </Button>
               </ModalFooter>
@@ -179,7 +195,8 @@ const DeleteButton = ({id, name, getData}) => {
                   color="danger"
                   onPress={() => {
                     toast.info("Deleting car...", {duration: 5000});
-                    deleteData(id, getData);
+                    const tokenValue = getToken();
+                    deleteData(id, getData, tokenValue);
                     onClose();
                   }}
                 >
@@ -199,7 +216,7 @@ const CarCard = ({item, getData}) => {
 
   return (
     <div className="flex flex-row w-full">
-      <Toaster richColors />
+      <Toaster richColors position="top-right"/>
       <div
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}

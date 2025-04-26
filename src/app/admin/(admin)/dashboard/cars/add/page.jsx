@@ -3,7 +3,8 @@
 import Link from "next/link";
 import {FiChevronLeft} from "react-icons/fi";
 import {useState} from "react";
-import {useGetToken} from "@/hooks/useCookies";
+// import {useGetToken} from "@/hooks/useCookies";
+import getToken from "@/utils/cookies";
 import {useImage} from "@/hooks/useImage";
 import {Toaster, toast} from "sonner";
 
@@ -17,7 +18,9 @@ export default function AddCar() {
     price: "",
     seatNumber: "",
   });
+
   const {name, type, model, transmission, price, seatNumber} = carInfo;
+  
   const handleFileChange = (e) => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useImage(e, (base64Image) =>
@@ -25,16 +28,13 @@ export default function AddCar() {
     );
   };
 
-  const postCarData = async (carData) => {
+  const postCarData = async (carData, tokenValue) => {
     try {
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      const {value} = await useGetToken();
       await fetch(`${process.env.NEXT_PUBLIC_RB_REST_API_URL}/api/car/create`, {
         method: "POST",
-        credentials: 'include',
         headers: {
           "Content-Type": "application/json",
-          // Authorization: `Bearer ${value}`,
+          "Authorization": `Bearer ${tokenValue}`,
         },
         body: JSON.stringify(carData),
       });
@@ -61,12 +61,13 @@ export default function AddCar() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     toast.info("Adding car...");
-    postCarData(carInfo);
+    const tokenValue = getToken();
+    postCarData(carInfo, tokenValue);
   };
 
   return (
     <main className="bg-[#EDEDED]">
-      <Toaster richColors />
+      <Toaster richColors position="top-right"/>
       <header className="border-b border-main-black/20">
         <Link
           href={"/admin/dashboard/cars"}
@@ -139,7 +140,7 @@ export default function AddCar() {
                 Choose transmission type
               </option>
               <option value="manual">Manual</option>
-              <option value="matic">Matic</option>
+              <option value="automatic">Automatic</option>
             </select>
           </div>
           <div className="flex items-center justify-between">
